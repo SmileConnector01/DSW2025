@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile settings </title>
+    <link rel="stylesheet" href="../assets/stylesheets/settings.css">
+</head>
+<body>
+    <div class="settings-container">
+        <!-- Header Navigation -->
+        <header class="settings-header">
+            <nav class="settings-nav">
+                <ul>
+                    <li class="active" data-section="profile">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <span>Profile</span>
+                            <small>Update personal information</small>
+                        </div>
+                    </li>
+                    <li data-section="notifications">
+                        <i class="fas fa-bell"></i>
+                        <div>
+                            <span>Notifications</span>
+                            <small>Manage alerts & reminders</small>
+                        </div>
+                    </li>
+                
+                    <li data-section="appearance">
+                        <i class="fas fa-palette"></i>
+                        <div>
+                            <span>Appearance</span>
+                            <small>Theme & display options</small>
+                        </div>
+                    </li>
+                    <li data-section="appointments">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <span>Appointments</span>
+                            <small>Booking preferences</small>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sidebar Navigation -->
+       
+
+        <!-- Main Content -->
+        <main class="settings-content">
+            <!-- Profile Section -->
+            <section class="content-section active" id="profile">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-circle"></i> Profile Settings</h2>
+                    <p>Manage your personal information and account details</p>
+                </div>
+                
+                <div class="settings-card">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <button class="avatar-edit"><i class="fas fa-camera"></i></button>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Dr. Emma Smith</h3>
+                            <p>Dentist at BrightSmile Clinic</p>
+                        </div>
+                    </div>
+                    
+                    <form class="profile-form">
+                        <div class="form-group dual-input">
+                            <div>
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" value="Emma">
+                            </div>
+                            <div>
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" value="Smith">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" value="emma.smith@brightsmile.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" value="+1 (555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="clinic">Dental Clinic</label>
+                            <input type="text" id="clinic" value="BrightSmile Clinic">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="specialty">Specialty</label>
+                            <select id="specialty">
+                                <option value="general">General Dentistry</option>
+                                <option value="ortho">Orthodontics</option>
+                                <option value="pedo">Pedodontics</option>
+                                <option value="endo">Endodontics</option>
+                                <option value="perio">Periodontics</option>
+                                <option value="pros">Prosthodontics</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="secondary-button">Cancel</button>
+                            <button type="submit" class="primary-button">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Password & Security</h3>
+                    <form class="security-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <div class="password-input">
+                                <input type="password" id="currentPassword" placeholder="Enter current password">
+                                <button type="button" class="password-toggle"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="newPassword" placeholder="Enter new password">
+                                <button type="button" class="password-toggle"><i class="fas fa-eye"></i></button>
+                            </div>
+                            <div class="password-strength">
+                                <span class="strength-bar weak"></span>
+                                <span class="strength-bar medium"></span>
+                                <span class="strength-bar strong"></span>
+                                <span class="strength-text">Password strength</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                                <button type="button" class="password-toggle"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="primary-button">Update Password</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Notifications Section -->
+            <section class="content-section" id="notifications">
+                <div class="section-header">
+                    <h2><i class="fas fa-bell"></i> Notification Preferences</h2>
+                    <p>Control how you receive alerts and reminders</p>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Notification Channels</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive important updates via email</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <h4>SMS Alerts</h4>
+                                    <p>Get text messages for urgent reminders</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-bell"></i>
+                                <div>
+                                    <h4>Push Notifications</h4>
+                                    <p>Instant alerts on your devices</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Appointment Reminders</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-calendar-day"></i>
+                                <div>
+                                    <h4>Upcoming Appointments</h4>
+                                    <p>Reminders for scheduled visits</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reminder-time">Reminder Time</label>
+                            <select id="reminder-time">
+                                <option value="1">1 day before</option>
+                                <option value="2">2 days before</option>
+                                <option value="3" selected>3 days before</option>
+                                <option value="7">1 week before</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Patient Communications</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-comment-medical"></i>
+                                <div>
+                                    <h4>New Messages</h4>
+                                    <p>Alerts when patients send messages</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-file-medical"></i>
+                                <div>
+                                    <h4>Treatment Updates</h4>
+                                    <p>Notifications about treatment progress</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+          
+            <!-- Appearance Section -->
+            <section class="content-section" id="appearance">
+                <div class="section-header">
+                    <h2><i class="fas fa-palette"></i> Appearance</h2>
+                    <p>Customize the look and feel of the app</p>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Theme Preferences</h3>
+                    
+                    <div class="theme-options">
+                        <div class="theme-option active" data-theme="light">
+                            <div class="theme-preview light">
+                                <div class="theme-header"></div>
+                                <div class="theme-content"></div>
+                            </div>
+                            <span>Light Mode</span>
+                        </div>
+                        
+                        <div class="theme-option" data-theme="dark">
+                            <div class="theme-preview dark">
+                                <div class="theme-header"></div>
+                                <div class="theme-content"></div>
+                            </div>
+                            <span>Dark Mode</span>
+                        </div>
+                        
+                        <div class="theme-option" data-theme="system">
+                            <div class="theme-preview system">
+                                <div class="theme-header"></div>
+                                <div class="theme-content"></div>
+                            </div>
+                            <span>System Default</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Accent Color</h3>
+                    <p class="card-subtitle">Choose your preferred color scheme</p>
+                    
+                    <div class="color-options">
+                        <div class="color-option active" data-color="blue">
+                            <div class="color-circle blue"></div>
+                            <span>Ocean Blue</span>
+                        </div>
+                        
+                        <div class="color-option" data-color="teal">
+                            <div class="color-circle teal"></div>
+                            <span>Mint Teal</span>
+                        </div>
+                        
+                        <div class="color-option" data-color="purple">
+                            <div class="color-circle purple"></div>
+                            <span>Lavender</span>
+                        </div>
+                        
+                        <div class="color-option" data-color="green">
+                            <div class="color-circle green"></div>
+                            <span>Emerald</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Display Settings</h3>
+                    
+                    <div class="form-group">
+                        <label for="font-size">Font Size</label>
+                        <select id="font-size">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    
+                    <div class="toggle-item">
+                        <div class="toggle-info">
+                            <i class="fas fa-text-height"></i>
+                            <div>
+                                <h4>Compact Mode</h4>
+                                <p>Show more content on screen</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Appointments Section -->
+            <section class="content-section" id="appointments">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Appointment Settings</h2>
+                    <p>Configure your booking preferences</p>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Working Hours</h3>
+                    
+                    <div class="working-hours">
+                        <div class="day-schedule">
+                            <div class="day-header">
+                                <span>Monday</span>
+                                <label class="toggle-switch small">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="time-slots">
+                                <div class="time-input">
+                                    <label>From</label>
+                                    <input type="time" value="09:00">
+                                </div>
+                                <div class="time-input">
+                                    <label>To</label>
+                                    <input type="time" value="17:00">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Repeat for other days -->
+                        <!-- Tuesday to Friday would follow same pattern -->
+                        
+                        <div class="day-schedule">
+                            <div class="day-header">
+                                <span>Saturday</span>
+                                <label class="toggle-switch small">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="time-slots disabled">
+                                <div class="time-input">
+                                    <label>From</label>
+                                    <input type="time" value="09:00" disabled>
+                                </div>
+                                <div class="time-input">
+                                    <label>To</label>
+                                    <input type="time" value="13:00" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Appointment Types</h3>
+                    <p class="card-subtitle">Manage the services you offer</p>
+                    
+                    <div class="service-list">
+                        <div class="service-item">
+                            <div class="service-info">
+                                <i class="fas fa-tooth"></i>
+                                <div>
+                                    <h4>Dental Checkup</h4>
+                                    <p>30 min • R4000</p>
+                                </div>
+                            </div>
+                            <button class="service-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                        
+                        <div class="service-item">
+                            <div class="service-info">
+                                <i class="fas fa-teeth"></i>
+                                <div>
+                                    <h4>Teeth Cleaning</h4>
+                                    <p>45 min • R6500</p>
+                                </div>
+                            </div>
+                            <button class="service-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                        
+                        <div class="service-item">
+                            <div class="service-info">
+                                <i class="fas fa-tooth"></i>
+                                <div>
+                                    <h4>Filling</h4>
+                                    <p>60 min • R15000</p>
+                                </div>
+                            </div>
+                            <button class="service-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    
+                    <button class="secondary-button full-width">
+                        <i class="fas fa-plus"></i> Add New Service
+                    </button>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Booking Preferences</h3>
+                    
+                    <div class="form-group">
+                        <label for="appointment-duration">Default Appointment Duration</label>
+                        <select id="appointment-duration">
+                            <option value="15">15 minutes</option>
+                            <option value="30" selected>30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="buffer-time">Buffer Time Between Appointments</label>
+                        <select id="buffer-time">
+                            <option value="5">5 minutes</option>
+                            <option value="10" selected>10 minutes</option>
+                            <option value="15">15 minutes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="toggle-item">
+                        <div class="toggle-info">
+                            <i class="fas fa-calendar-plus"></i>
+                            <div>
+                                <h4>Allow Online Booking</h4>
+                                <p>Let patients book appointments directly</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+            
+            
+        </main>
+    </div>
+
+    <script src="../assets/scripts/profile-settings.js"></script>
+</body>
+</html>

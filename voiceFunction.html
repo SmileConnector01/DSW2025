@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Model Narration</title>
+  <script src="voiceFunction.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    button { padding: 1rem; font-size: 1rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>3D Model Narration</h1>
+  <p>Click the button to hear a voice explain the model.</p>
+  <button id="play-narration">Play Narration</button>
+
+  <script>
+    document.getElementById("play-narration").addEventListener("click", async () => {
+      const response = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: "This is the upper molar. It is used to grind food when chewing." })
+      });
+
+      if (!response.ok) {
+        alert("Failed to fetch audio");
+        return;
+      }
+
+      const blob = await response.blob();
+      const audioUrl = URL.createObjectURL(blob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+    });
+  </script>
+
+</body>
+</html>

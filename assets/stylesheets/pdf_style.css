@@ -1,0 +1,129 @@
+.pdf-preview-container {
+    max-width: 90%;
+    width: 900px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-content {
+    flex: 1;
+    overflow-y: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 10px 0;
+}
+
+.pdf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.pdf-header-info {
+    display: flex;
+    align-items: center;
+}
+
+.pdf-logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.pdf-header-text h1 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.pdf-header-text p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #666;
+}
+
+.pdf-date {
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+}
+
+.pdf-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.pdf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 12px;
+}
+
+.pdf-table th {
+    background-color: #f5f5f5;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.pdf-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.pdf-footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+}
+
+.pdf-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.pdf-page-break {
+    page-break-after: always;
+    height: 0;
+    visibility: hidden;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .pdf-content, .pdf-content * {
+        visibility: visible;
+    }
+    .pdf-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+    .pdf-actions {
+        display: none;
+    }
+}

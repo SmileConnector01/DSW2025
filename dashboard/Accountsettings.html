@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile settings </title>
+    <link rel="stylesheet" href="../assets/stylesheets/acc-setting.css">
+</head>
+<body>
+    <div class="settings-container">
+        <!-- Header Navigation -->
+        <header class="settings-header">
+            <nav class="settings-nav">
+                <ul>
+                     <li data-section="danger-zone">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <span>Account</span>
+                            <small>Advanced options</small>
+                        </div>
+                    </li>
+                    <li data-section="notifications">
+                        <i class="fas fa-bell"></i>
+                        <div>
+                            <span>Notifications</span>
+                            <small>Manage alerts & reminders</small>
+                        </div>
+                    </li>
+                    <li data-section="privacy">
+                        <i class="fas fa-lock"></i>
+                        <div>
+                            <span>Privacy & Security</span>
+                            <small>Data protection settings</small>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sidebar Navigation -->
+       
+
+        <!-- Main Content -->
+        <main class="settings-content">
+           
+            <!-- Notifications Section -->
+            <section class="content-section" id="notifications">
+                <div class="section-header">
+                    <h2><i class="fas fa-bell"></i> Notification Preferences</h2>
+                    <p>Control how you receive alerts and reminders</p>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Notification Channels</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive important updates via email</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <h4>SMS Alerts</h4>
+                                    <p>Get text messages for urgent reminders</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-bell"></i>
+                                <div>
+                                    <h4>Push Notifications</h4>
+                                    <p>Instant alerts on your devices</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Appointment Reminders</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-calendar-day"></i>
+                                <div>
+                                    <h4>Upcoming Appointments</h4>
+                                    <p>Reminders for scheduled visits</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reminder-time">Reminder Time</label>
+                            <select id="reminder-time">
+                                <option value="1">1 day before</option>
+                                <option value="2">2 days before</option>
+                                <option value="3" selected>3 days before</option>
+                                <option value="7">1 week before</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Patient Communications</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-comment-medical"></i>
+                                <div>
+                                    <h4>New Messages</h4>
+                                    <p>Alerts when patients send messages</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-file-medical"></i>
+                                <div>
+                                    <h4>Treatment Updates</h4>
+                                    <p>Notifications about treatment progress</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Privacy & Security Section -->
+            <section class="content-section" id="privacy">
+                <div class="section-header">
+                    <h2><i class="fas fa-lock"></i> Privacy & Security</h2>
+                    <p>Manage your data protection and account security</p>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Security Features</h3>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>Two-Factor Authentication</h4>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fas fa-fingerprint"></i>
+                                <div>
+                                    <h4>Biometric Login</h4>
+                                    <p>Use fingerprint or face recognition</p>
+                                </div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Data Privacy</h3>
+                    
+                    <div class="privacy-options">
+                        <div class="privacy-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h4>Data Collection</h4>
+                                <p>Control what information we collect</p>
+                            </div>
+                            <button class="secondary-button small">Manage</button>
+                        </div>
+                        
+                        <div class="privacy-item">
+                            <i class="fas fa-share-square"></i>
+                            <div>
+                                <h4>Data Sharing</h4>
+                                <p>Choose what data is shared with partners</p>
+                            </div>
+                            <button class="secondary-button small">Manage</button>
+                        </div>
+                        
+                        <div class="privacy-item">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <div>
+                                <h4>Export Data</h4>
+                                <p>Download a copy of your information</p>
+                            </div>
+                            <button class="secondary-button small">Request Export</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="card-title">Active Sessions</h3>
+                    <p class="card-subtitle">Devices currently logged into your account</p>
+                    
+                    <div class="sessions-list">
+                        <div class="session-item current">
+                            <i class="fas fa-laptop"></i>
+                            <div>
+                                <h4>MacBook Pro (Current)</h4>
+                                <p> Bloemfontein , SA • Chrome • Just now</p>
+                            </div>
+                            <button class="session-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                        
+                        <div class="session-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <h4>iPhone 14 Pro</h4>
+                                <p>Pretoria , SA • Safari • 2 hours ago</p>
+                            </div>
+                            <button class="session-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                        
+                        <div class="session-item">
+                            <i class="fas fa-tablet-alt"></i>
+                            <div>
+                                <h4>iPad Pro</h4>
+                                <p>Johannesbyrg, SA • Safari • 3 days ago</p>
+                            </div>
+                            <button class="session-action"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    
+                    <button class="secondary-button full-width">View All Sessions</button>
+                </div>
+            </section>
+            
+            
+          
+            <!-- Danger Zone Section -->
+            <section class="content-section" id="danger-zone">
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Account Settings</h2>
+                    <p>Advanced options for your account</p>
+                </div>
+                
+                <div class="settings-card danger">
+                    <h3 class="card-title"><i class="fas fa-ban"></i> Deactivate Account</h3>
+                    <p>Temporarily disable your account. Your information will be preserved but you won't be able to use the service.</p>
+                    <button class="secondary-button">Deactivate Account</button>
+                </div>
+                
+                <div class="settings-card danger">
+                    <h3 class="card-title"><i class="fas fa-trash-alt"></i> Delete Account</h3>
+                    <p>Permanently remove your account and all associated data. This action cannot be undone.</p>
+                    <button class="danger-button">Delete Account</button>
+                    <div class="warning-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Warning: This will permanently erase all your data including patient records and appointment history.</span>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                
+                
+                <div class="settings-card">
+                    <h3 class="card-title"><i class="fas fa-file-export"></i> Data Export</h3>
+                    <p>Download a copy of all your data before closing your account.</p>
+                    <button class="secondary-button"><i class="fas fa-download"></i> Export All Data</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/scripts/profile-settings.js"></script>
+</body>
+</html>

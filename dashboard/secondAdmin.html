@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileConnector - Super Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/mainAdmin.css">
+    <link rel="stylesheet" href="../assets/stylesheets/chatbot-dashboard.css"> 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/stylesheets/pop-up-password.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/pdf_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/stylesheets/responsive-tables.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <!-- library link for html2pdf for pdf generator-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> <!-- library link for html2canvas for pdf generator-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>        <!-- Source code for calendar layout from Fullcalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>                   <!-- library for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>    <!-- library for markdown for chatbot -->
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-controls">
+                <div class="header-left">
+                    <button class="header-btn" aria-label="Appointments">
+                        <i class="fa-regular fa-calendar"></i>
+                    </button>
+                    <button class="header-btn" aria-label="Notes">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <button class="header-btn" aria-label="Messages">
+                        <i class="fa-regular fa-comment-dots"></i>
+                        <span class="message-badge">5</span>
+                    </button>
+                </div>
+                
+                <div class="header-right">
+                    <button class="header-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    
+                    <div class="user-profile">
+                        <div class="user-info" id="userProfileBtn">
+                            <span class="user-name"></span>
+                            <div class="user-avatar">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <div class="dropdown-avatar">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <div class="dropdown-user-info">
+                                    <h4 class="user-name"></h4>
+                                    <p class="user-email"></p>
+                                </div>
+                            </div>
+                            
+                            <div class="dropdown-divider"></div>
+                            
+                            <a href="../dashboard/profilesettings.html" class="dropdown-item">
+                                <i class="fas fa-user-cog"></i> Profile Settings
+                            </a>
+                            <a href="../dashboard/Accountsettings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Account Settings
+                            </a>
+                            
+                            <div class="dropdown-divider"></div>
+                            
+                            <a href="../dashboard/Help.html" class="dropdown-item">
+                                <i class="fas fa-question-circle"></i> Help Center
+                            </a>
+                            
+                            <div class="dropdown-divider"></div>
+                            
+                            <button class="dropdown-item logout-btn" id="logoutLink">
+                                <i class="fas fa-sign-out-alt"></i> Log Out
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+      
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <div class="tooth-icon">
+                        <div class="wifi-arc arc1"></div>
+                        <div class="wifi-arc arc2"></div>
+                        <div class="wifi-arc arc3"></div>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <h1 class="app-name">SmileConnector</h1>
+                    <p class="tagline">Super Admin Dashboard</p>
+                </div>
+            </div>
+            <ul>
+                <li data-tab="dashboard" class="active">
+                  <a href="#"><i class="fas fa-home"></i> Dashboard <span></span></a>
+                </li>
+                <li data-tab="schools">
+                    <a href="#"><i class="fas fa-school"></i> School Programs <span></span></a>
+                </li>                     
+                <li data-tab="teledentistry">
+                  <a href="#"><i class="fas fa-video"></i> Tele-Dentistry <span></span></a>
+                </li>                
+                <li data-tab="calendar-appointments" style="display: none;">
+                  <a href="#"><i class="fas fa-calendar-alt"></i> <em>Calendar &nbsp;& &nbsp;&nbsp;&nbsp;Appointments</em> <span></span></a>
+                </li>
+                <li data-tab="chat" style="display: none;">
+                    <a href="#"><i class="fas fa-comments"></i> Chat Messages <span></span></a>
+                </li>
+                <li data-tab="Assistant Smila">
+                    <a href="#"><i class="fas fa-robot"></i> Assistant Smila <span></span></a>
+                </li>                 
+                <li data-tab="admins" style="display: none;">
+                    <a href="#"><i class="fas fa-user-shield" ></i> Admin Management <span></span></a>
+                </li>
+                <li data-tab="patients">
+                    <a href="#"><i class="fas fa-users"></i> Patient Management <span></span></a>
+                </li>
+                <li data-tab="settings" style="display: none;">
+                    <a href="#"><i class="fas fa-cogs"></i> System Settings <span></span></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-overlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tab Content Container -->
+            <div class="tab-content">
+                <!-- Dashboard Tab -->
+                <div class="tab-pane active" id="dashboard">
+                  <!-- Key Metrics Section -->
+                  <section class="metrics-section" style="display: none;">
+                    <div class="metric-card">
+                      <div class="metric-icon" style="background-color: #5a80ff">
+                        <i class="fas fa-user-injured"></i>
+                      </div>
+                      <div class="metric-info">
+                        <h3>Patients Served</h3>
+                        <p class="metric-value"></p>
+                        <p class="metric-change">
+                          <i class="fas fa-arrow-up"></i> 12% this month
+                        </p>
+                      </div>
+                    </div>
+      
+                    <div class="metric-card">
+                      <div class="metric-icon" style="background-color: greenyellow">
+                        <i class="fas fa-school"></i>
+                      </div>
+                      <div class="metric-info">
+                        <h3>Schools Reached</h3>
+                        <p class="metric-value"></p>
+                        <p class="metric-change">
+                          <i class="fas fa-arrow-up"></i> 3 new this month
+                        </p>
+                      </div>
+                    </div>
+      
+                    <div class="metric-card">
+                      <div class="metric-icon" style="background-color: #0077ff">
+                        <i class="fas fa-teeth"></i>
+                      </div>
+                      <div class="metric-info">
+                        <h3>Preventive Treatments</h3>
+                        <p class="metric-value"></p>
+                        <p class="metric-change">
+                          <i class="fas fa-arrow-up"></i> 18% this month
+                        </p>
+                      </div>
+                    </div>
+      
+                    <div class="metric-card">
+                      <div class="metric-icon" style="background-color: red">
+                        <i class="fas fa-video"></i>
+                      </div>
+                      <div class="metric-info">
+                        <h3>Tele-Consultations</h3>
+                        <p class="metric-value"></p>
+                        <p class="metric-change">
+                          <i class="fas fa-arrow-up"></i> 22% this month
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+      
+                  <!-- Charts Section -->
+                  <section class="charts-section" style="display: none;">
+                    <div class="chart-card">
+                      <h2>Community Outreach Impact</h2>
+                      <div class="chart-container">
+                        <canvas id="outreachChart"></canvas>
+                      </div>
+                    </div>
+      
+                    <div class="chart-card">
+                      <h2>Oral Health Conditions</h2>
+                      <div class="chart-container">
+                        <canvas id="conditionsChart"></canvas>
+                      </div>
+                    </div>
+                  </section>
+      
+                  <!-- Recent Activity and Upcoming Events -->
+                  <section class="activity-section" style="display: none;">
+                    <div class="recent-activity">
+                      <h2>Recent Activity</h2>
+                      <div class="activity-list" id="recent-activities">
+                        <!--recent activities will be dynamically loaded here-->
+                      </div>
+                    </div>
+      
+                    <div class="upcoming-events">
+                      <h2>Upcoming Events</h2>
+                      <div class="event-list" id="upcoming-activity">
+                        <!--Upcoming events will be dynamically loaded here-->
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <!-- Calendar and appointments tab -->
+                <div class="tab-pane" id="calendar-appointments">
+                    <div class="calendar-appointments-container">
+                        <!-- Tab Navigation -->
+                        <div class="calendar-tabs">
+                            <button class="calendar-tab active" data-tab="calendar">Calendar</button>
+                            <button class="calendar-tab" data-tab="my-appointments">My Appointments</button>
+                            <button class="calendar-tab" data-tab="patient-appointments">Patient Appointments</button>
+                        </div>
+                        
+                        <!-- Tab Content -->
+                        <div class="calendar-tab-content">
+                            <!-- Calendar Tab -->
+                            <div class="calendar-tab-pane active" id="calendar-view">
+                                <div class="calendar-toolbar">
+                                    <div class="toolbar-left">
+                                        <button class="toolbar-btn" id="prev-week">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="toolbar-btn" id="today">Today</button>
+                                        <button class="toolbar-btn" id="next-week">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                        <span class="current-date-range" id="date-range-display"></span>
+                                    </div>
+                                    <div class="toolbar-right">
+                                        <button class="toolbar-btn" id="day-view">Day</button>
+                                        <button class="toolbar-btn active" id="week-view">Week</button>
+                                        <button class="toolbar-btn" id="month-view">Month</button>
+                                        <button class="toolbar-btn" id="new-event-btn">
+                                            <i class="fas fa-plus"></i> New Event
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="calendar"></div>
+                            </div>
+                            
+                            <!-- My Appointments Tab -->
+                            <div class="calendar-tab-pane" id="my-appointments-view">
+                                <div class="appointments-header">
+                                    <h2>My Appointments</h2>
+                                    <div class="appointments-filter">
+                                        <select id="my-appointments-filter">
+                                            <option value="all">All Appointments</option>
+                                            <option value="upcoming">Upcoming</option>
+                                            <option value="past">Past</option>
+                                            <option value="today">Today</option>
+                                            <option value="week">This Week</option>
+                                            <option value="month">This Month</option>
+                                        </select>
+                                        <button class="refresh-btn" id="refresh-my-appointments">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="appointments-list" id="my-appointments-list">
+                                    <!-- Appointments will be loaded here -->
+                                    <div class="empty-state">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <p>No appointments found</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Patient Appointments Tab -->
+                            <div class="calendar-tab-pane" id="patient-appointments-view">
+                                <div class="appointments-header">
+                                    <h2>Patient Appointments</h2>
+                                    <div class="appointments-filter">
+                                        <select id="patient-appointments-filter">
+                                            <option value="all">All Appointments</option>
+                                            <option value="upcoming">Upcoming</option>
+                                            <option value="past">Past</option>
+                                            <option value="today">Today</option>
+                                            <option value="week">This Week</option>
+                                            <option value="month">This Month</option>
+                                        </select>
+                                        <div class="search-container">
+                                            <input type="text" placeholder="Search patients..." id="patient-appointments-search">
+                                            <button class="search-btn">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                        <button class="refresh-btn" id="refresh-patient-appointments">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="appointments-list" id="patient-appointments-list">
+                                    <!-- Patient appointments will be loaded here -->
+                                    <div class="empty-state">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <p>No patient appointments found</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chatbot Tab -->
+                <div class="tab-pane" id="Assistant Smila">
+                    <div class="chat-bot container">
+                        <!-- Sidebar Navigation -->
+                        <div class="sideNavigation">
+                            <div class="topBarAction" id="toggleSidebar">
+                                <i class="fa-solid fa-bars"></i>
+                            </div>
+                
+                            <div class="sideNavButton">
+                                <button id="newChatButton" class="transparentButton">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span class="collapseText">New Chat <span></span></span>
+                                </button>
+                            </div>
+                
+                            <div class="chatHistory">
+                                <h5>Recent Conversations</h5>
+                                <ul class="recentchat">
+                                    <!-- Recent chats will be populated dynamically from the backend-->
+                                </ul>
+                            </div>
+                
+                            <div class="actionList">
+                                <button class="transparentButton">
+                                    <i class="fa-regular fa-circle-question"></i>
+                                    <span class="collapseText">Help & FAQ <span></span></span>
+                                </button>
+                
+                                <button class="transparentButton">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                    <span class="collapseText">History <span></span></span>
+                                </button>
+                
+                                <button class="transparentButton" title="Toggle Theme">
+                                    <i class="fas fa-moon"></i>
+                                    <span class="collapseText">Theme <span></span></span>
+                                </button>
+                
+                                <button class="transparentButton">
+                                    <i class="fa-solid fa-gear"></i>
+                                    <span class="collapseText">Settings <span></span></span>
+                                </button>
+                            </div>
+                        </div>
+                
+                        <!-- Main Chat Screen -->
+                        <div class="chatScreen"> 
+                            <div class="chatHeader">
+                                <div class="chatTitle">AI SmileConnector Assistant</div>
+                                <div class="chatTools">
+                                    <button id="mobileMenuToggle">
+                                        <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                    <button>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                
+                            <div class="startContent">
+                                <h1>
+                                    <span class="greeting">Hello, <span class="user-name"></span></span><br>
+                                    <span class="brand">How can I help you today?</span>
+                                </h1>
+                                <p>Ask me anything or try one of these suggestions:</p>
+                                
+                                <div class="suggestionGrid">
+                                    <div class="suggestionCard">
+                                        <h3>How to brush teeth properly?</h3>
+                                        <p>Learn the best techniques for optimal dental hygiene</p>
+                                    </div>
+                                    <div class="suggestionCard">
+                                        <h3>Healthy meal plans</h3>
+                                        <p>Get personalized nutrition advice and recipes</p>
+                                    </div>
+                                    <div class="suggestionCard">
+                                        <h3>Python coding help</h3>
+                                        <p>Get assistance with your programming questions</p>
+                                    </div>
+                                    <div class="suggestionCard">
+                                        <h3>Travel recommendations</h3>
+                                        <p>Discover the best places to visit for your next trip</p>
+                                    </div>
+                                </div>
+                            </div> 
+                
+                            <div class="chatContent">
+                                <div class="results">
+                                    <!-- Chat messages will be populated dynamically from the server-->
+                                </div>
+                            </div>
+                
+                            <!-- File Preview Container (positioned above input) -->
+                            <div class="file-preview-container" style="display: none;">
+                                <div class="preview-header">
+                                    <span>Selected File</span>
+                                    <button id="remove-file">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="preview-content">
+                                    <img id="image-preview" src="" alt="Preview" style="display: none;">
+                                    <div class="file-info">
+                                        <span id="file-name"></span>
+                                        <span id="file-size"></span>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Input area -->
+                            <div class="inputContainer">
+                                <div class="inputArea">
+                                    <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+                                    <div class="inputTools">
+                                        <button title="Attach file" id="fileInput"><i class="fa-solid fa-paperclip"></i></button>
+                                        <button title="Send voice message" id="voiceInput"><i class="fa-solid fa-microphone"></i></button>
+                                        <button class="sendButton" id="sendButton">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="privacyPolicy">
+                                    SmileConnector Assistant may not always be accurate. Please verify the information 
+                                    before making any decisions based on it.<br>
+                                    <span>Powered by SmileConnector Assistant</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                    
+                </div>
+
+                <!--tele-denstry-->
+                <div class="tab-pane" id="teledentistry">
+                    <div id="teleDentistryContainer">
+                        <h1 class="page-title">Tele-Dentistry</h1>
+                        <div class="tele-dentistry-content">
+                            <p>Start new conference</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat Interface Section -->
+                <section class="tab-pane" id="chat">
+                    <div class="chat-container">
+                        <!-- Chat Sidebar -->
+                        <div class="chat-sidebar">
+                            <div class="chat-sidebar-header">
+                                <h3>Messages</h3>
+                                <button class="new-chat-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="chat-search">
+                                <div class="search-input-wrap">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Search conversations...">
+                                </div>
+                            </div>
+                            <div class="chat-contacts">
+                                <div class="chat-contact active">
+                                    <div class="contact-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Dr. Smith" onerror="this.src='../asset/images/AIprofile.png'">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <h4>Dr. Sarah Smith</h4>
+                                        <p>Let's discuss your treatment plan...</p>
+                                    </div>
+                                    <div class="contact-meta">
+                                        <span class="message-time">10:45 AM</span>
+                                        <span class="unread-count">2</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="chat-contact">
+                                    <div class="contact-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Dr. Johnson" onerror="this.src='../assets/images/AIprofile.png'">
+                                        <span class="status-indicator offline"></span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <h4>Dr. Michael Johnson</h4>
+                                        <p>Your x-ray results look good...</p>
+                                    </div>
+                                    <div class="contact-meta">
+                                        <span class="message-time">Yesterday</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="chat-contact">
+                                    <div class="contact-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Front Desk" onerror="this.src='../assets/images/AIprofile.png'">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <h4>Front Desk</h4>
+                                        <p>Your appointment is confirmed...</p>
+                                    </div>
+                                    <div class="contact-meta">
+                                        <span class="message-time">Wed</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="chat-contact">
+                                    <div class="contact-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Dental Hygienist" onerror="this.src='../assets/images/AIprofile.png'">
+                                        <span class="status-indicator away"></span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <h4>Emma White (Hygienist)</h4>
+                                        <p>Remember to floss twice daily...</p>
+                                    </div>
+                                    <div class="contact-meta">
+                                        <span class="message-time">Mon</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat Main -->
+                        <div class="chat-main">
+                            <div class="chat-header">
+                                <div class="chat-user-info">
+                                    <div class="chat-user-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Dr. Smith" onerror="this.src='../assets/images/AIprofile.png'">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="chat-user-details">
+                                        <h3>Dr. Sarah Smith</h3>
+                                        <p>Online • Your Primary Dentist</p>
+                                    </div>
+                                </div>
+                                <div class="chat-actions">
+                                    <button class="chat-action-btn">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                    <button class="chat-action-btn">
+                                        <i class="fas fa-phone"></i>
+                                    </button>
+                                    <button class="chat-action-btn">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages">
+                                <div class="message-date-divider">
+                                    <span>Today</span>
+                                </div>
+                                
+                                <div class="message received">
+                                    <div class="message-avatar">
+                                        <img src="../assets/images/AIprofile.png" alt="Dr. Smith" onerror="this.src='../assets/images/AIprofile.png'">
+                                    </div>
+                                    <div class="message-content">
+                                        <div class="message-bubble">
+                                            <p>Good morning! Just checking how you're doing after your filling procedure yesterday. Any pain or discomfort?</p>
+                                        </div>
+                                        <div class="message-info">
+                                            <span class="message-time">9:32 AM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="message sent">
+                                    <div class="message-content">
+                                        <div class="message-bubble">
+                                            <p>Hi Dr. Smith, I'm feeling pretty good! Just a little sensitivity with cold drinks but no real pain.</p>
+                                        </div>
+                                        <div class="message-info">
+                                            <span class="message-time">9:45 AM</span>
+                                            <span class="message-status"><i class="fas fa-check-double"></i></span>
+                                        </div>
+                                    </div>
+                                </div>                                                            
+                               
+                                <div class="message sent">
+                                    <div class="message-content">
+                                        <div class="message-bubble">
+                                            <p>Thank you! I'll look it over. By the way, when should I schedule my next appointment?</p>
+                                        </div>
+                                        <div class="message-info">
+                                            <span class="message-time">10:45 AM</span>
+                                            <span class="message-status"><i class="fas fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-input">
+                                <button class="chat-input-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <div class="input-field">
+                                    <input type="text" placeholder="Type a message...">
+                                </div>
+                                <button class="chat-input-btn send-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Admin Management Tab -->
+                <div class="tab-pane" id="admins">
+                    <h1 class="page-title">Admin Management</h1>
+
+                    <!-- Top Action Bar -->
+                    <div class="action-bar">
+                        <div class="search-container">
+                            <input
+                                type="text"
+                                placeholder="Search admins..."
+                                class="search-input"
+                            />
+                            <button class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="action-btn add-admin-btn" id="addAdminBtn">
+                                <i class="fas fa-user-plus"></i> Add Admin
+                            </button>
+                            <button class="action-btn generate-report-btn" id="adminReport">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                            <button class="action-btn bulk-import-btn">
+                                <i class="fas fa-file-import"></i> Bulk Import
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Admin List -->
+                    <div class="content-card admin-list-card">
+                        <div class="card-header">
+                            <h2>Admin Accounts</h2>
+                            <div class="filter-options">
+                                <!-- <select id="adminTypeFilter">
+                                    <option value="all">All Types</option>
+                                    <option value="super">Normal Admin</option>
+                                    <option value="school">Super Admin</option>
+                                </select> -->
+                                <select id="adminStatusFilter" style="margin-left: 10px;">
+                                    <option value="all">All Statuses</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="pending">Pending</option>
+                                </select>
+                                <select id="adminSort" style="margin-left: 10px;">
+                                    <option value="recent">Recently Added</option>
+                                    <option value="name">Name (A-Z)</option>
+                                    <option value="last-login">Last Login</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="patient-table">
+                                <thead>
+                                    <tr>
+                                        <th>Admin ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pagination">
+                            <button class="pagination-btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="pagination-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                            <button class="pagination-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>                    
+                </div>
+
+                <!-- Patient Management Tab -->
+                <div class="tab-pane" id="patients">
+                    <h1 class="page-title">Patient Management</h1>
+
+                    <!-- Top Action Bar -->
+                    <div class="action-bar">
+                        <div class="search-container">
+                            <input
+                                type="text"
+                                placeholder="Search patients..."
+                                class="search-input"
+                            />
+                            <button class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="action-btn add-patient-btn" id="addPatientBtn">
+                                <i class="fas fa-user-plus"></i> Add Patient
+                            </button>
+                            <button class="action-btn generate-report-btn" id="patientReport">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                            <!-- <button class="action-btn bulk-import-btn">
+                                <i class="fas fa-file-import"></i> Bulk Import
+                            </button> -->
+                            <!-- <button class="action-btn export-btn">
+                                <i class="fas fa-file-export"></i> Export
+                            </button> -->
+                        </div>
+                    </div>
+
+                    <!-- Patient List -->
+                    <div class="content-card patient-list-card">
+                        <div class="card-header">
+                            <h2>Patient Records</h2>
+                            <div class="filter-options">
+                                <select id="patientLocationFilter">
+                                    <option value="all">All Locations</option>
+                                    <option value="soweto">Soweto</option>
+                                    <option value="mamelodi">Mamelodi</option>
+                                    <option value="diepsloot">Diepsloot</option>
+                                    <option value="alexandra">Alexandra</option>
+                                </select>
+                                <select id="patientStatusFilter" style="margin-left: 10px;">
+                                    <option value="all">All Statuses</option>
+                                    <option value="archived">Archived</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                <select id="patientSort" style="margin-left: 10px;">
+                                    <option value="recent">Recent Signups</option>
+                                    <option value="name">Name (A-Z)</option>
+                                    <option value="age">Age</option>
+                                    <option value="last-visit">Last Visit</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="patient-table">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Name</th>
+                                        <th style="text-align: center;">Age</th>
+                                        <th>Location</th>
+                                        <th>School</th>
+                                        <th>Date Registered</th>
+                                        <th style="text-align: center;">Status</th>
+                                        <th style="text-align: center;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patientTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pagination">
+                            <button class="pagination-btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="pagination-info">Page 1 of 8</span>
+                            <button class="pagination-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                </div>            
+                <!-- School programs tab -->
+                <div class="tab-pane" id="schools">
+                <h1 class="page-title" style="display: flex; justify-content: space-between; align-items: center;">School Programs Management 
+                    <button class="primary-btn" id="add_event">Add Event</button>
+                </h1>
+
+                <div class="school-programs-content">
+                    <section class="school-section">
+                    <h2><i class="fas fa-calendar-check"></i> Planned School Visits</h2>
+                    <div id="planned-visits-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    </section>
+
+                    <section class="school-section">
+                    <h2><i class="fas fa-check-circle"></i> Completed School Visits</h2>
+                    <div id="completed-visits-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    </section>
+                </div>
+                </div>
+
+                <!-- Add Event Modal (place this with your other modals) -->
+                <div class="modal" id="addEventModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h2>Add New Event</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form id="addEventForm">
+                        <input type="hidden" id="addEventId" name="id">
+                        <div class="form-group">
+                        <label for="addEventSchool">School*</label>
+                        <input type="text" id="addEventSchool" name="school" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="addEventDateTime">Date & Time*</label>
+                        <input type="datetime-local" id="addEventDateTime" name="date_time" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="addEventStudents">Students*</label>
+                        <input type="number" id="addEventStudents" name="students" min="0" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="addEventGradeRange">Grade Range</label>
+                        <input type="text" id="addEventGradeRange" name="gradeRange" class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="addEventLocation">Location</label>
+                        <input type="text" id="addEventLocation" name="location" class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="addEventContact">Contact</label>
+                        <input type="text" id="addEventContact" name="contact" class="form-input">
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button class="cancel-btn" id="cancel_btn">Cancel</button>
+                    <button class="save-btn" form="addEventForm">Save Event</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Edit Planned Visit Modal -->
+                <div class="modal" id="editPlannedVisitModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h2>Edit Planned Visit</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form id="editPlannedVisitForm">
+                        <input type="hidden" id="editVisitId" name="id">
+                        <div class="form-group">
+                        <label for="editVisitSchool">School</label>
+                        <input type="text" id="editVisitSchool" name="school" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVisitDate">Date</label>
+                        <input type="date" id="editVisitDate" name="date" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVisitStudents">Students</label>
+                        <input type="number" id="editVisitStudents" name="students" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVisitGradeRange">Grade Range</label>
+                        <input type="text" id="editVisitGradeRange" name="gradeRange" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVisitLocation">Location</label>
+                        <input type="text" id="editVisitLocation" name="location" required>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="save-btn" form="editPlannedVisitForm">Save Changes</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Edit Visit Modal -->
+                <div class="modal" id="editVisitModal" style="display:none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h2>Edit Visit Details</h2>
+                    <button class="close-modal" id="close-completed">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form id="editVisitForm">
+                        <input type="hidden" id="editVisit-Id" name="id">
+                        <div class="form-group">
+                        <label for="editCavities">Cavities</label>
+                        <input type="number" id="editCavities" name="cavities" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editGumDisease">Gum Disease</label>
+                        <input type="number" id="editGumDisease" name="gumdisease" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editToothLoss">Tooth Loss</label>
+                        <input type="number" id="editToothLoss" name="toothloss" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editOther">Other</label>
+                        <input type="text" id="editOther" name="other">
+                        </div>
+                        <div class="form-group">
+                        <label for="editTreatments">Treatments</label>
+                        <input type="number" id="editTreatments" name="treatments" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editFollowUps">Follow-ups</label>
+                        <input type="number" id="editFollowUps" name="followUps" min="0" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVideoFile">Video File</label>
+                        <input type="file" id="editVideoFile" name="video_file" accept="video/*" class="video-input">
+                        <small class="duration-display" style="display: none;"></small>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVideoTitle">Title</label>
+                        <input type="text" id="editVideoTitle" name="video_title" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVideoDescription">Description</label>
+                        <textarea id="editVideoDescription" name="video_description"></textarea>
+                        </div>
+                        <div class="form-group">
+                        <label for="editVideoCategory">Category</label>
+                        <input type="text" id="editVideoCategory" name="video_category">
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button class="cancel-btn" id="cancel-completed">Cancel</button>
+                    <button class="save-btn" form="editVisitForm" id="save-completed">Save</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Completed Visit Analytics Modal -->
+                <div class="modal" id="completedVisitAnalyticsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h2>Completed Visit Analytics</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <div class="visit-analytics-details">
+                        <h3 id="analyticsSchoolName">School Name</h3>
+                        <p id="analyticsVisitDate">Visit Date: </p>
+                        <div class="analytics-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Students:</span>
+                            <span class="metric-value" id="analyticsScreened"></span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Treatments Provided:</span>
+                            <span class="metric-value" id="analyticsTreatments"></span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Follow-ups Required:</span>
+                            <span class="metric-value" id="analyticsFollowUps"></span>
+                        </div>
+                        </div>
+                        <!-- Could add charts or more detailed info here later -->
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button class="secondary-btn close-modal">Close</button>
+                    </div>
+                </div>
+                </div>
+                <!-- System Settings Tab -->
+                <div class="tab-pane" id="settings">
+                    <div class="settings-header">
+                        <h1 class="page-title">System Settings</h1>
+                        <div class="settings-tabs">
+                            <button class="settings-tab active" data-tab="general">General</button>
+                            <button class="settings-tab" data-tab="announcements">Announcements</button>
+
+                            <button class="settings-tab" data-tab="security">Security</button>
+                            <button class="settings-tab" data-tab="maintenance">Maintenance</button>
+                            <button class="settings-tab" data-tab="integrations">Integrations</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-content-container">
+                        <!-- General Settings -->
+                        <div class="settings-content active" id="general-settings">
+                            <div class="content-card">
+                                <h2><i class="fas fa-cog"></i> Global Configuration</h2>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-globe"></i> System Identity</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="systemName">
+                                                <span>System Name</span>
+                                                <span class="tooltip" data-tooltip="The display name for your application">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </span>
+                                            </label>
+                                            <input type="text" id="systemName" value="SmileConnector">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="systemLogo">System Logo</label>
+                                            <div class="file-upload">
+                                                <div class="logo-preview" id="logoPreview">
+                                                    <img src="" alt="Current Logo" id="currentLogo" style="display: none;">
+                                                    <i class="fas fa-camera" id="logoPlaceholder"></i>
+                                                </div>
+                                                <input type="file" id="systemLogo" accept="image/*">
+                                                <label for="systemLogo" class="upload-btn">Change Logo</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="timezone">Timezone</label>
+                                            <select id="timezone" class="searchable-select">
+                                                <option value="Africa/Johannesburg" selected>South Africa Standard Time (SAST)</option>
+                                                <option value="UTC">UTC</option>
+                                                <!-- More timezones will be populated by JS -->
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dateFormat">Date Format</label>
+                                            <select id="dateFormat">
+                                                <option value="dd/mm/yyyy">DD/MM/YYYY</option>
+                                                <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                                <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-columns"></i> Display Settings</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="recordsPerPage">Records Per Page</label>
+                                            <select id="recordsPerPage">
+                                                <option value="10">10</option>
+                                                <option value="25" selected>25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="defaultTheme">Default Theme</label>
+                                            <select id="defaultTheme">
+                                                <option value="light">Light Mode</option>
+                                                <option value="dark">Dark Mode</option>
+                                                <option value="system">System Preference</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="sessionTimeout">Session Timeout (minutes)</label>
+                                            <div class="range-input">
+                                                <input type="range" id="sessionTimeoutRange" min="5" max="240" value="30" step="5">
+                                                <input type="number" id="sessionTimeout" min="5" max="240" value="30">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="notificationSound">Notification Sound</label>
+                                            <select id="notificationSound">
+                                                <option value="default">Default</option>
+                                                <option value="chime">Chime</option>
+                                                <option value="bell">Bell</option>
+                                                <option value="none">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button class="primary-btn" id="saveGeneralSettings">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                    <button class="secondary-btn" id="resetGeneralSettings">
+                                        <i class="fas fa-undo"></i> Reset to Defaults
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add to settings-content -->
+                        <div class="settings-content" id="announcements-settings">
+                            <div class="content-card">
+                                <h2><i class="fas fa-bullhorn"></i> Announcements & News</h2>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-exclamation-circle"></i> Login Popup Messages</h3>
+                                    <div class="announcement-controls">
+                                        <button class="primary-btn" id="createPopupBtn">
+                                            <i class="fas fa-plus"></i> Create New Popup
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="announcement-list" id="popupList">
+                                        <!-- Popup messages will be listed here -->
+                                        <div class="empty-state">
+                                            <i class="fas fa-bell-slash"></i>
+                                            <p>No popup messages configured</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-newspaper"></i> Company News & Updates</h3>
+                                    <div class="announcement-controls">
+                                        <button class="primary-btn" id="createNewsBtn">
+                                            <i class="fas fa-plus"></i> Create News Post
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="announcement-list" id="newsList">
+                                        <!-- News posts will be listed here -->
+                                        <div class="empty-state">
+                                            <i class="fas fa-newspaper"></i>
+                                            <p>No news posts created yet</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Security Settings -->
+                        <div class="settings-content" id="security-settings">
+                            <div class="content-card">
+                                <h2><i class="fas fa-shield-alt"></i> Security Settings</h2>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-key"></i> Authentication</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="passwordPolicy">Password Policy</label>
+                                            <select id="passwordPolicy" class="policy-select">
+                                                <option value="basic" data-details="Minimum 6 characters">Basic (6 characters)</option>
+                                                <option value="medium" selected data-details="Minimum 8 characters with 1 number">Medium (8 characters, 1 number)</option>
+                                                <option value="strong" data-details="Minimum 10 characters with mixed case and special character">Strong (10 characters, mixed case, special)</option>
+                                            </select>
+                                            <div class="policy-details" id="policyDetails">Minimum 8 characters with 1 number</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="passwordExpiry">Password Expiry (days)</label>
+                                            <input type="number" id="passwordExpiry" value="90" min="7" max="365">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="loginAttempts">Max Login Attempts</label>
+                                            <input type="number" id="loginAttempts" value="5" min="1" max="10">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lockoutDuration">Lockout Duration (minutes)</label>
+                                            <input type="number" id="lockoutDuration" value="15" min="1" max="1440">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-user-lock"></i> Two-Factor Authentication</h3>
+                                    <div class="toggle-group">
+                                        <label for="enable2FA">Enable 2FA for all users</label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enable2FA">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-row" id="2faSettings" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="2faMethod">2FA Method</label>
+                                            <select id="2faMethod">
+                                                <option value="email">Email</option>
+                                                <option value="sms">SMS</option>
+                                                <option value="authenticator">Authenticator App</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="2faGracePeriod">Grace Period (days)</label>
+                                            <input type="number" id="2faGracePeriod" value="7" min="1" max="30">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button class="primary-btn" id="saveSecuritySettings">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Maintenance Settings -->
+                        <div class="settings-content" id="maintenance-settings">
+                            <div class="content-card">
+                                <h2><i class="fas fa-tools"></i> System Maintenance</h2>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-database"></i> Database Operations</h3>
+                                    <div class="action-grid">
+                                        <div class="action-card" id="backupBtn">
+                                            <div class="action-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="action-content">
+                                                <h4>Backup Database</h4>
+                                                <p>Create a complete backup of your system data</p>
+                                                <div class="last-run">Last backup: 2 days ago</div>
+                                            </div>
+                                            <button class="action-btn">Run Now</button>
+                                        </div>
+                                        
+                                        <div class="action-card" id="optimizeDbBtn">
+                                            <div class="action-icon">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                            </div>
+                                            <div class="action-content">
+                                                <h4>Optimize Database</h4>
+                                                <p>Improve database performance</p>
+                                                <div class="last-run">Last optimized: 1 week ago</div>
+                                            </div>
+                                            <button class="action-btn">Run Now</button>
+                                        </div>
+                                        
+                                        <div class="action-card" id="exportDbBtn">
+                                            <div class="action-icon">
+                                                <i class="fas fa-file-export"></i>
+                                            </div>
+                                            <div class="action-content">
+                                                <h4>Full Export</h4>
+                                                <p>Export all system data</p>
+                                                <div class="last-run">Last export: Never</div>
+                                            </div>
+                                            <button class="action-btn">Export</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-broom"></i> System Cleanup</h3>
+                                    <div class="action-grid">
+                                        <div class="action-card" id="clearCacheBtn">
+                                            <div class="action-icon">
+                                                <i class="fas fa-broom"></i>
+                                            </div>
+                                            <div class="action-content">
+                                                <h4>Clear Cache</h4>
+                                                <p>Clear temporary system cache</p>
+                                                <div class="last-run">Last cleared: Today</div>
+                                            </div>
+                                            <button class="action-btn">Clear Now</button>
+                                        </div>
+                                        
+                                        <div class="action-card" id="purgeDataBtn">
+                                            <div class="action-icon warning">
+                                                <i class="fas fa-trash"></i>
+                                            </div>
+                                            <div class="action-content">
+                                                <h4>Purge Old Data</h4>
+                                                <p>Permanently delete old records</p>
+                                                <div class="last-run">Last purge: Never</div>
+                                            </div>
+                                            <button class="action-btn warning">Purge</button>
+                                        </div>
+                                        
+                                        <div class="action-card Logsbtn" id="systemLogsBtn">
+                                            <div class="action-icon">
+                                                <i class="fas fa-file-alt"></i>
+                                            </div>
+                                            <div class="action-card Logsbtn">
+                                                <h4>View System Logs</h4>
+                                                <p>Access and manage system logs</p>
+                                                <div class="last-run">Log size: 45MB</div>
+                                            </div>
+                                            <button class="action-btn">View Logs</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Integrations Settings -->
+                        <div class="settings-content" id="integrations-settings">
+                            <div class="content-card">
+                                <h2><i class="fas fa-plug"></i> System Integrations</h2>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-envelope"></i> Email Service</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="emailProvider">Email Provider</label>
+                                            <select id="emailProvider">
+                                                <option value="smtp">SMTP</option>
+                                                <option value="sendgrid">SendGrid</option>
+                                                <option value="mailgun">Mailgun</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emailFrom">From Email</label>
+                                            <input type="email" id="emailFrom" value="noreply@smileconnector.org">
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="smtpSettings">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="smtpHost">SMTP Host</label>
+                                                <input type="text" id="smtpHost" placeholder="smtp.example.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="smtpPort">SMTP Port</label>
+                                                <input type="number" id="smtpPort" value="587">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="smtpUsername">SMTP Username</label>
+                                                <input type="text" id="smtpUsername">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="smtpPassword">SMTP Password</label>
+                                                <input type="password" id="smtpPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3><i class="fas fa-sms"></i> SMS Gateway</h3>
+                                    <div class="toggle-group">
+                                        <label for="enableSMS">Enable SMS Notifications</label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableSMS">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div id="smsSettings" style="display: none;">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="smsProvider">SMS Provider</label>
+                                                <select id="smsProvider">
+                                                    <option value="twilio">Twilio</option>
+                                                    <option value="nexmo">Nexmo</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="smsFrom">From Number</label>
+                                                <input type="text" id="smsFrom" placeholder="+27 693 451 778">
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="twilioSettings">
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="twilioSid">Account SID</label>
+                                                    <input type="text" id="twilioSid">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="twilioToken">Auth Token</label>
+                                                    <input type="password" id="twilioToken">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button class="primary-btn" id="saveIntegrationSettings">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                    <button class="secondary-btn" id="testIntegrationSettings">
+                                        <i class="fas fa-check-circle"></i> Test Connection
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </main>
+        <!-- Announcement Editor Modal -->
+        <div class="modal" id="announcementModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Create New Announcement</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="announcementTitle">Title</label>
+                        <input type="text" id="announcementTitle" placeholder="Enter announcement title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcementContent">Content</label>
+                        <textarea id="announcementContent" rows="5" placeholder="Enter announcement content"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="announcementStart">Start Date</label>
+                            <input type="datetime-local" id="announcementStart">
+                        </div>
+                        <div class="form-group">
+                            <label for="announcementEnd">End Date</label>
+                            <input type="datetime-local" id="announcementEnd">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="popupSettings">
+                        <div class="toggle-group">
+                            <label for="isPopup">Show as popup on login</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="isPopup" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <label for="requireAck">Require acknowledgment</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="requireAck">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="newsSettings" style="display: none;">
+                        <label for="newsCategory">Category</label>
+                        <select id="newsCategory">
+                            <option value="general">General</option>
+                            <option value="updates">System Updates</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="secondary-btn modal-cancel">Cancel</button>
+                    <button class="primary-btn" id="saveAnnouncement">Save Announcement</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit logs modal -->
+        <div class="modal" id="auditLogsModal">
+            <div class="modal-content" style="max-width: 1200px;">
+            <div class="modal-header">
+                <h3>Audit Logs</h3>
+                <button class="modal-close" aria-label="Close modal" id="closeAuditLog">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Filter Bar -->
+                <div class="action-bar" style="margin-bottom: 20px;">
+                <div class="search-container" style="flex-grow: 1;">
+                    <input type="text" placeholder="Search audit logs..." class="search-input" id="auditLogSearch" aria-label="Search audit logs">
+                    <button class="search-btn" id="auditSearchBtn">
+                    <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="filter-options" style="margin-left: 20px; display: flex; gap: 10px;">
+                    <select id="auditActionType" class="form-control" style="width: 180px;">
+                    <option value="all">All Actions</option>
+                    <option value="create">Create</option>
+                    <option value="update">Update</option>
+                    <option value="delete">Delete</option>
+                    <option value="login">Login</option>
+                    <option value="system">System</option>
+                    </select>
+                    <select id="auditTimeRange" class="form-control" style="width: 180px;">
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                    <option value="all">All Time</option>
+                    <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                </div>
+        
+                <!-- Audit Log Table -->
+                <div class="table-responsive">
+                <table class="audit-log-table">
+                    <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Action</th>
+                        <th>Admin</th>
+                        <th>Target Type</th>
+                        <th>Target ID</th>
+                        <th>Details</th>
+                        <th>IP Address</th>
+                    </tr>
+                    </thead>
+                    <tbody id="auditLogsTableBody">
+                    <!-- Rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                </div>
+        
+                <div class="pagination" style="margin-top: 20px;">
+                <button class="pagination-btn" id="auditPrevPage" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="pagination-info" id="auditPageInfo">Page 1 of 1</span>
+                <button class="pagination-btn" id="auditNextPage">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="exportAuditLogs">
+                <i class="fas fa-download"></i> Export to CSV
+                </button>
+                <button class="modal-btn modal-btn-primary" id="refreshAuditLogs">
+                <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Admin Form Modal -->
+        <div class="modal" id="adminFormModal">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 id="adminModalTitle">Add New Admin</h2>
+                  <button class="close-modal">
+                      <i class="fas solid fa-times"></i>
+                  </button>
+              </div>
+              <div class="modal-body">
+                    <form id="adminForm" action="../backend/addAdmin.php" method="post" enctype="multipart/form-data">
+                      <div class="form-row">
+                          <div class="form-group">
+                              <label for="adminName">Full Name</label>
+                              <input
+                                  type="text"
+                                  id="adminName"
+                                  name="adminName"
+                                  required
+                              />
+                          </div>
+                          <div class="form-group">
+                              <label for="adminEmail">Email</label>
+                              <input
+                                  type="email"
+                                  id="adminEmail"
+                                  name="adminEmail"
+                                  required
+                              />
+                          </div>
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group">
+                              <label for="adminTitle">Title</label>
+                              <select id="adminTitle" name="adminTitle" required>
+                                  <option value="Mr">Mr</option>
+                                  <option value="Mrs">Mrs</option>
+                                  <option value="Ms">Ms</option>
+                                  <option value="Dr">Dr</option>
+                                  <option value="Prof">Prof</option>
+                                  <option value="Rev">Rev</option>
+                              </select>
+                          </div>
+                          <div class="form-group">
+                              <label for="adminStatus">Status</label>
+                              <select id="adminStatus" name="adminStatus" required>
+                                  <!-- <option value="active">Active</option>
+                                  <option value="inactive">Inactive</option> -->
+                                  <option value="pending" disabled>Pending Approval</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label>Permissions</label>
+                          <div class="permissions-grid">
+                              <div class="permission-item">
+                                  <input type="checkbox" id="permPatients" name="permissions" value="manage_patients" checked disabled>
+                                  <label for="permPatients">Manage Patients</label>
+                              </div>
+                              <div class="permission-item">
+                                  <input type="checkbox" id="permSchools" name="permissions" value="manage_schools" checked disabled>
+                                  <label for="permSchools">Manage Schools</label>
+                              </div>
+                              
+                              <div class="permission-item">
+                                  <input type="checkbox" id="permReports" name="permissions" value="view_reports" checked disabled>
+                                  <label for="permReports">View Reports</label>
+                              </div>                           
+
+
+                              <!-- <div class="permission-item">
+                                  <input type="checkbox" id="permAudit" name="permissions" value="view_audit">
+                                  <label for="permAudit">View Audit Logs</label>
+                              </div> -->
+                              <!-- <div class="permission-item">
+                                  <input type="checkbox" id="permTele" name="permissions" value="tele_dentistry">
+                                  <label for="permTele">Tele-Dentistry</label>
+                              </div> -->
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <textarea
+                              id="adminNotes"
+                              name="adminNotes"
+                              rows="2"
+                              placeholder="Additional notes or instructions for this admin"
+                          ></textarea>
+                      </div>
+                        <div class="form-group super-admin-permission">
+                            <span class="permission-tooltip" tabindex="0">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip-text">Grants full system access and all administrative privileges</span>
+                            </span>
+                            <input type="checkbox" id="permSuperAdmin" name="permissions" value="super_admin">
+                            <label for="permSuperAdmin">Super Admin Access</label>
+                        </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="cancel-btn">Cancel</button>
+                  <button class="save-btn" form="adminForm">
+                      Save Admin
+                  </button>
+              </div>
+          </div>
+        </div>
+
+        <!-- Admin Details Modal -->
+        <div class="modal" id="adminDetailsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Admin Details</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="patient-details">
+                        <div class="patient-profile">
+                            <div class="patient-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="patient-info">
+                                <h3><span id="detailAdminTitle"></span> <span id="detailAdminName"></span></h3>
+                                <p id="detailAdminId">Admin ID: <span id="detailAdminIdValue"></span></p>
+                                <p id="detailAdminEmail"></p>
+                                <span id="detailAdminType" class="admin-type-badge">Regular Admin</span>
+                                <span id="detailAdminStatus" class="status-badge">Pending</span>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Account Information</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Last Login:</span>
+                                    <span id="detailLastLogin">Never logged in</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Created On:</span>
+                                    <span id="detailCreatedDate"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Created By:</span>
+                                    <span id="detailCreatedBy"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Login Count:</span>
+                                    <span id="detailLoginCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Permissions</h4>
+                            <div class="permissions-grid">
+                                <div class="permission-item">
+                                    <i class="fas fa-check-circle" style="color: #4CAF50;"></i>
+                                    <span>Manage Patients</span>
+                                </div>
+                                <div class="permission-item">
+                                    <i class="fas fa-check-circle" style="color: #4CAF50;"></i>
+                                    <span>Manage Schools</span>
+                                </div>
+                                <div class="permission-item">
+                                    <i class="fas fa-check-circle" style="color: #4CAF50;"></i>
+                                    <span>View Reports</span>
+                                </div>
+                                <div class="permission-item super-admin-permission">
+                                    <i id="superAdminIcon" class="fas fa-times-circle" style="color: #F44336;"></i>
+                                    <span>Super Admin Access</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Notes</h4>
+                            <div class="notes-content" id="detailAdminNotes">
+                                No additional notes
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Recent Activity</h4>
+                            <div class="visit-timeline" id="adminActivityTimeline">
+                                <div class="visit-item">
+                                    <div class="visit-content">
+                                        <p>No recent activity</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="secondary-btn">Reset Password</button> -->
+                    <button class="cancel-btn">Close</button>
+                    <button class="primary-btn edit-from-details">
+                        Edit Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Popup confirmation Password Modal -->
+        <div class="pop-up-password" id="passwordModal">
+            <div class="pop-up-password-content">
+                <button class="close-btn" id="closeModal">
+                    <i class='bx bx-x'></i>
+                </button>
+                <h2>Confirm Your Identity</h2>
+                <p>For security reasons, please confirm your password to proceed with this change.</p>
+                
+                <div class="error-message" id="errorMessage">
+                    <i class='bx bx-error-circle'></i> <span id="errorText">Incorrect password. Please try again.</span>
+                </div>
+                
+                <div class="input-box">
+                    <input type="password" id="currentPassword" required>
+                    <label>Current Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                
+                <div class="buttons">
+                    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-confirm" id="confirmBtn">
+                        <span id="btnText">Confirm</span>
+                        <div class="spinner" id="spinner"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Details Modal -->
+        <div class="modal" id="patientDetailsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Patient Details</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="patient-details">
+                        <div class="patient-profile">
+                            <div class="patient-icon">
+                                <i class="fas fa-user-injured"></i>
+                            </div>
+                            <div class="patient-info">
+                                <h3 id="detailPatientName"></h3>
+                                <p id="detailPatientId"></p>
+                                <p id="detailPatientSchool"></p>
+                                <span id="detailPatientStatus" class="status-badge"></span>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Basic Information</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Age:</span>
+                                    <span id="detailPatientAge"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Birthdate:</span>
+                                    <span id="detailPatientBirthdate"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Location:</span>
+                                    <span id="detailPatientLocation"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Guardian:</span>
+                                    <span id="detailGuardianName"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Medical Information</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Status:</span>
+                                    <span id="detailPatientStatusText"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Last Updated:</span>
+                                    <span id="detailLastUpdated"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Medical Notes</h4>
+                            <div class="medical-notes" id="detailMedicalNotes">
+                                No medical notes available
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Patient Records</h4>
+                            <div class="records-list" id="detailPatientRecords">
+                                <p>No records uploaded</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="secondary-btn" id="patientViewPdf">Print Record</button>
+                    <button class="cancel-btn">Close</button>
+                    <button class="primary-btn edit-from-details">Edit Patient</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Patient Form Modal -->
+        <div class="modal" id="patientFormModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="patientModalTitle">Add New Patient</h2>
+                    <button class="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="patientForm" action="../backend/addPatient.php" method="post" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="patientName">Full Name</label>
+                                <input type="text" id="patientName" name="patientName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="patientBirthdate">Birthdate</label>
+                                <input type="date" id="patientBirthdate" name="patientBirthdate" required />
+                            </div>                      
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="patientLocation">Location</label>
+                                <select id="patientLocation" name="patientLocation" required>
+                                    <option value="">Select Location</option>
+                                    <option value="soweto">Soweto</option>
+                                    <option value="mamelodi">Mamelodi</option>
+                                    <option value="diepsloot">Diepsloot</option>
+                                    <option value="alexandra">Alexandra</option>
+                                    <option value="tembisa">Tembisa</option>
+                                    <option value="khayelitsha">Khayelitsha</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientSchool">School</label>
+                                <input type="text" id="patientSchool" name="patientSchool" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guardianName">Guardian Username/Email</label>
+                                <input type="text" id="guardianName" name="guardianName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="patientStatus">Treatment Status</label>
+                                <select id="patientStatus" name="patientStatus" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="medicalNotes">Medical Notes</label>
+                            <textarea id="medicalNotes" name="medicalNotes" rows="4"></textarea>
+                        </div>
+                        <div class="form-group file-upload">
+                            <label>Patient Records (PDF, Images)</label>
+                            <div class="file-upload-container">
+                                <input type="file" id="patientRecords" name="patientRecords[]" multiple 
+                                    accept=".pdf,.jpg,.jpeg,.png" />
+                                <label for="patientRecords" class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                                </label>
+                            </div>
+                            <div class="uploaded-files" id="uploadedFilesPreview">
+                                <p class="file-info">No files selected</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="save-btn" form="patientForm">Save Patient</button>
+                </div>
+            </div>
+        </div>
+
+    <!-- PDF Preview Modal -->
+    <div class="modal" id="pdfPreviewModal">
+        <div class="modal-content pdf-preview-container">
+            <div class="modal-header">
+                <h2>PDF Preview</h2>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="pdfContentPreview" class="pdf-content">
+                    <!-- PDF content will be generated here -->
+                </div>
+            </div>
+            <div class="modal-footer pdf-actions">
+
+                <button class="secondary-btn" id="printPdfBtn">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <button class="secondary-btn" id="emailPdfBtn">
+                    <i class="fas fa-envelope"></i> Email
+                </button>
+                <button class="primary-btn" id="savePdfBtn">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/scripts/secAdminDashboard.js"></script>
+    <script src="../assets/scripts/chatbot.js"></script>
+    <script src="../assets/scripts/AuditLogs.js"></script>
+    <script src="../assets/scripts/usersManagement.js"></script>
+    <script src="../assets/scripts/pop-up-password.js"></script>
+    <script src="../assets/scripts/patientForm.js"></script>
+    <script src="../assets/scripts/calendar.js"></script>
+    <script src="../assets/scripts/schoolprogram.js"></script>
+    <script src="../assets/scripts/pdfgenerator.js"></script>
+</body>
+</html>

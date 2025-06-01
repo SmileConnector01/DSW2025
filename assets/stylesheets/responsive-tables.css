@@ -1,0 +1,759 @@
+/* Responsive Tables CSS */
+/* Base Table Styles */
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.patient-table thead tr {
+    background-color: #0077ff;
+    color: #ffffff;
+    text-align: left;
+}
+
+.patient-table th,
+.patient-table td {
+    padding: 12px 15px;
+    position: relative;
+}
+
+.patient-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    transition: all 0.2s;
+}
+
+.patient-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.patient-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0077ff;
+}
+
+.patient-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Action Buttons */
+.action-cell {
+    white-space: nowrap;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.pending {
+    background-color: #FFF3CD;
+    color: #856404;
+}
+
+.status-badge.active {
+    background-color: #D4EDDA;
+    color: #155724;
+}
+
+.status-badge.inactive {
+    background-color: #F8D7DA;
+    color: #721C24;
+}
+
+.status-badge.completed {
+    background-color: #D4EDDA;
+    color: #155724;
+}
+
+.status-badge.in-progress {
+    background-color: #D1ECF1;
+    color: #0C5460;
+}
+
+/* Responsive Table Styles */
+@media screen and (max-width: 1200px) {
+    .patient-table {
+        font-size: 0.85em;
+    }
+    
+    .patient-table th,
+    .patient-table td {
+        padding: 10px 12px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    /* Switch to block layout for medium screens */
+    .patient-table {
+        display: block;
+    }
+    
+    .patient-table thead {
+        display: none;
+    }
+    
+    .patient-table tbody,
+    .patient-table tr,
+    .patient-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .patient-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .patient-table td {
+        padding: 10px 15px;
+        text-align: left !important;
+        position: relative;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .patient-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: #0077ff;
+    }
+    
+    .action-cell {
+        text-align: center !important;
+    }
+    
+    .action-cell:before {
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .patient-table td:before {
+        width: 40%;
+        font-size: 0.8em;
+    }
+    
+    .patient-table td {
+        font-size: 0.85em;
+        padding: 8px 15px 8px 50%;
+    }
+    
+    .status-badge {
+        float: right;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .patient-table td:before {
+        width: 35%;
+        font-size: 0.75em;
+    }
+    
+    .patient-table td {
+        padding: 6px 15px 6px 40%;
+    }
+    
+    .icon-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8em;
+    }
+}
+
+/* Dark Mode Support */
+.dark-mode .patient-table tbody tr {
+    border-bottom-color: #444;
+}
+
+.dark-mode .patient-table tbody tr:nth-of-type(even) {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .patient-table tbody tr:hover {
+    background-color: #3a3a3a;
+}
+
+.dark-mode .patient-table td:before {
+    color: #4dabf7;
+}
+
+/* Additional Media Queries for Complete Responsiveness */
+
+/* iPhone XR (414px × 896px) */
+@media screen and (max-width: 414px) and (min-height: 896px) {
+    .action-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 8px;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .search-input {
+        width: calc(100% - 45px);
+        padding: 8px 12px;
+    }
+    
+    .action-buttons {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-start;
+    }
+    
+    .action-btn {
+        flex: 1;
+        min-width: calc(50% - 4px);
+        padding: 8px 6px;
+        font-size: 0.8em;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 8px;
+    }
+    
+    .filter-options {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .filter-options select {
+        flex: 1;
+        min-width: calc(50% - 4px);
+        margin-left: 0 !important;
+        padding: 6px 8px;
+        font-size: 0.8em;
+    }
+    
+    .table-container {
+        margin: 0 -8px;
+        padding: 0 8px;
+    }
+    
+    .patient-table td {
+        padding: 8px 10px 8px 45%;
+        font-size: 0.8em;
+    }
+    
+    .patient-table td:before {
+        width: 42%;
+        font-size: 0.75em;
+        left: 10px;
+    }
+}
+
+/* iPhone SE (375px × 667px) */
+@media screen and (max-width: 375px) and (max-height: 667px) {
+    .page-title {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        padding: 0 8px;
+    }
+    
+    .action-bar {
+        padding: 8px;
+        margin: 0 -8px 15px -8px;
+    }
+    
+    .content-card {
+        margin: 0 -8px;
+        border-radius: 0;
+        padding: 8px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.1em;
+    }
+    
+    .filter-options select {
+        font-size: 0.75em;
+        padding: 5px 6px;
+    }
+    
+    .patient-table td {
+        padding: 6px 8px 6px 40%;
+    }
+    
+    .patient-table td:before {
+        width: 38%;
+        font-size: 0.7em;
+        left: 8px;
+    }
+    
+    .icon-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.75em;
+    }
+    
+    .pagination {
+        padding: 8px;
+        margin: 0 -8px;
+    }
+}
+
+/* iPhone 12 Pro (390px × 844px) */
+@media screen and (max-width: 390px) and (min-height: 844px) {
+    .action-bar {
+        padding: 10px 6px;
+    }
+    
+    .search-container {
+        margin-bottom: 10px;
+    }
+    
+    .action-buttons {
+        justify-content: space-between;
+    }
+    
+    .action-btn {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    
+    .card-header {
+        padding: 12px 6px;
+    }
+    
+    .table-container {
+        padding: 0 6px;
+    }
+    
+    .patient-table td {
+        padding: 7px 10px 7px 42%;
+    }
+    
+    .patient-table td:before {
+        width: 40%;
+        left: 10px;
+    }
+}
+
+/* iPhone 14 Pro (430px × 932px) */
+@media screen and (min-width: 415px) and (max-width: 430px) {
+    .action-bar {
+        padding: 12px 10px;
+    }
+    
+    .action-btn {
+        padding: 10px 12px;
+        font-size: 0.85em;
+    }
+    
+    .card-header {
+        padding: 15px 10px;
+    }
+    
+    .filter-options select {
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+    
+    .table-container {
+        padding: 0 10px;
+    }
+    
+    .patient-table td {
+        padding: 10px 12px 10px 45%;
+    }
+    
+    .patient-table td:before {
+        width: 43%;
+        font-size: 0.8em;
+        left: 12px;
+    }
+}
+
+/* Samsung Galaxy S8 (360px × 740px) */
+@media screen and (max-width: 360px) {
+    .page-title {
+        font-size: 1.2em;
+        padding: 0 6px;
+    }
+    
+    .action-bar {
+        padding: 8px 6px;
+        margin: 0 -6px 12px -6px;
+    }
+    
+    .search-input {
+        font-size: 0.8em;
+        padding: 7px 10px;
+    }
+    
+    .action-btn {
+        padding: 7px 8px;
+        font-size: 0.75em;
+    }
+    
+    .content-card {
+        margin: 0 -6px;
+        padding: 6px;
+    }
+    
+    .card-header {
+        padding: 10px 6px;
+        gap: 10px;
+    }
+    
+    .filter-options select {
+        font-size: 0.7em;
+        padding: 4px 6px;
+    }
+    
+    .table-container {
+        padding: 0 6px;
+    }
+    
+    .patient-table td {
+        padding: 6px 8px 6px 38%;
+        font-size: 0.75em;
+    }
+    
+    .patient-table td:before {
+        width: 36%;
+        font-size: 0.65em;
+        left: 8px;
+    }
+    
+    .icon-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 0.7em;
+    }
+}
+
+/* Galaxy Z Fold 5 (344px × 882px) */
+@media screen and (max-width: 344px) {
+    .page-title {
+        font-size: 1.1em;
+        padding: 0 4px;
+    }
+    
+    .action-bar {
+        padding: 6px 4px;
+        margin: 0 -4px 10px -4px;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .search-input {
+        width: calc(100% - 40px);
+        padding: 6px 8px;
+        font-size: 0.75em;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+    }
+    
+    .action-btn {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 0.7em;
+    }
+    
+    .content-card {
+        margin: 0 -4px;
+        padding: 4px;
+        border-radius: 0;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        padding: 8px 4px;
+        gap: 8px;
+    }
+    
+    .card-header h2 {
+        font-size: 1em;
+    }
+    
+    .filter-options {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .filter-options select {
+        width: 100%;
+        margin-left: 0 !important;
+        font-size: 0.65em;
+        padding: 4px 6px;
+    }
+    
+    .table-container {
+        padding: 0 4px;
+        margin: 0 -4px;
+    }
+    
+    .patient-table td {
+        padding: 5px 6px 5px 35%;
+        font-size: 0.7em;
+    }
+    
+    .patient-table td:before {
+        width: 33%;
+        font-size: 0.6em;
+        left: 6px;
+    }
+    
+    .icon-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 0.65em;
+    }
+    
+    .pagination {
+        padding: 6px 4px;
+        margin: 0 -4px;
+    }
+}
+
+/* Nest Hub (1024px × 600px) - Landscape tablet */
+@media screen and (min-width: 1024px) and (max-width: 1280px) and (max-height: 600px) {
+    .content-card {
+        margin: 0;
+        height: calc(100vh - 120px);
+        overflow: hidden;
+    }
+    
+    .card-header {
+        padding: 10px 15px;
+        flex-shrink: 0;
+    }
+    
+    .table-container {
+        height: calc(100% - 120px);
+        overflow-y: auto;
+        padding: 0 15px;
+    }
+    
+    .patient-table {
+        font-size: 0.8em;
+        min-width: 800px;
+    }
+    
+    .patient-table th,
+    .patient-table td {
+        padding: 8px 10px;
+    }
+    
+    .pagination {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #ddd;
+        padding: 8px 15px;
+    }
+}
+
+/* Surface Duo (540px × 720px) */
+@media screen and (min-width: 540px) and (max-width: 720px) and (orientation: portrait) {
+    .action-bar {
+        padding: 15px 12px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .search-container {
+        flex: 1;
+        min-width: 250px;
+    }
+    
+    .action-buttons {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .action-btn {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+    
+    .card-header {
+        padding: 18px 12px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .filter-options select {
+        flex: 1;
+        min-width: 150px;
+        margin-left: 0 !important;
+        padding: 8px 12px;
+    }
+    
+    .table-container {
+        padding: 0 12px;
+    }
+}
+
+/* ASUS ZenBook Fold (853px × 1280px) */
+@media screen and (min-width: 853px) and (max-width: 900px) {
+    .action-bar {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .search-container {
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
+    }
+    
+    .action-buttons {
+        flex-wrap: nowrap;
+        gap: 12px;
+    }
+    
+    .card-header {
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .card-header h2 {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+    
+    .filter-options select {
+        min-width: 140px;
+        margin-left: 0 !important;
+        padding: 8px 12px;
+    }
+}
+
+/* iPad Pro adjustments (1024px × 1366px) */
+@media screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+    .patient-table {
+        font-size: 0.9em;
+    }
+    
+    .table-container {
+        max-height: calc(100vh - 300px);
+        overflow-y: auto;
+    }
+    
+    .card-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Small landscape phones (max-height: 500px) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .page-title {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    
+    .action-bar {
+        padding: 8px 12px;
+    }
+    
+    .card-header {
+        padding: 12px;
+    }
+    
+    .content-card {
+        height: calc(100vh - 80px);
+        overflow: hidden;
+    }
+    
+    .table-container {
+        height: calc(100% - 100px);
+        overflow-y: auto;
+    }
+}
+
+/* Extra fine-tuning for very small screens */
+@media screen and (max-width: 320px) {
+    .patient-table td {
+        padding: 4px 6px 4px 32%;
+        font-size: 0.65em;
+        line-height: 1.3;
+    }
+    
+    .patient-table td:before {
+        width: 30%;
+        font-size: 0.6em;
+        left: 6px;
+        line-height: 1.2;
+    }
+    
+    .status-badge {
+        font-size: 0.6em;
+        padding: 2px 6px;
+    }
+    
+    .icon-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6em;
+        margin: 0 1px;
+    }
+}

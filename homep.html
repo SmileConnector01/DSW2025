@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice-Controlled To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Voice-Controlled To-Do List</h1>
+    <button id="startBtn">Start Voice Recognition</button>
+    <ul id="todoList"></ul>
+
+    <div id="output">Say "add task" to create a to-do.</div>
+
+    <script>
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        recognition.continuous = true;
+        recognition.lang = 'en-US';
+
+        const startBtn = document.getElementById('startBtn');
+        const output = document.getElementById('output');
+        const todoList = document.getElementById('todoList');
+
+        startBtn.addEventListener('click', () => {
+            recognition.start();
+        });
+
+        recognition.addEventListener('result', (event) => {
+            const transcript = event.results[event.resultIndex][0].transcript;
+            output.textContent = transcript;
+
+            if (transcript.toLowerCase().includes('add task')) {
+                const task = transcript.replace('add task', '').trim();
+                const li = document.createElement('li');
+                li.textContent = task;
+                todoList.appendChild(li);
+                output.textContent += ' - Task added!';
+            }
+        });
+
+        recognition.addEventListener('error', (event) => {
+            console.error('Error:', event.error);
+        });
+
+    </script>
+
+</body>
+</html>

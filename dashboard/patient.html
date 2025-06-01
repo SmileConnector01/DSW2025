@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmileConnector - Patient Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/stylesheets/patientdashboard.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="logo-container">
+          
+          <div class="logo-icon">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <div class="logo-text">
+            <h1>SmileConnector</h1>
+            <p>Patient Portal</p>
+          </div>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="active" id="dashboardLink">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="appointmentsLink">
+              <i class="fas fa-calendar-check"></i>
+              <span>Appointments</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="recordsLink">
+              <i class="fas fa-tooth"></i>
+              <span>Dental Records</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="messagesLink">
+              <i class="fas fa-comments"></i>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="teleDentistryLink">
+              <i class="fas fa-video"></i>
+              <span>Tele-Dentistry</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="billingLink">
+              <i class="fas fa-file-invoice-dollar"></i>
+              <span>Billing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="settingsLink">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+          
+          <h1 class="page-title" id="pageTitle">Patient Dashboard</h1>
+
+          <div class="user-controls">
+            <button class="notification-btn" id="notificationBtn">
+              <i class="fas fa-bell"></i>
+              <span class="badge">3</span>
+            </button>
+            <button class="messages-btn" id="messagesBtn">
+              <i class="fas fa-envelope"></i>
+              <span class="badge">5</span>
+            </button>
+
+            <div class="user-profile" id="userProfile">
+              <span class="user-name"></span>
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+
+              <div class="user-dropdown">
+                <div class="dropdown-header">
+                  <div class="dropdown-avatar">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="dropdown-user-info">
+                    <h4 class="user-name"></h4>
+                    <p>Patient ID: <span>P001</span></p>
+                  </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <a href="#" class="dropdown-item" id="profileLink">
+                  <i class="fas fa-user"></i> My Profile
+                </a>
+                <a href="#" class="dropdown-item" id="accountSettingsLink">
+                  <i class="fas fa-cog"></i> Account Settings
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <a href="#" class="dropdown-item" id="helpLink">
+                  <i class="fas fa-question-circle"></i> Help Center
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <a href="#" class="dropdown-item" id="logoutLink">
+                  <i class="fas fa-sign-out-alt"></i> Log Out
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+
+    
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner" style="display: none">
+          <div class="spinner-content">
+            <i class="fas fa-tooth spinner-icon"></i>
+            <p>Loading Messages...</p>
+          </div>
+        </div>
+
+        <!-- Dashboard Content-->
+        <div class="content-section" id="dashboardContent">
+          <!-- Welcome Section -->
+          <section class="welcome-section" id="welcomeSection">
+            <div class="welcome-text">
+              <h2>Welcome back, <span class="user-name"> </span></h2>
+              <p>
+                Your oral health is important to us. Check your upcoming
+                appointments, view your dental records, or schedule a new
+                consultation with your dentist.
+              </p>
+            </div>
+            <div class="welcome-image">
+              <img src="../assets/images/logoSmile.png" alt="Happy teeth" />
+            </div>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="quick-actions" id="quickActions">
+            <div class="action-card" id="bookAppointmentCard">
+              <i class="fas fa-calendar-plus"></i>
+              <h3>Book Appointment</h3>
+              <p>Schedule a new dental visit or tele-consultation</p>
+            </div>
+            <div class="action-card" id="viewRecordsCard">
+              <i class="fas fa-file-medical"></i>
+              <h3>View Records</h3>
+              <p>Access your dental history and treatment plans</p>
+            </div>
+            <div class="action-card" id="startConsultationCard">
+              <i class="fas fa-video"></i>
+              <h3>Start Consultation</h3>
+              <p>Connect with your dentist via video call</p>
+            </div>
+            <div class="action-card" id="healthTipsCard">
+              <i class="fas fa-tooth"></i>
+              <h3>Oral Health Tips</h3>
+              <p>Learn how to maintain healthy teeth and gums</p>
+            </div>
+          </section>
+
+          <!-- Upcoming Appointments -->
+          <section class="appointments-section" id="appointmentsSection">
+            <div class="section-header">
+              <h2 class="section-title">Upcoming Appointments</h2>
+              <a href="#" class="view-all" id="viewAllAppointments"
+                >View All <i class="fas fa-chevron-right"></i   
+              ></a>
+            </div>
+
+            <div class="appointment-list">  
+              <div class="appointment-card" id="appointment1">
+                <div class="appointment-date">
+                  <div class="appointment-day">15</div>
+                  <div class="appointment-month">Jun</div>
+                </div>
+                <div class="appointment-details">
+                  <h3>Dental Checkup</h3>
+                  <p class="appointment-time">10:00 AM - 10:30 AM</p>
+                </div>
+                <span class="appointment-status status-confirmed"
+                  >Confirmed</span
+                >
+              </div>
+
+              <div class="appointment-card" id="appointment2">
+                <div class="appointment-date">
+                  <div class="appointment-day">22</div>
+                  <div class="appointment-month">Jun</div>
+                </div>
+                <div class="appointment-details">
+                  <h3>Tooth Filling</h3>
+                  <p class="appointment-time">2:00 PM - 2:45 PM</p>
+                </div>
+                <span class="appointment-status status-confirmed"
+                  >Confirmed</span
+                >
+              </div>
+
+              <div class="appointment-card" id="appointment3">
+                <div class="appointment-date">
+                  <div class="appointment-day">05</div>
+                  <div class="appointment-month">Jul</div>
+                </div>
+                <div class="appointment-details">
+                  <h3>Follow-up Consultation</h3>
+                  <p class="appointment-time">11:30 AM - 12:00 PM</p>
+                </div>
+                <span class="appointment-status status-pending">Pending</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Health Records -->
+          <section class="records-section" id="recordsSection">
+            <div class="section-header">
+              <h2 class="section-title">Recent Health Records</h2>
+              <a href="#" class="view-all" id="viewAllRecords"
+                >View All <i class="fas fa-chevron-right"></i
+              ></a>
+            </div>
+
+            <div class="records-grid">
+              <div class="record-card" id="record1">
+                <div class="record-header">
+                  <h3 class="record-title">Dental Examination</h3>
+                  <span class="record-date">12 Jun 2025</span>
+                </div>
+                <div class="record-content">
+                  <p>
+                    Routine dental checkup. No cavities detected. Recommended
+                    fluoride treatment for prevention.
+                  </p>
+                </div>
+              </div>
+
+              <div class="record-card" id="record2">
+                <div class="record-header">
+                  <h3 class="record-title">X-Ray Results</h3>
+                  <span class="record-date">05 Jun 2025</span>
+                </div>
+                <div class="record-content">
+                  <p>
+                    Bitewing x-rays show no signs of decay between teeth. Wisdom
+                    teeth developing normally.
+                  </p>
+                </div>
+              </div>
+
+              <div class="record-card" id="record3">
+                <div class="record-header">
+                  <h3 class="record-title">Oral Hygiene Instruction</h3>
+                  <span class="record-date">15 May 2025</span>
+                </div>
+                <div class="record-content">
+                  <p>
+                    Demonstrated proper brushing and flossing techniques.
+                    Recommended electric toothbrush.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Add this inside your existing HTML file, replacing the appointmentsContent section -->
+        <div class="content-section" id="appointmentsContent">
+          <section class="section-header">
+            <h2 class="section-title">Appointment Management</h2>
+            <div class="header-actions">
+              <button class="btn-primary" id="addNewChildBtn">
+                <i class="fas fa-child"></i> Add New Child
+              </button>
+            </div>
+          </section>
+
+          <!-- Appointment Booking Container -->
+          <div class="appointments-container">
+            <!-- Appointments Tabs -->
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="view-appointments">
+                <i class="fas fa-calendar-alt"></i> My Children Appointments
+              </button>
+              <button class="tab-btn" data-tab="book-appointment">
+                <i class="fas fa-plus-circle"></i> New Appointment
+              </button>
+            </div>
+
+            <!-- View Appointments Tab -->
+            <div class="tab-content active" id="view-appointments">
+              <div class="appointments-list-container">
+                <div class="appointments-filter">
+                  <div class="filter-group">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select id="statusFilter" class="form-select">
+                      <option value="all">All Statuses</option>
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="cancelled">Cancelled</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </div>
+                  <div class="filter-group">
+                    <label for="childFilter">Filter by Child:</label>
+                    <select id="childFilter" class="form-select">
+                      <option value="all">All Children</option>
+                      <option value="child1">Emma Johnson</option>
+                      <option value="child2">Liam Johnson</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="appointments-list-header">
+                  <h3>Upcoming Appointments</h3>
+                  <div class="appointment-count">3 appointments</div>
+                </div>
+                
+               <!-- Update the appointments list containers in your HTML -->
+                <div class="appointments-list" id="upcomingAppointments">
+                  <!-- Will be populated by JavaScript -->
+                  <div class="empty-state" id="upcomingEmptyState" style="display: none;">
+                    <i class="fas fa-calendar-times"></i>
+                    <h4>No Upcoming Appointments</h4>
+                    <p>You don't have any upcoming appointments scheduled. Book one now to get started.</p>
+                    <button class="btn-primary" id="bookFromEmptyState">
+                      <i class="fas fa-calendar-plus"></i> Book Appointment
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="appointments-list-header">
+                  <h3>Past Appointments</h3>
+                  <div class="appointment-count">5 appointments</div>
+                </div>
+                
+                <div class="appointments-list" id="pastAppointments">
+                  <!-- Will be populated by JavaScript -->
+                  <div class="empty-state" id="pastEmptyState" style="display: none;">
+                    <i class="fas fa-history"></i>
+                    <h4>No Past Appointments</h4>
+                    <p>Your past appointments will appear here once you've had your first visit.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Book Appointment Tab -->
+            <div class="tab-content" id="book-appointment">
+              <div class="booking-instructions">
+                <p>Start by selecting a child and then follow the booking steps.</p>
+              </div>
+              <button class="btn-primary" id="startBookingBtn">
+                <i class="fas fa-calendar-plus"></i> Start Booking Process
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appointment Booking Modal -->
+        <div class="modal-overlay" id="bookingModal" style="display: none">
+          <div class="modal-content booking-modal">
+            <div class="modal-header">
+              <h3>Book New Appointment</h3>
+              <button class="modal-close" id="closeBookingModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+              <!-- Progress Steps -->
+              <div class="booking-progress">
+                <div class="progress-step active" data-step="1">
+                  <div class="step-number">1</div>
+                  <div class="step-label">Select Child</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                  <div class="step-number">2</div>
+                  <div class="step-label">Choose Service</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                  <div class="step-number">3</div>
+                  <div class="step-label">Select Date</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                  <div class="step-number">4</div>
+                  <div class="step-label">Confirmation</div>
+                </div>
+              </div>
+              
+              <!-- Step 1: Select Child -->
+              <div class="booking-step active" data-step="1">
+                <div class="step-header">
+                  <h4>Select a Child</h4>
+                  <p>Choose an existing child or add a new one</p>
+                </div>
+                
+                <div class="child-selection">
+                  <div class="existing-children">
+                    <h5>Your Children</h5>
+                    <div class="children-list">
+                      <div class="child-option selected">
+                        <div class="child-avatar">
+                          <i class="fas fa-child"></i>
+                        </div>
+                        <div class="child-info">
+                          <h6>Emma Johnson</h6>
+                          <p>Age: 8 years</p>
+                        </div>
+                        <div class="child-select">
+                          <i class="fas fa-check-circle"></i>
+                        </div>
+                      </div>
+                      
+                      <div class="child-option">
+                        <div class="child-avatar">
+                          <i class="fas fa-child"></i>
+                        </div>
+                        <div class="child-info">
+                          <h6>Liam Johnson</h6>
+                          <p>Age: 5 years</p>
+                        </div>
+                        <div class="child-select">
+                          <i class="far fa-circle"></i>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="no-children-message" style="display: none;">
+                      <i class="fas fa-info-circle"></i>
+                      <p>No children found. Please add a child first.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="add-child-option">
+                    <button class="btn-secondary" id="addChildInModal">
+                      <i class="fas fa-plus"></i> Add New Child
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Step 2: Choose Service -->
+              <div class="booking-step" data-step="2">
+                <div class="step-header">
+                  <h4>Select Dental Service</h4>
+                  <p>Choose the type of appointment you need</p>
+                </div>
+                
+                <div class="service-selection">
+                  <div class="service-category">
+                    <h5>Preventive Care</h5>
+                    <div class="service-options">
+                      <div class="service-option selected">
+                        <div class="service-icon">
+                          <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="service-info">
+                          <h6>Regular Checkup</h6>
+                          <p>Comprehensive dental examination</p>
+                        </div>
+                        <div class="service-select">
+                          <i class="fas fa-check-circle"></i>
+                        </div>
+                      </div>
+                      
+                      <div class="service-option">
+                        <div class="service-icon">
+                          <i class="fas fa-toothbrush"></i>
+                        </div>
+                        <div class="service-info">
+                          <h6>Teeth Cleaning</h6>
+                          <p>Professional dental cleaning</p>
+                        </div>
+                        <div class="service-select">
+                          <i class="far fa-circle"></i>
+                        </div>
+                      </div>
+                      
+                      <div class="service-option">
+                        <div class="service-icon">
+                          <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="service-info">
+                          <h6>Fluoride Treatment</h6>
+                          <p>Preventive fluoride application</p>
+                        </div>
+                        <div class="service-select">
+                          <i class="far fa-circle"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="service-category">
+                    <h5>Treatments</h5>
+                    <div class="service-options">
+                      <div class="service-option">
+                        <div class="service-icon">
+                          <i class="fas fa-teeth"></i>
+                        </div>
+                        <div class="service-info">
+                          <h6>Tooth Filling</h6>
+                          <p>Cavity treatment and restoration</p>
+                        </div>
+                        <div class="service-select">
+                          <i class="far fa-circle"></i>
+                        </div>
+                      </div>
+                      
+                      <div class="service-option">
+                        <div class="service-icon">
+                          <i class="fas fa-teeth-open"></i>
+                        </div>
+                        <div class="service-info">
+                          <h6>Tooth Extraction</h6>
+                          <p>Removal of damaged tooth</p>
+                        </div>
+                        <div class="service-select">
+                          <i class="far fa-circle"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Step 3: Select Date -->
+              <div class="booking-step" data-step="3">
+                <div class="step-header">
+                  <h4>Select Appointment Date & Time</h4>
+                  <p>Choose an available time slot</p>
+                </div>
+                
+                <div class="date-selection">
+                  <div class="calendar-container">
+                    <div class="calendar-header">
+                      <button class="btn-calendar-nav" id="prevMonth">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <h5 id="currentMonth">June 2025</h5>
+                      <button class="btn-calendar-nav" id="nextMonth">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                      <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                  </div>
+                  
+                  <div class="time-slots-container" id="timeSlotsContainer">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Step 4: Confirmation -->
+              <div class="booking-step" data-step="4">
+                <div class="step-header">
+                  <h4>Confirm Appointment Details</h4>
+                  <p>Please review your appointment information</p>
+                </div>
+                
+                <div class="confirmation-details">
+                  <div class="detail-item">
+                    <span class="detail-label">Child:</span>
+                    <span class="detail-value" id="confirmChild">Emma Johnson</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Service:</span>
+                    <span class="detail-value" id="confirmService">Regular Checkup</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" id="confirmDate">June 15, 2025</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Time:</span>
+                    <span class="detail-value" id="confirmTime">11:00 AM</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Duration:</span>
+                    <span class="detail-value" id="confirmDuration">30 minutes</span>
+                  </div>
+                </div>
+                
+                <div class="confirmation-notes">
+                  <label for="appointmentNotes">Additional Notes:</label>
+                  <textarea id="appointmentNotes" placeholder="Any special instructions or concerns..."></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button class="btn-secondary" id="prevStepBtn" disabled>
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button class="btn-primary" id="nextStepBtn">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+              <button class="btn-success" id="confirmBookingBtn" style="display: none;">
+                <i class="fas fa-check"></i> Confirm Appointment
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="successModal" style="display: none">
+          <div class="modal-content success-modal">
+            <div class="modal-body">
+              <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <h3>Appointment Booked Successfully!</h3>
+              <p>Your appointment has been confirmed. You'll receive a confirmation email shortly.</p>
+              <div class="success-details">
+                <p><strong>Reference #:</strong> APPT-2025-06-001</p>
+              </div>
+              <button class="btn-primary" id="closeSuccessModal">Done</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Child Modal -->
+        <div class="modal-overlay" id="addChildModal" style="display: none">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Add New Child</h3>
+              <button class="modal-close" id="closeAddChildModal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form id="addChildForm">
+                <div class="form-group">
+                  <label for="childFirstName">First Name</label>
+                  <input type="text" id="childFirstName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="childLastName">Last Name</label>
+                  <input type="text" id="childLastName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="childDob">Date of Birth</label>
+                  <input type="date" id="childDob" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="childGender">Gender</label>
+                  <select id="childGender" class="form-select" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-secondary" id="cancelAddChild">
+                Cancel
+              </button>
+              <button class="btn-primary" id="saveChildBtn">
+                Save Child
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dental Records Page Content -->
+        <div class="content-section" id="recordsContent">
+          <section class="section-header">
+            <h2 class="section-title">Dental Records</h2>
+          </section>
+
+          <!-- Records Tabs -->
+          <div class="tabs-container">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="treatment-history">
+                Treatment History
+              </button>
+              <button class="tab-btn" data-tab="xrays">X-Rays & Scans</button>
+              <button class="tab-btn" data-tab="prescriptions">
+                Prescriptions
+              </button>
+            </div>
+
+            <!-- Treatment History Tab Content -->
+            <div class="tab-content active" id="treatment-history">
+              <div class="records-list">
+                <div class="record-item">
+                  <div class="record-item-header">
+                    <h3>Dental Examination</h3>
+                    <span class="record-date">Jun 12, 2025</span>
+                  </div>
+                  <div class="record-item-body">
+                    <p><strong>Dentist:</strong> Dr. Smith</p>
+                    <p>
+                      <strong>Findings:</strong> No cavities detected. Mild
+                      plaque buildup.
+                    </p>
+                    <p>
+                      <strong>Recommendations:</strong> Fluoride treatment
+                      recommended. Continue regular brushing and flossing.
+                    </p>
+                  </div>
+                  <div class="record-item-footer"></div>
+                </div>
+
+                <div class="record-item">
+                  <div class="record-item-header">
+                    <h3>Teeth Cleaning</h3>
+                    <span class="record-date">May 28, 2025</span>
+                  </div>
+                  <div class="record-item-body">
+                    <p><strong>Dentist:</strong> Dr. Lee</p>
+                    <p>
+                      <strong>Procedure:</strong> Professional teeth cleaning
+                      with scaling and polishing.
+                    </p>
+                    <p>
+                      <strong>Notes:</strong> Minimal gum bleeding observed.
+                      Recommended more frequent flossing.
+                    </p>
+                  </div>
+                  <div class="record-item-footer"></div>
+                </div>
+
+                <div class="record-item">
+                  <div class="record-item-header">
+                    <h3>Tooth Filling</h3>
+                    <span class="record-date">Mar 15, 2025</span>
+                  </div>
+                  <div class="record-item-body">
+                    <p><strong>Dentist:</strong> Dr. Johnson</p>
+                    <p>
+                      <strong>Procedure:</strong> Composite filling on tooth #19
+                      (Lower left molar).
+                    </p>
+                    <p>
+                      <strong>Materials Used:</strong> Tooth-colored composite
+                      resin.
+                    </p>
+                  </div>
+                  <div class="record-item-footer"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- X-Rays & Scans Tab Content (Hidden by default) -->
+            <div class="tab-content" id="xrays">
+              <div class="media-gallery">
+                <div class="media-item">
+                  <div class="media-preview">
+                    <img
+                      src="../assets/images/Bitewing X-Ray.jpeg"
+                      alt="Bitewing X-Ray"
+                    />
+                  </div>
+                  <div class="media-info">
+                    <h4>Bitewing X-Ray</h4>
+                    <p><strong>Date:</strong> Jun 5, 2025</p>
+                    <p><strong>Dentist:</strong> Dr. Smith</p>
+                    <p>
+                      <strong>Notes:</strong> No signs of decay between teeth.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="media-item">
+                  <div class="media-preview">
+                    <img
+                      src="../assets/images/Panoramic X-Ray.jpeg"
+                      alt="Panoramic X-Ray"
+                    />
+                  </div>
+                  <div class="media-info">
+                    <h4>Panoramic X-Ray</h4>
+                    <p><strong>Date:</strong> Jan 10, 2025</p>
+                    <p><strong>Dentist:</strong> Dr. Johnson</p>
+                    <p>
+                      <strong>Notes:</strong> Wisdom teeth developing normally.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prescriptions Tab Content -->
+            <div class="tab-content" id="prescriptions">
+              <div class="prescriptions-list">
+                <div class="prescription-item">
+                  <div class="prescription-header">
+                    <h3>Fluoride Toothpaste</h3>
+                    <span class="prescription-date">Jun 12, 2025</span>
+                  </div>
+                  <div class="prescription-body">
+                    <p><strong>Prescribed by:</strong> Dr. Smith</p>
+                    <p><strong>Dosage:</strong> Use twice daily for brushing</p>
+                    <p>
+                      <strong>Instructions:</strong> Apply small amount to
+                      toothbrush. Brush for 2 minutes, then spit out excess. Do
+                      not rinse.
+                    </p>
+                  </div>
+                  <div class="prescription-footer">
+                    <span class="prescription-status active">Active</span>
+                  </div>
+                </div>
+
+                <div class="prescription-item">
+                  <div class="prescription-header">
+                    <h3>Antibiotic - Amoxicillin</h3>
+                    <span class="prescription-date">Mar 15, 2025</span>
+                  </div>
+                  <div class="prescription-body">
+                    <p><strong>Prescribed by:</strong> Dr. Johnson</p>
+                    <p>
+                      <strong>Dosage:</strong> 500mg every 8 hours for 7 days
+                    </p>
+                    <p>
+                      <strong>Instructions:</strong> Take with food. Complete
+                      full course even if symptoms improve.
+                    </p>
+                  </div>
+                  <div class="prescription-footer">
+                    <span class="prescription-status completed">Completed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Billing History Tab Content (Hidden by default) -->
+            <div class="tab-content" id="billing-history">
+              <div class="billing-summary">
+                <div class="summary-card">
+                  <h4>Total Paid</h4>
+                  <p class="amount">$1,250.00</p>
+                </div>
+                <div class="summary-card">
+                  <h4>Outstanding</h4>
+                  <p class="amount">$0.00</p>
+                </div>
+                <div class="summary-card">
+                  <h4>Insurance Claims</h4>
+                  <p class="amount">$850.00</p>
+                </div>
+              </div>
+
+              <div class="billing-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Service</th>
+                      <th>Provider</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jun 12, 2025</td>
+                      <td>Dental Examination</td>
+                      <td>Dr. Smith</td>
+                      <td>$120.00</td>
+                      <td>
+                        <span class="status-badge status-paid">Paid</span>
+                      </td>
+                      <td>
+                        <button class="btn-action btn-download">
+                          <i class="fas fa-file-invoice"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>May 28, 2025</td>
+                      <td>Teeth Cleaning</td>
+                      <td>Dr. Lee</td>
+                      <td>$95.00</td>
+                      <td>
+                        <span class="status-badge status-paid">Paid</span>
+                      </td>
+                      <td>
+                        <button class="btn-action btn-download">
+                          <i class="fas fa-file-invoice"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mar 15, 2025</td>
+                      <td>Tooth Filling</td>
+                      <td>Dr. Johnson</td>
+                      <td>$210.00</td>
+                      <td>
+                        <span class="status-badge status-insurance"
+                          >Insurance Claim</span
+                        >
+                      </td>
+                      <td>
+                        <button class="btn-action btn-download">
+                          <i class="fas fa-file-invoice"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dental Record View Modal -->
+        <div class="modal-overlay" id="recordModal" style="display: none">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Dental Record Details</h3>
+              <button class="modal-close" id="closeRecordModal">&times;</button>
+            </div>
+            <div class="modal-body" id="recordModalBody">
+              <!-- Dynamic content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+              <button class="btn-secondary" id="cancelRecordModal">
+                Cancel
+              </button>
+              <button class="btn-primary" id="downloadRecordPdf">
+                <i class="fas fa-download"></i> Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messages Page Content -->
+        <div class="content-section" id="messagesContent">
+          <section class="section-header">
+            <h2 class="section-title">Messages</h2>
+            <button class="btn-primary" id="newMessageBtn">
+              <i class="fas fa-plus"></i> New Message
+            </button>
+          </section>
+
+          <div class="messages-container">
+            <!-- Message Inbox Sidebar -->
+            <div class="messages-sidebar">
+              <div class="messages-search">
+                <input type="text" placeholder="Search messages..." />
+                <i class="fas fa-search"></i>
+              </div>
+
+              <div class="messages-list">
+                <div class="message-preview active">
+                  <div class="message-avatar">
+                    <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="message-info">
+                    <h4>Dr. Smith</h4>
+                    <p class="message-excerpt">
+                      Regarding your upcoming appointment...
+                    </p>
+                    <p class="message-time">Today, 10:30 AM</p>
+                  </div>
+                  <span class="unread-badge">2</span>
+                </div>
+
+                <div class="message-preview">
+                  <div class="message-avatar">
+                    <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="message-info">
+                    <h4>Dr. Johnson</h4>
+                    <p class="message-excerpt">
+                      Your test results are ready...
+                    </p>
+                    <p class="message-time">Yesterday, 3:45 PM</p>
+                  </div>
+                </div>
+
+                <div class="message-preview">
+                  <div class="message-avatar">
+                    <i class="fas fa-clinic-medical"></i>
+                  </div>
+                  <div class="message-info">
+                    <h4>SmileConnector Clinic</h4>
+                    <p class="message-excerpt">
+                      Reminder: Appointment tomorrow at...
+                    </p>
+                    <p class="message-time">Jun 14, 9:15 AM</p>
+                  </div>
+                </div>
+
+                <div class="message-preview">
+                  <div class="message-avatar">
+                    <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="message-info">
+                    <h4>Dr. Lee</h4>
+                    <p class="message-excerpt">
+                      Follow-up after your cleaning...
+                    </p>
+                    <p class="message-time">May 29, 2025</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message Content Area -->
+            <div class="message-content">
+              <div class="message-header">
+                <div class="message-recipient">
+                  <div class="recipient-avatar">
+                    <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="recipient-info">
+                    <h3>Dr. Smith</h3>
+                    <p>General Dentistry</p>
+                  </div>
+                </div>
+                <div class="message-actions">
+                  <button class="btn-action">
+                    <i class="fas fa-reply"></i>
+                  </button>
+                  <button class="btn-action">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="message-thread">
+                <div class="message received">
+                  <div class="message-text">
+                    <p>
+                      Hello <span class="user-name"></span>, I wanted to follow
+                      up regarding your upcoming appointment on June 15th. Do
+                      you have any specific concerns you'd like us to address
+                      during your visit?
+                    </p>
+                  </div>
+                  <div class="message-meta">
+                    <span class="message-time">Today, 10:30 AM</span>
+                  </div>
+                </div>
+
+                <div class="message received">
+                  <div class="message-text">
+                    <p>
+                      Also, I noticed from your last visit that you mentioned
+                      some sensitivity in your lower left molar. Has that
+                      improved since your last cleaning?
+                    </p>
+                  </div>
+                  <div class="message-meta">
+                    <span class="message-time">Today, 10:32 AM</span>
+                  </div>
+                </div>
+
+                <div class="message sent">
+                  <div class="message-text">
+                    <p>
+                      Hi Dr. Smith, thanks for reaching out. The sensitivity has
+                      improved somewhat, but I'd like you to take a look at it
+                      during the appointment. I've also been experiencing some
+                      jaw discomfort in the mornings.
+                    </p>
+                  </div>
+                  <div class="message-meta">
+                    <span class="message-time">Today, 11:15 AM</span>
+                    <span class="message-status"
+                      ><i class="fas fa-check"></i
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="message-compose">
+                <textarea placeholder="Type your message here..."></textarea>
+                <div class="compose-actions">
+                  <button class="btn-action">
+                    <i class="fas fa-paperclip"></i>
+                  </button>
+                  <button class="btn-primary">
+                    Send <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tele-Dentistry Page Content -->
+        <div class="content-section" id="teleDentistryContent">
+          <section class="section-header">
+            <h2 class="section-title">Tele-Dentistry</h2>
+          </section>
+
+          <div class="tele-dentistry-container">
+            <!-- Upcoming Consultations -->
+            <div class="consultation-section">
+              <h3 class="subsection-title">Upcoming Consultations</h3>
+              <div class="consultation-list">
+                <div class="consultation-card">
+                  <div class="consultation-info">
+                    <h4>Follow-up Consultation</h4>
+                    <p>
+                      <i class="fas fa-calendar-alt"></i> Jul 5, 2025 - 11:30 AM
+                      to 12:00 PM
+                    </p>
+                    <p><i class="fas fa-user-md"></i> Dr. Smith</p>
+                    <p>
+                      <i class="fas fa-info-circle"></i> Discussion of X-ray
+                      results and treatment options
+                    </p>
+                  </div>
+                  <div class="consultation-actions">
+                    <button class="btn-primary">
+                      <i class="fas fa-video"></i> Join (Available Jul 5)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Past Consultations -->
+            <div class="consultation-section">
+              <h3 class="subsection-title">Past Consultations</h3>
+              <div class="consultation-list">
+                <div class="consultation-card">
+                  <div class="consultation-info">
+                    <h4>Initial Consultation</h4>
+                    <p>
+                      <i class="fas fa-calendar-alt"></i> May 10, 2025 - 2:00 PM
+                      to 2:30 PM
+                    </p>
+                    <p><i class="fas fa-user-md"></i> Dr. Johnson</p>
+                    <p>
+                      <i class="fas fa-info-circle"></i> Discussion of tooth
+                      sensitivity and treatment options
+                    </p>
+                  </div>
+                  <div class="consultation-actions">
+                    <button class="btn-action">
+                      <i class="fas fa-file-alt"></i> Notes
+                    </button>
+                  </div>
+                </div>
+
+                <div class="consultation-card">
+                  <div class="consultation-info">
+                    <h4>Emergency Consultation</h4>
+                    <p>
+                      <i class="fas fa-calendar-alt"></i> Mar 20, 2025 - 4:15 PM
+                      to 4:45 PM
+                    </p>
+                    <p><i class="fas fa-user-md"></i> Dr. Lee</p>
+                    <p>
+                      <i class="fas fa-info-circle"></i> Evaluation of tooth
+                      pain and swelling
+                    </p>
+                  </div>
+                  <div class="consultation-actions">
+                    <button class="btn-action">
+                      <i class="fas fa-file-alt"></i> Notes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing Page Content-->
+        <div class="content-section" id="billingContent">
+          <section class="section-header">
+            <h2 class="section-title">Billing & Payments</h2>
+            <button class="btn-primary" id="makePaymentBtn">
+              <i class="fas fa-credit-card"></i> Make Payment
+            </button>
+          </section>
+
+          <div class="billing-overview">
+            <div class="billing-summary-card">
+              <h3>Account Balance</h3>
+              <p class="balance-amount">R0.00</p>
+              <p class="balance-status">Your account is current</p>
+            </div>
+
+            <div class="billing-summary-card">
+              <h3>Next Payment Due</h3>
+              <p class="due-date">No upcoming payments</p>
+              <p class="due-amount">R0.00</p>
+            </div>
+
+            <div class="billing-summary-card">
+              <h3>Insurance</h3>
+              <p class="insurance-status">Active - Delta Dental</p>
+              <p class="insurance-details">
+                Annual maximum remaining: R1,250.00
+              </p>
+            </div>
+          </div>
+
+          <div class="billing-details">
+            <div class="billing-tabs">
+              <button class="billing-tab-btn active" data-tab="invoices">
+                <i class="fas fa-file-invoice"></i> Invoices
+                <span class="tab-badge">2</span>
+              </button>
+              <button class="billing-tab-btn" data-tab="payments">
+                <i class="fas fa-credit-card"></i> Payments
+                <span class="tab-badge">2</span>
+              </button>
+              <button class="billing-tab-btn" data-tab="insurance">
+                <i class="fas fa-shield-alt"></i> Insurance Claims
+                <span class="tab-badge">1</span>
+              </button>
+            </div>
+
+            <div class="billing-tab-content active" id="invoices">
+              <div class="invoice-list">
+                <div class="invoice-item">
+                  <div class="invoice-header">
+                    <h4>Invoice #INV-2025-06-001</h4>
+                    <span class="invoice-status status-paid">Paid</span>
+                  </div>
+                  <div class="invoice-details">
+                    <p><strong>Date:</strong> Jun 12, 2025</p>
+                    <p><strong>Amount:</strong> R120.00</p>
+                    <p><strong>Services:</strong> Dental Examination</p>
+                  </div>
+                  <div class="invoice-actions">
+                    <button class="btn-download-invoice">
+                      <i class="fas fa-download"></i> Download
+                      <span class="download-format">PDF</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="invoice-item">
+                  <div class="invoice-header">
+                    <h4>Invoice #INV-2025-05-002</h4>
+                    <span class="invoice-status status-paid">Paid</span>
+                  </div>
+                  <div class="invoice-details">
+                    <p><strong>Date:</strong> May 28, 2025</p>
+                    <p><strong>Amount:</strong> R95.00</p>
+                    <p><strong>Services:</strong> Teeth Cleaning</p>
+                  </div>
+                  <div class="invoice-actions">
+                    <button class="btn-download-invoice">
+                      <i class="fas fa-download"></i> Download
+                      <span class="download-format">PDF</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="billing-tab-content" id="payments">
+              <div class="payment-list">
+                <div class="payment-item">
+                  <div class="payment-header">
+                    <h4>Payment #PAY-2025-06-001</h4>
+                    <span class="payment-method">Credit Card (Visa)</span>
+                  </div>
+                  <div class="payment-details">
+                    <p><strong>Date:</strong> Jun 12, 2025</p>
+                    <p><strong>Amount:</strong> R120.00</p>
+                    <p><strong>For Invoice:</strong> #INV-2025-06-001</p>
+                  </div>
+                  <div class="payment-actions">
+                    <button class="btn-download-receipt">
+                      <i class="fas fa-receipt"></i> Receipt
+                      <span class="download-format">PDF</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="payment-item">
+                  <div class="payment-header">
+                    <h4>Payment #PAY-2025-05-001</h4>
+                    <span class="payment-method">Credit Card (Visa)</span>
+                  </div>
+                  <div class="payment-details">
+                    <p><strong>Date:</strong> May 28, 2025</p>
+                    <p><strong>Amount:</strong> R95.00</p>
+                    <p><strong>For Invoice:</strong> #INV-2025-05-002</p>
+                  </div>
+                  <div class="payment-actions">
+                    <button class="btn-download-receipt">
+                      <i class="fas fa-receipt"></i> Receipt
+                      <span class="download-format">PDF</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="billing-tab-content" id="insurance">
+              <div class="insurance-claims">
+                <div class="claim-item">
+                  <div class="claim-header">
+                    <h4>Claim #CLM-2025-03-001</h4>
+                    <span class="claim-status status-processed">Processed</span>
+                  </div>
+                  <div class="claim-details">
+                    <p><strong>Date:</strong> Mar 15, 2025</p>
+                    <p><strong>Amount:</strong> R210.00</p>
+                    <p><strong>Service:</strong> Tooth Filling</p>
+                    <p><strong>Paid by Insurance:</strong> R160.00</p>
+                    <p><strong>Patient Responsibility:</strong> R50.00</p>
+                  </div>
+                  <div class="claim-actions">
+                    <button class="btn-download-eob">
+                      <i class="fas fa-file-alt"></i> EOB
+                      <span class="download-format">PDF</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div class="modal-overlay" id="paymentModal" style="display: none">
+          <div class="modal-content payment-modal">
+            <div class="modal-header">
+              <h3>Choose Payment Option</h3>
+              <button class="modal-close" id="closePaymentModal">
+                &times;
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="payment-options">
+                <div class="payment-option active" data-option="card">
+                  <i class="fas fa-credit-card"></i>
+                  <span>Debit / Credit Card</span>
+                </div>
+                <div class="payment-option" data-option="bank">
+                  <i class="fas fa-university"></i>
+                  <span>Internet Banking</span>
+                </div>
+              </div>
+
+              <!-- Card Payment Form -->
+              <div class="payment-form active" id="cardForm">
+                <div class="card-form-header">
+                  <i class="fas fa-credit-card"></i>
+                  <h4>Card Payment</h4>
+                </div>
+
+                <div class="form-group">
+                  <label>Card Number</label>
+                  <div class="card-input">
+                    <input
+                      type="text"
+                      placeholder="1234 5678 9012 3456"
+                      maxlength="19"
+                      id="cardNumber"
+                      class="form-input"
+                    />
+                    <i class="fab fa-cc-visa"></i>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Expiry Date</label>
+                  <div class="expiry-date-input">
+                    <input
+                      type="month"
+                      id="expiryDate"
+                      class="form-input"
+                      min="2025-06"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>CVV</label>
+                  <div class="cvv-input-container">
+                    <input
+                      type="text"
+                      placeholder="123"
+                      maxlength="3"
+                      class="form-input"
+                      id="cvvInput"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Cardholder Name</label>
+                  <div class="cardholder-input">
+                    <input
+                      type="text"
+                      placeholder="John Doe"
+                      id="cardholderName"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+
+                <div class="payment-form-actions">
+                  <button class="btn-secondary" id="cancelPayment">
+                    Cancel
+                  </button>
+                  <button class="btn-primary" id="confirmPayment">
+                    Pay R<span id="paymentAmount">0.00</span>
+                    <i class="fas fa-lock"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Internet Banking Form -->
+              <div class="payment-form" id="bankForm" style="display: none">
+                <div class="bank-options">
+                  <div class="bank-option">
+                    <img
+                      src="../assets/images/Standard_Bank.jpeg"
+                      alt="Bank Logo"
+                    />
+                    <span>Standard Bank</span>
+                  </div>
+                  <div class="bank-option">
+                    <img src="../assets/images/FNB.jpeg" alt="Bank Logo" />
+                    <span>FNB</span>
+                  </div>
+                  <div class="bank-option">
+                    <img src="../assets/images/Nedbank.jpeg" alt="Bank Logo" />
+                    <span>Nedbank</span>
+                  </div>
+                  <div class="bank-option">
+                    <img src="../assets/images/Absa.jpeg" alt="Bank Logo" />
+                    <span>Absa</span>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn-secondary" id="cancelBankPayment">
+                    Cancel
+                  </button>
+                  <button class="btn-primary" id="confirmBankPayment">
+                    Continue to Bank
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </main>
+    </div>
+    <script src="../assets/scripts/patientdashboard.js"></script>
+    <script src="../assets/scripts/bookingAppointment.js"></script>
+  </body>
+</html>

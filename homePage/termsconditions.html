@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - SmileConnector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        /* Header Section with Image Overlay */
+        .hero-section {
+            position: relative;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(59, 130, 246, 0.8) 50%, rgba(30, 64, 175, 0.9) 100%);
+            backdrop-filter: blur(2px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Navigation Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .breadcrumb-nav a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #1e40af;
+        }
+
+        .breadcrumb-separator {
+            color: #cbd5e1;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content-header h2 {
+            color: #1e40af;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .last-updated {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .toc h3 {
+            color: #1e40af;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 8px;
+        }
+
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+
+        .toc-list a {
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .toc-list a:hover {
+            color: #1e40af;
+            background: rgba(59, 130, 246, 0.1);
+            padding-left: 20px;
+        }
+
+        .toc-list a::before {
+            content: '▶';
+            color: #3b82f6;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+
+        /* Content Sections */
+        .terms-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #fafbfc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .terms-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-section h3 {
+            color: #1e40af;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+            position: relative;
+        }
+
+        .terms-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
+
+        .terms-section p {
+            margin-bottom: 15px;
+            color: #475569;
+            text-align: justify;
+        }
+
+        .terms-section ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .terms-section li {
+            margin-bottom: 8px;
+            color: #475569;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: #1e40af;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .main-container {
+                margin-top: -30px;
+                padding: 40px 15px;
+            }
+
+            .content-header h2 {
+                font-size: 2rem;
+            }
+
+            .toc {
+                padding: 20px;
+            }
+
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+
+            .terms-section {
+                padding: 20px;
+            }
+
+            .contact-section {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Add these new styles for scroll animations and active TOC */
+        .terms-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .terms-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toc-list a.active {
+            color: #1e40af;
+            background: rgba(59, 130, 246, 0.1);
+            padding-left: 20px;
+            font-weight: 600;
+        }
+        
+        .toc-list a.active::before {
+            color: #1e40af;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section with Image Overlay -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Terms & Conditions</h1>
+            <p>Understanding our policies and your rights as our valued patient</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-nav">
+                <a href="#home">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Terms & Conditions</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="content-header">
+            <h2>Terms & Conditions</h2>
+            <div class="last-updated">Last Updated: May 28, 2025</div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul class="toc-list">
+                <li><a href="#acceptance">Acceptance of Terms</a></li>
+                <li><a href="#services">Our Services</a></li>
+                <li><a href="#appointments">Appointments & Scheduling</a></li>
+                <li><a href="#payment">Payment Terms</a></li>
+                <li><a href="#privacy">Privacy & Confidentiality</a></li>
+                <li><a href="#liability">Limitation of Liability</a></li>
+                <li><a href="#modifications">Modifications</a></li>
+                <li><a href="#contact">Contact Information</a></li>
+            </ul>
+        </div>
+
+        <!-- Terms Sections -->
+        <section id="acceptance" class="terms-section">
+            <h3>1. Acceptance of Terms</h3>
+            <p>By scheduling an appointment, receiving treatment, or using any services provided by DentalCare Pro, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+            <div class="highlight-box">
+                <p>These terms constitute a legally binding agreement between you and DentalCare Pro effective from your first visit or service use.</p>
+            </div>
+        </section>
+
+        <section id="services" class="terms-section">
+            <h3>2. Our Services</h3>
+            <p>DentalCare Pro provides comprehensive dental care services including but not limited to:</p>
+            <ul>
+                <li>Preventive dental care and routine cleanings</li>
+                <li>Restorative dentistry including fillings, crowns, and bridges</li>
+                <li>Cosmetic dental procedures</li>
+                <li>Orthodontic treatments</li>
+                <li>Emergency dental care</li>
+                <li>Oral surgery procedures</li>
+            </ul>
+            <p>All treatments are provided by licensed dental professionals in accordance with current dental practice standards and regulations.</p>
+        </section>
+
+        <section id="appointments" class="terms-section">
+            <h3>3. Appointments & Scheduling</h3>
+            <p>We value your time and ask that you respect ours. Please note the following policies:</p>
+            <ul>
+                <li><strong>Cancellation Policy:</strong> 24-hour notice required for appointment changes or cancellations</li>
+                <li><strong>Late Arrivals:</strong> Patients arriving more than 15 minutes late may need to reschedule</li>
+                <li><strong>No-Show Policy:</strong> Missed appointments without notice may incur a fee</li>
+                <li><strong>Emergency Care:</strong> Available during business hours and limited after-hours coverage</li>
+            </ul>
+            <div class="highlight-box">
+                <p>Emergency situations will always be prioritized regardless of scheduling policies.</p>
+            </div>
+        </section>
+
+        <section id="payment" class="terms-section">
+            <h3>4. Payment Terms</h3>
+            <p>We strive to make dental care affordable and accessible. Our payment policies include:</p>
+            <ul>
+                <li>Payment is expected at the time of service unless prior arrangements are made</li>
+                <li>We accept cash, credit cards, debit cards, and approved financing options</li>
+                <li>Insurance claims will be filed as a courtesy, but patients are responsible for all charges</li>
+                <li>Payment plans may be available for extensive treatment</li>
+                <li>A service charge may apply to returned checks or failed payment methods</li>
+            </ul>
+        </section>
+
+        <section id="privacy" class="terms-section">
+            <h3>5. Privacy & Confidentiality</h3>
+            <p>Your privacy is paramount to us. We are committed to protecting your personal and medical information in compliance with HIPAA regulations.</p>
+            <ul>
+                <li>Medical records and personal information are kept strictly confidential</li>
+                <li>Information may only be shared with your explicit consent or as required by law</li>
+                <li>Digital records are protected with industry-standard security measures</li>
+                <li>You have the right to access and request corrections to your medical records</li>
+            </ul>
+        </section>
+
+        <section id="liability" class="terms-section">
+            <h3>6. Limitation of Liability</h3>
+            <p>While we maintain the highest standards of care, please understand:</p>
+            <ul>
+                <li>Dental treatment outcomes can vary based on individual circumstances</li>
+                <li>We cannot guarantee specific results from any treatment</li>
+                <li>Patients must follow post-treatment care instructions for optimal results</li>
+                <li>Any complications should be reported immediately</li>
+            </ul>
+            <div class="highlight-box">
+                <p>Our liability is limited to the cost of the specific treatment provided. We maintain comprehensive malpractice insurance for your protection.</p>
+            </div>
+        </section>
+
+        <section id="modifications" class="terms-section">
+            <h3>7. Modifications to Terms</h3>
+            <p>DentalCare Pro reserves the right to modify these terms and conditions at any time. Changes will be:</p>
+            <ul>
+                <li>Posted on our website with the effective date</li>
+                <li>Available in our office for review</li>
+                <li>Communicated to patients during visits when material changes occur</li>
+            </ul>
+            <p>Continued use of our services after changes constitutes acceptance of the modified terms.</p>
+        </section>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h3>Questions About Our Terms?</h3>
+            <p>If you have any questions about these Terms & Conditions, please don't hesitate to contact us. We're here to help ensure you understand your rights and responsibilities as our patient.</p>
+            <a href="#contact" class="contact-button">Contact Us Today</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const sections = document.querySelectorAll('.terms-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Smooth scroll for TOC links
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active state after scroll completes
+                        setTimeout(() => {
+                            updateActiveTocLink(targetId);
+                        }, 1000);
+                    }
+                });
+            });
+            
+            // Update active TOC link on scroll
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 150;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        const id = '#' + section.getAttribute('id');
+                        updateActiveTocLink(id);
+                    }
+                });
+            });
+            
+            function updateActiveTocLink(id) {
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initialize first active link
+            updateActiveTocLink('#acceptance');
+        });
+    </script>
+</body>
+</html>

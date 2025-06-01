@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account - SmileConnector</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/Emailsignup.css">
+</head>
+<body>
+    <div class="form-container">
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="step active" id="step1"></div>
+            <div class="step-connector" id="connector1"></div>
+            <div class="step" id="step2"></div>
+            <div class="step-connector" id="connector2"></div>
+            <div class="step" id="step3"></div>
+        </div>
+
+        <!-- Form overlay for loading state -->
+        <div class="form-overlay" id="formOverlay">
+            <div class="dot-spinner" id="formSpinner">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <!-- Screen 1: Email Input -->
+        <div class="form-screen active" id="screen1">
+            <div class="header">
+                <h1>Join SmileConnector</h1>
+                <p>Enter your email address to get started. We'll send you a verification code to confirm your account.</p>
+            </div>
+            
+            <form id="emailForm" action="../backend/send_otp.php" method="POST">
+                <div class="input-box">
+                    <input type="email" id="email" name="email" required>
+                    <label>Email Address</label>
+                    <i class='bx bx-envelope'></i>
+                </div>
+                
+                <button type="submit" class="button" id="emailSubmitBtn">
+                    <span class="button-text">Send Verification Code</span>
+                    <div class="button-loader" id="emailLoader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <!-- Screen 2: OTP Verification -->
+        <div class="form-screen" id="screen2">
+            <div class="header">
+                <h1>Verify Your Email</h1>
+                <p>We've sent a 6-digit verification code to your email. Please enter it below to continue.</p>
+            </div>
+            
+            <form id="otpForm" action="../backend/verify_otpPatient.php" method="POST">
+                <input type="hidden" id="email_hidden" name="email" value="">
+                <input type="hidden" id="otp_combined" name="otp" value="">
+                <div class="otp-container">
+                    <input type="text" name="otp1" maxlength="1" required>
+                    <input type="text" name="otp2" maxlength="1" required>
+                    <input type="text" name="otp3" maxlength="1" required>
+                    <input type="text" name="otp4" maxlength="1" required>
+                    <input type="text" name="otp5" maxlength="1" required>
+                    <input type="text" name="otp6" maxlength="1" required>
+                </div>
+                
+                <button type="submit" class="button" id="otpSubmitBtn">
+                    <span class="button-text">Verify Code</span>
+                    <div class="button-loader" id="otpLoader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </button>
+                <button type="button" class="button back-button" onclick="goBackToEmail()">Back to Email</button>
+            </form>
+            
+            <div class="resend-link">
+                <a href="#" onclick="resendOTP()">Didn't receive the code? Resend</a>
+            </div>
+        </div>
+
+        <!-- Screen 3: Complete Registration -->
+        <div class="form-screen" id="screen3">
+            <div class="header">
+                <h1>Complete Your Profile</h1>
+                <p>Almost done! Please fill in your details and create a secure password to complete your registration.</p>
+            </div>
+            
+            <form id="registrationForm" action="../backend/complete_signup.php" method="POST">
+                <input type="hidden" id="email_final" name="email" value="">
+                
+                <div class="row">
+                    <div class="input-box">
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label>First Name</label>
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="lastName" name="lastName" required>
+                        <label>Last Name</label>
+                        <i class='bx bx-user'></i>
+                    </div>
+                </div>
+                
+                <div class="input-box">
+                    <input type="password" id="password" name="password" required>
+                    <label>Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                    <div class="password-requirements">
+                        Must be at least 8 characters with a number and uppercase letter
+                    </div>
+                </div>
+                
+                <div class="input-box confirm">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <label>Confirm Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                
+                <button type="submit" class="button" id="registerSubmitBtn">
+                    <span class="button-text">Complete Registration</span>
+                    <div class="button-loader" id="registerLoader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <span>•</span>
+            <a href="#">Terms of Service</a>
+            <span>•</span>
+            <a href="#">Contact Support</a>
+        </div>
+        
+        <div class="copyright">&copy; 2025 SmileConnector Patient Portal. <br>All rights reserved.</div>
+    </div>
+
+    <script src="../assets/scripts/signupEmail.js"></script>
+</body>
+</html>

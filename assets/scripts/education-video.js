@@ -1,0 +1,110 @@
+    const videoModal = document.getElementById('videoModal');
+    const closeModal = document.getElementById('closeModal');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const container = document.getElementById('video-container');
+
+    let videos = [];
+
+function formatDuration(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+    // Fetch and render videos
+    fetch('http://localhost:80/SmileConnector/backend/displaymap.php?type=video')
+        .then(res => res.json())
+        .then(data => {
+            videos = data.map((video, index) => {
+                const card = document.createElement('div');
+                card.classList.add('video-card');
+                card.setAttribute('data-category', video.category);
+                card.setAttribute('data-index', index); // Store index for lookup
+
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        <video src="../backend/upload_video/${video.filename}" class="thumbnail" muted style="width: 100%; height: 100%;"></video>
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <span class="video-duration">${formatDuration(video.duration)}</span>
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                    </div>
+                `;
+
+                container.appendChild(card);
+
+                return {
+                    title: video.title,
+                    url: `/backend/upload_video/${video.filename}`,
+                    thumbnail: video.filename,
+                    description: video.description
+                };
+            });
+        })
+        .then(() => {
+            // Now attach click event to .video-card elements
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const index = card.dataset.index;
+                    const videoData = videos[index];
+                    videoPlayer.innerHTML = `
+                        <video controls autoplay style="width: 100%; height: 100%;">
+                            <source src="${videoData.url}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    `;
+                    videoModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        })
+        .catch(err => {
+            console.error('Failed to fetch videos:', err);
+        });
+
+    // Filtering functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.dataset.filter;
+            document.querySelectorAll('.video-card').forEach(video => {
+                if (filter === 'all' || video.dataset.category.includes(filter)) {
+                    video.style.display = 'block';
+                    video.style.animation = 'fadeIn 0.5s ease forwards';
+                } else {
+                    video.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Modal controls
+    closeModal.addEventListener('click', () => {
+        videoModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        const video = videoPlayer.querySelector('video');
+        if (video) video.pause();
+    });
+
+    fullscreenBtn.addEventListener('click', () => {
+        const videoElement = videoPlayer.querySelector('video');
+        if (!document.fullscreenElement) {
+            videoElement?.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    });
+
+    videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            videoModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            const video = videoPlayer.querySelector('video');
+            if (video) video.pause();
+        }
+    });

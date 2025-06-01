@@ -1,0 +1,27 @@
+{
+  "name": "video_conf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DnL-0/video_call.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DnL-0/video_call/issues"
+  },
+  "homepage": "https://github.com/DnL-0/video_call#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "peer": "^1.0.2",
+    "peerjs": "^1.5.4"
+  }
+}

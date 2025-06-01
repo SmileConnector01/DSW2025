@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="video_conf.css">
+  <link rel="stylesheet" href="../../../assets/stylesheets/dashboard.css">
+  <meta charset="UTF-8">
+  <title>Video Conf</title>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <h1>Video Conference</h1>
+
+    <div>Your ID: <span id="my-id"></span>
+      <button id="copyBtn">Copy</button>
+    </div>
+    
+
+    <input id="remote-id" placeholder="Enter remote peer ID">
+    <button id="call-btn">Call</button>
+    <button id="endCallBtn">Hang Up</button>
+    <button id="share-screen-btn">Share Screen</button>
+    <button id="back-to-camera-btn">Back to Camera</button>
+  
+    <div id="incoming-call">
+      <p>Incoming call...</p>
+      <button id="accept-btn">Accept</button>
+      <button id="decline-btn">Decline</button>
+    </div>
+  
+    <div>
+      <video id="local-video" autoplay muted></video>
+      <video id="remote-video" autoplay></video>
+    </div>
+
+  <script src="video_conf.js"></script>
+</body>
+</html>

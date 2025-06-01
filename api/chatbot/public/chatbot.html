@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileConnector Assistant</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sideNavigation">
+            <div class="topBarAction" id="toggleSidebar">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <div class="sideNavButton">
+                <button id="newChatButton" class="transparentButton">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="collapseText">New Chat <span></span></span>
+                </button>
+            </div>
+
+            <div class="chatHistory">
+                <h5>Recent Conversations</h5>
+                <ul class="recentchat">
+                    <!-- Recent chats will be populated dynamically from the backend-->
+                </ul>
+            </div>
+
+            <div class="actionList">
+                <button class="transparentButton">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <span class="collapseText">Help & FAQ <span></span></span>
+                </button>
+
+                <button class="transparentButton">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span class="collapseText">History <span></span></span>
+                </button>
+
+                <button class="transparentButton" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                    <span class="collapseText">Theme <span></span></span>
+                </button>
+
+                <button class="transparentButton">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="collapseText">Settings <span></span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Chat Screen -->
+        <div class="chatScreen"> 
+            <div class="chatHeader">
+                <div class="chatTitle">AI SmileConnector Assistant</div>
+                <div class="chatTools">
+                    <button id="mobileMenuToggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <button>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="startContent">
+                <h1>
+                    <span class="greeting">Hello, <span id="username">Divin</span></span><br>
+                    <span class="brand">How can I help you today?</span>
+                </h1>
+                <p>Ask me anything or try one of these suggestions:</p>
+                
+                <div class="suggestionGrid">
+                    <div class="suggestionCard">
+                        <h3>How to brush teeth properly?</h3>
+                        <p>Learn the best techniques for optimal dental hygiene</p>
+                    </div>
+                    <div class="suggestionCard">
+                        <h3>Healthy meal plans</h3>
+                        <p>Get personalized nutrition advice and recipes</p>
+                    </div>
+                    <div class="suggestionCard">
+                        <h3>Python coding help</h3>
+                        <p>Get assistance with your programming questions</p>
+                    </div>
+                    <div class="suggestionCard">
+                        <h3>Travel recommendations</h3>
+                        <p>Discover the best places to visit for your next trip</p>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="chatContent">
+                <div class="results">
+                    <!-- Chat messages will be populated dynamically from the server-->
+                </div>
+            </div>
+
+            <!-- File Preview Container (positioned above input) -->
+            <div class="file-preview-container" style="display: none;">
+                <div class="preview-header">
+                    <span>Selected File</span>
+                    <button id="remove-file">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="preview-content">
+                    <img id="image-preview" src="" alt="Preview" style="display: none;">
+                    <div class="file-info">
+                        <span id="file-name"></span>
+                        <span id="file-size"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="inputContainer">
+                <div class="inputArea">
+                    <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+                    <div class="inputTools">
+                        <button title="Attach file" id="fileInput"><i class="fa-solid fa-paperclip"></i></button>
+                        <button title="Send voice message" id="voiceInput"><i class="fa-solid fa-microphone"></i></button>
+                        <button class="sendButton" id="sendButton">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="privacyPolicy">
+                    SmileConnector Assistant may not always be accurate. Please verify the information 
+                    before making any decisions based on it.<br>
+                    <span>Powered by Gemni 2.5 Pro</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input (created by JavaScript)
+    <input type="file" id="actualFileInput" style="display: none;"> -->
+
+    <!-- Overlay for mobile menu (will be added dynamically by JavaScript) -->
+    
+    <script src="chatbot.js"></script>
+</body>
+</html>
