@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (this.id === 'settingsLink') {
         pageTitle.textContent = 'Settings';
       }
+        // when you hide/remove the iframe
+        if(document.getElementById('videoconferenceIframe')) {
+            const iframeid = document.getElementById('videoconferenceIframe');
+            iframeid.contentWindow.postMessage({ cmd: 'stop-camera' }, '*');
+          }
     });
   });
    // Set dashboard as active by default
@@ -183,6 +188,30 @@ function initializeAppointmentsTab() {
   });
 }
 
+fetch('http://localhost/SmileConnector/backend/fetch_appoitments.php?type=calendar_event')
+  .then(response => response.json())
+  .then(data => {
+    console.log("Calendar Events:", data);
+    // Example usage
+    data.forEach(event => {
+      let appointmentList = document.getElementById('childrenList');
+      appointmentList.innerHTML += `
+        <div class="appointment-card" id="${event.id}">
+          <div class="appointment-date">
+            <div class="appointment-day">${event.start_datetime}</div>
+            <div class="appointment-month"></div>
+          </div>
+          <div class="appointment-details">
+            <h3>${event.title}</h3>
+            <p class="appointment-time"></p>
+          </div>
+        </div>
+      `;
+
+    });
+  })
+  .catch(error => console.error("Error fetching calendar events:", error));
+
 // Add this new function to handle filtering
 function filterAppointments() {
   const statusFilter = document.getElementById('statusFilter').value;
@@ -261,6 +290,43 @@ function initializeDashboard() {
     e.preventDefault();
     document.getElementById('recordsLink').click();
   });
+}
+
+let button_tele_dentistry = document.getElementById("tele-dentistry-content");
+
+button_tele_dentistry.addEventListener("click", function(event) {
+  event.preventDefault();
+  loadTeleDentistry();
+})
+
+// Tab switching functionality for TeleDentistry
+    function loadTeleDentistry() {
+    const container = document.getElementById('teleDentistryContent');
+    
+    // Clear previous content
+    container.innerHTML = '';
+    
+    // Create an iframe to load the video conference
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('id', 'videoconferenceIframe');
+    iframe.src = 'video_conf_U/public/index.html';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    iframe.style.minHeight = '600px'; // Adjust as needed
+    
+    container.appendChild(iframe);
+    
+    // Activate the tab (same as your existing tab switching code)
+    document.querySelectorAll('.sidebar li').forEach(l => l.classList.remove('active'));
+    container.classList.add('active');
+    
+    document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.remove('active');
+        if (pane.id === 'teledentistry') {
+            pane.classList.add('active');
+        }
+    });
 }
 
 // appointments.js - Appointment specific logic
@@ -664,43 +730,129 @@ function validateStep(stepNumber) {
 }
 
 function updateConfirmationDetails() {
-  const selectedChild = document.querySelector('.child-option.selected .child-info h6').textContent;
-  const selectedService = document.querySelector('.service-option.selected .service-info h6').textContent;
-  const selectedDate = document.querySelector('.calendar-day.selected').textContent;
-  const currentMonth = document.getElementById('currentMonth').textContent;
-  const selectedTime = document.querySelector('.time-slot.selected').textContent;
-  
+  // 1) Find the selected child element’s <h6>
+  const selectedChildHeading = document.querySelector('.child-option.selected .child-info h6');
+  if (!selectedChildHeading) {
+    console.error("⚠️ No child-option.selected found in DOM.");
+    return;
+  }
+  const selectedChild = selectedChildHeading.textContent;
+
+  // 2) Find service, date, time… (make sure those also exist)
+  const selectedServiceHeading = document.querySelector('.service-option.selected .service-info h6');
+  if (!selectedServiceHeading) {
+    console.error("⚠️ No service-option.selected found in DOM.");
+    return;
+  }
+  const selectedService = selectedServiceHeading.textContent;
+
+  const selectedDateElem = document.querySelector('.calendar-day.selected');
+  if (!selectedDateElem) {
+    console.error("⚠️ No calendar-day.selected found in DOM.");
+    return;
+  }
+  const selectedDate = selectedDateElem.textContent;
+
+  const currentMonthElem = document.getElementById('currentMonth');
+  if (!currentMonthElem) {
+    console.error("⚠️ #currentMonth not found in DOM.");
+    return;
+  }
+  const currentMonth = currentMonthElem.textContent;
+
+  const selectedTimeElem = document.querySelector('.time-slot.selected');
+  if (!selectedTimeElem) {
+    console.error("⚠️ No time-slot.selected found in DOM.");
+    return;
+  }
+  const selectedTime = selectedTimeElem.textContent;
+
+  // 3) Populate the confirmation fields
   document.getElementById('confirmChild').textContent = selectedChild;
   document.getElementById('confirmService').textContent = selectedService;
   document.getElementById('confirmDate').textContent = `${selectedDate} ${currentMonth}`;
   document.getElementById('confirmTime').textContent = selectedTime;
-  
-  // Set duration based on service
-  let duration = '30 minutes';
+
+  // 4) Set duration logic
+  let duration = '60 minutes';
   if (selectedService.includes('Cleaning')) {
-    duration = '45 minutes';
+    duration = '60 minutes';
   } else if (selectedService.includes('Filling') || selectedService.includes('Extraction')) {
     duration = '60 minutes';
   }
   document.getElementById('confirmDuration').textContent = duration;
 }
 
+
 function confirmBooking() {
   // In a real app, this would call an API to book the appointment
-  const selectedChild = document.querySelector('.child-option.selected .child-info h6').textContent;
-  const selectedService = document.querySelector('.service-option.selected .service-info h6').textContent;
-  const selectedDate = document.querySelector('.calendar-day.selected').textContent;
+  const selectedChild = document.querySelector('.child-option.selected .child-info h6').textContent; //this is the childFullName
+  const selectedService = document.querySelector('.service-option.selected .service-info h6').textContent; //this is title
+  const selectedDate = document.querySelector('.calendar-day.selected').textContent; 
   const currentMonth = document.getElementById('currentMonth').textContent;
-  const selectedTime = document.querySelector('.time-slot.selected').textContent;
-  const notes = document.getElementById('appointmentNotes').value;
-  
-  console.log('Booking appointment:', {
-    child: selectedChild,
-    service: selectedService,
-    date: `${selectedDate} ${currentMonth}`,
-    time: selectedTime,
-    notes: notes
-  });
+  const selectedTime = document.querySelector('.time-slot.selected').textContent;  
+  const notes = document.getElementById('appointmentNotes').value;// this is description
+  PatientID;// this is the Patient_ID
+
+// 2. Combine into one string
+const rawDateStr = `${currentMonth} ${selectedDate} ${selectedTime}`; // e.g. "June 2025 4 08:00"
+const dateObj = new Date(rawDateStr);
+
+// 3. Format start_datetime
+const yyyy = dateObj.getFullYear();
+const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+const dd = String(dateObj.getDate()).padStart(2, '0');
+const hh = String(dateObj.getHours()).padStart(2, '0');
+const min = String(dateObj.getMinutes()).padStart(2, '0');
+const start_datetime = `${yyyy}-${mm}-${dd} ${hh}:${min}:00`;
+
+// 4. Calculate end_datetime (+1 hour)
+const endDateObj = new Date(dateObj.getTime() + 60 * 60 * 1000); // Add 1 hour
+const end_hh = String(endDateObj.getHours()).padStart(2, '0');
+const end_min = String(endDateObj.getMinutes()).padStart(2, '0');
+const end_datetime = `${yyyy}-${mm}-${dd} ${end_hh}:${end_min}:00`;
+
+// 5. Prepare data to send
+const appointmentData = {
+  childFullName: selectedChild,
+  title: selectedService,
+  description: notes,
+  start_datetime: start_datetime,
+  end_datetime: end_datetime,
+  Patient_ID: PatientID
+};
+
+console.log('Appointment data to send:', appointmentData);
+
+// 6. Send to PHP using fetch()
+fetch('http://localhost/SmileConnector/backend/createAppointment.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(appointmentData)
+})
+.then(response => response.json())
+.then(result => {
+  if (result.status === 'success') {
+    alert('✅ Appointment successfully created!');
+    // Optionally refresh calendar or redirect
+  } else {
+    alert('❌ Failed to create appointment: ' + result.message);
+  }
+})
+.catch(error => {
+  console.error('❌ Fetch error:', error);
+  alert('❌ Could not connect to server.');
+});
+
+  // console.log('Booking appointment:', {
+  //   child: selectedChild,
+  //   service: selectedService,
+  //   date: `${selectedDate} ${currentMonth}`,
+  //   time: selectedTime,
+  //   notes: notes
+  // });
   
   // Close booking modal
   closeBookingModal();
@@ -746,7 +898,8 @@ function initializeCalendar() {
 }
 
 function renderCalendar(month, year) {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
   document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
   
   const firstDay = new Date(year, month, 1).getDay();
@@ -755,7 +908,7 @@ function renderCalendar(month, year) {
   const calendarGrid = document.getElementById('calendarGrid');
   calendarGrid.innerHTML = '';
   
-  // Add day headers
+  // Day headers
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   dayNames.forEach(day => {
     const dayElement = document.createElement('div');
@@ -763,58 +916,290 @@ function renderCalendar(month, year) {
     dayElement.textContent = day;
     calendarGrid.appendChild(dayElement);
   });
-  
-  // Add empty cells for days before the first day of the month
+
+  // Empty cells before the first day of the month
   for (let i = 0; i < firstDay; i++) {
     const emptyElement = document.createElement('div');
     emptyElement.className = 'calendar-day disabled';
     calendarGrid.appendChild(emptyElement);
   }
-  
-  // Add days of the month
+
+  // Generate each day cell
   for (let day = 1; day <= daysInMonth; day++) {
     const dayElement = document.createElement('div');
+    const cellDate = new Date(year, month, day);
+    const today = new Date();
+    
     dayElement.className = 'calendar-day';
     dayElement.textContent = day;
-    
-    // Disable past dates
-    const currentDate = new Date();
-    const cellDate = new Date(year, month, day);
-    if (cellDate < currentDate && cellDate.getDate() !== currentDate.getDate()) {
+
+    const isPast = cellDate < today.setHours(0, 0, 0, 0); // ignore time
+    const isWeekend = cellDate.getDay() === 0 || cellDate.getDay() === 6; // 0 = Sunday, 6 = Saturday
+
+    if (isPast || isWeekend) {
       dayElement.classList.add('disabled');
     } else {
-      dayElement.addEventListener('click', function() {
+      dayElement.addEventListener('click', function () {
         document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
         this.classList.add('selected');
+
+        // ✅ Save the clicked date to use later
+        let selectedDate = new Date(year, month, day);
+        renderTimeSlots();
       });
     }
-    
+
     calendarGrid.appendChild(dayElement);
   }
 }
 
-function loadChildrenList() {
-  // In a real app, this would come from an API
-  const children = [
-    { name: 'Emma Johnson', age: 8 },
-    { name: 'Liam Johnson', age: 5 }
+function renderTimeSlots() {
+  const container = document.getElementById('timeSlotsContainer');
+  container.innerHTML = ''; // Clear previous content
+
+  // 1) Determine which calendar date is currently selected
+  const selectedDayElem = document.querySelector('.calendar-day.selected');
+  if (!selectedDayElem) {
+    console.error("⚠️ No date selected in calendar. Cannot filter time slots.");
+    return;
+  }
+
+  // Get day number (e.g. "3", "14", etc.)
+  const dayNum = parseInt(selectedDayElem.textContent, 10);
+
+  // Get "Month Year" from your header, e.g. "June 2025"
+  const [monthName, yearStr] = document.getElementById('currentMonth')
+                                  .textContent
+                                  .split(' ');
+  const year = parseInt(yearStr, 10);
+  const monthNames = [
+    'January','February','March','April','May','June',
+    'July','August','September','October','November','December'
   ];
-  
-  const childrenList = document.querySelector('.children-list');
-  const noChildrenMessage = document.querySelector('.no-children-message');
-  
-  if (children.length === 0) {
-    childrenList.style.display = 'none';
-    noChildrenMessage.style.display = 'flex';
-  } else {
+  const monthIndex = monthNames.indexOf(monthName);
+  if (monthIndex < 0) {
+    console.error(`⚠️ Could not parse month "${monthName}"`);
+    return;
+  }
+
+  // Build a Date object and extract "YYYY-MM-DD"
+  const selDateObj = new Date(year, monthIndex, dayNum);
+  const yyyy = selDateObj.getFullYear();
+  const mm  = String(selDateObj.getMonth() + 1).padStart(2, '0'); // monthIndex + 1
+  const dd  = String(selDateObj.getDate()).padStart(2, '0');
+  const selectedDateString = `${yyyy}-${mm}-${dd}`; 
+  // e.g. "2025-06-03"
+
+  // 2) Create the heading and wrapper
+  const heading = document.createElement('h5');
+  heading.textContent = 'Available Time Slots';
+  container.appendChild(heading);
+
+  const slotsWrapper = document.createElement('div');
+  slotsWrapper.id = 'timeSlots';
+  slotsWrapper.className = 'time-slots';
+  container.appendChild(slotsWrapper);
+
+  // 3) Define our static list of time slots (“HH:MM”)
+  const timeSlots = [
+    '08:00', '09:00', '10:00', '11:00',
+    '12:00', '13:00', '14:00', '15:00',
+    '16:00', '17:00'
+  ];
+
+  // 4) Fetch all booked events, then filter by the selected date
+  fetch('http://localhost/SmileConnector/backend/timeSlots.php', {
+    method: 'GET',
+    credentials: 'include',
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(json => {
+    if (json.status !== 'success') {
+      console.error("❌ PHP error:", json.message);
+      renderSlotsWithoutBookings(timeSlots, slotsWrapper);
+      return;
+    }
+
+    // Build a Set of booked “HH:MM” for exactly the selected date
+    const bookedTimes = new Set();
+    json.events.forEach(evt => {
+      // evt.start_datetime is "YYYY-MM-DD hh:mm:ss"
+      const [datePart, timePartFull] = evt.start_datetime.split(' ');
+      if (datePart === selectedDateString) {
+        // timePartFull might be "09:00:00" → take first 5 chars “09:00”
+        bookedTimes.add(timePartFull.slice(0, 5));
+      }
+    });
+
+    let firstAvailableAssigned = false;
+
+    // 5) Render each slot, disabling only those booked on this date
+    timeSlots.forEach(time => {
+      const slotDiv = document.createElement('div');
+
+      if (bookedTimes.has(time)) {
+        // This slot is booked on the selected date
+        slotDiv.className = 'time-slot booked';
+        slotDiv.textContent = `${time} — Booked`;
+        // No click listener → cannot select
+      } else {
+        // This slot is available on the selected date
+        slotDiv.className = 'time-slot available';
+        slotDiv.textContent = time;
+
+        // Auto‐select the first available slot
+        if (!firstAvailableAssigned) {
+          slotDiv.classList.add('selected');
+          firstAvailableAssigned = true;
+        }
+
+        slotDiv.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot.available').forEach(s => {
+            s.classList.remove('selected');
+          });
+          this.classList.add('selected');
+        });
+      }
+
+      slotsWrapper.appendChild(slotDiv);
+    });
+  })
+  .catch(error => {
+    console.error("❌ Fetch error:", error);
+    renderSlotsWithoutBookings(timeSlots, slotsWrapper);
+  });
+}
+
+
+// Helper to render all slots as available (no filtering by booking date)
+function renderSlotsWithoutBookings(timeSlots, slotsWrapper) {
+  slotsWrapper.innerHTML = '';
+  let firstAssigned = false;
+
+  timeSlots.forEach(time => {
+    const slotDiv = document.createElement('div');
+    slotDiv.classList.add('time-slot', 'available');
+    slotDiv.textContent = time;
+
+    if (!firstAssigned) {
+      slotDiv.classList.add('selected');
+      firstAssigned = true;
+    }
+
+    slotDiv.addEventListener('click', function() {
+      document.querySelectorAll('.time-slot.available').forEach(s => {
+        s.classList.remove('selected');
+      });
+      this.classList.add('selected');
+    });
+
+    slotsWrapper.appendChild(slotDiv);
+  });
+}
+
+let PatientID = 38; // Divin PatientID from patient who logged in
+
+// --- Function 1: Send PatientID to PHP and store it in session ---
+function sendPatientID(patientID) {
+  fetch('http://localhost:80/SmileConnector/backend/Getchildrenbook.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'PatientID=' + encodeURIComponent(patientID)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.status === "PatientID stored") {
+      console.log("Response from PHP:", result); // {status: "...", patientID: 3}
+      console.log("Returned PatientID:", result.patientID); // 3
+    } else {
+      console.error("❌ Failed to store PatientID:", result.message);
+    }
+  })
+  .catch(error => {
+    console.error("❌ Error sending PatientID:", error);
+  });
+}
+
+sendPatientID(PatientID); // Call the function to send PatientID
+
+function loadChildrenList() {
+  fetch('http://localhost/SmileConnector/backend/Displaychildrenbook.php', {
+    method: 'GET',
+    credentials: 'include',   // ensure PHPSESSID is sent
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(resp => resp.json())
+  .then(data => {
+    const childrenList = document.querySelector('.children-list');
+    const noChildrenMessage = document.querySelector('.no-children-message');
+
+    if (data.status === "error") {
+      console.error("❌ Session error:", data.message);
+      childrenList.style.display = 'none';
+      noChildrenMessage.style.display = 'flex';
+      return;
+    }
+
+    // Transform server response to an array of { name: … }
+    const children = data.map(child => ({
+      name: child.childFullName
+    }));
+
+    if (children.length === 0) {
+      childrenList.style.display = 'none';
+      noChildrenMessage.style.display = 'flex';
+      return;
+    }
+
+    // We have at least one child; show the grid
+    childrenList.innerHTML = '';
     childrenList.style.display = 'grid';
     noChildrenMessage.style.display = 'none';
-    
-    // Select first child by default
-    if (document.querySelectorAll('.child-option').length > 0) {
-      document.querySelectorAll('.child-option')[0].classList.add('selected');
-    }
-  }
+
+    children.forEach((child, index) => {
+      // Create the wrapper <div class="child-option">
+      const childDiv = document.createElement('div');
+      childDiv.classList.add('child-option');
+      if (index === 0) {
+        // Select the first one by default
+        childDiv.classList.add('selected');
+      }
+
+      // Create the inner <div class="child-info"><h6>…</h6></div>
+      const infoDiv = document.createElement('div');
+      infoDiv.classList.add('child-info');
+
+      const nameHeading = document.createElement('h6');
+      nameHeading.textContent = child.name;
+
+      infoDiv.appendChild(nameHeading);
+      childDiv.appendChild(infoDiv);
+      childrenList.appendChild(childDiv);
+
+      // Add a click‐listener to toggle “.selected”
+      childDiv.addEventListener('click', () => {
+        // Remove “selected” from any other
+        document.querySelectorAll('.child-option.selected').forEach(el => {
+          el.classList.remove('selected');
+        });
+        // Mark this one
+        childDiv.classList.add('selected');
+      });
+    });
+
+    console.log("✅ Children loaded:", children);
+  })
+  .catch(err => {
+    console.error("❌ Fetch error:", err);
+  });
 }
 
 function openAddChildModal() {
