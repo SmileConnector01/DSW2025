@@ -751,27 +751,27 @@ async function initDashboardCharts() {
                 const monthName = monthNames[date.getMonth()];
 
                 if(monthName == currentMonthName){
-                    count_currentMonthName += event.students;
+                    count_currentMonthName += Number(event.students);
                     count_schoolPrograms += 1;
                 }
                 else if(monthName == currentMonthName_1 && year == current_year_1){
-                    count_currentMonthName_1 += event.students;
+                    count_currentMonthName_1 += Number(event.students);
                     count_schoolPrograms1 += 1;
                 }
                 else if(monthName == currentMonthName_2 && year == current_year_2){
-                    count_currentMonthName_2 += event.students;
+                    count_currentMonthName_2 += Number(event.students);
                     count_schoolPrograms2 += 1;
                 }
                 else if(monthName == count_currentMonthName_3 && year == current_year_3){
-                    count_currentMonthName_3 += event.students;
+                    count_currentMonthName_3 += Number(event.students);
                     count_schoolPrograms3 += 1;
                 }
                 else if(monthName == currentMonthName_4 && year == current_year_4){
-                    count_currentMonthName_4 += event.students;
+                    count_currentMonthName_4 += Number(event.students);
                     count_schoolPrograms4 += 1;
                 }
                 else if(monthName == currentMonthName_5 && year == current_Year){
-                    count_currentMonthName_5 += event.students;
+                    count_currentMonthName_5 += Number(event.students);
                     count_schoolPrograms5 += 1;
                 }
             });
