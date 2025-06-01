@@ -35,7 +35,7 @@ app.get('/testing', (req, res) => {
 
 // Default route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'homePage', 'homep.html'));
+  res.sendFile(path.join(__dirname, 'homePage', 'testing.html'));
 });
 
 app.listen(PORT, () => {
