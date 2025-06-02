@@ -225,23 +225,55 @@ function initializeAppointmentsTab() {
 fetch('http://localhost/SmileConnector/backend/fetch_appoitments.php?type=calendar_event')
   .then(response => response.json())
   .then(data => {
-    console.log("Calendar Events:", data);
-    // Example usage
+    let appointmentList = document.getElementById('childrenList');
+    let appointmentsHeader = document.getElementById('appointmentslist');
+    appointmentList.innerHTML = ''; // Clear previous entries if needed
+    appointmentsHeader.innerHTML = ''; // Clear previous header if needed
+
     data.forEach(event => {
-      let appointmentList = document.getElementById('childrenList');
+      // Parse and format start_datetime (YYYY-MM-DD HH:MM:SS)
+      const [datePart, timePart] = event.start_datetime.split(' ');
+      const [year, month, day] = datePart.split('-');
+      const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ];
+      const monthText = monthNames[parseInt(month, 10) - 1];
+      const formattedTime = timePart.slice(0, 5); // e.g. "14:30"
+
       appointmentList.innerHTML += `
         <div class="appointment-card" id="${event.id}">
           <div class="appointment-date">
-            <div class="appointment-day">${event.start_datetime}</div>
-            <div class="appointment-month"></div>
+            <div class="appointment-day">${day}</div>
+            <div class="appointment-month">${monthText}</div>
           </div>
           <div class="appointment-details">
             <h3>${event.title}</h3>
-            <p class="appointment-time"></p>
+            <p class="appointment-time">${formattedTime}</p>
+            <p class="appointment-child">${event.childFullName}</p>
           </div>
         </div>
       `;
 
+      // Compare event date with current time
+      const eventDateTime = new Date(event.start_datetime);
+      const now = new Date();
+      const appointmentTitle = eventDateTime < now ? "Past Appointment" : "Upcoming Appointment";
+
+      appointmentsHeader.innerHTML += `
+        <h3>${appointmentTitle}</h3>
+        <div class="appointment-card" id="${event.id}">
+          <div class="appointment-date">
+            <div class="appointment-day">${day}</div>
+            <div class="appointment-month">${monthText}</div>
+          </div>
+          <div class="appointment-details">
+            <h3>${event.title}</h3>
+            <p class="appointment-time">${formattedTime}</p>
+            <p class="appointment-child">${event.childFullName}</p>
+          </div>
+        </div>
+      `;
     });
   })
   .catch(error => console.error("Error fetching calendar events:", error));
@@ -466,20 +498,20 @@ function loadAppointments() {
   const pastList = document.getElementById('pastAppointments');
   
   // Clear existing appointments
-  upcomingList.innerHTML = '';
-  pastList.innerHTML = '';
+  // upcomingList.innerHTML = '';
+  // pastList.innerHTML = '';
   
   // Add upcoming appointments
-  upcomingAppointments.forEach(appt => {
-    const apptElement = createAppointmentElement(appt);
-    upcomingList.appendChild(apptElement);
-  });
+  // upcomingAppointments.forEach(appt => {
+  //   const apptElement = createAppointmentElement(appt);
+  //   upcomingList.appendChild(apptElement);
+  // });
   
-  // Add past appointments
-  pastAppointments.forEach(appt => {
-    const apptElement = createAppointmentElement(appt);
-    pastList.appendChild(apptElement);
-  });
+  // // Add past appointments
+  // pastAppointments.forEach(appt => {
+  //   const apptElement = createAppointmentElement(appt);
+  //   pastList.appendChild(apptElement);
+  // });
   
   // Update appointment counts
   document.querySelectorAll('.appointment-count').forEach(el => {

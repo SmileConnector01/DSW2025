@@ -275,59 +275,8 @@
 
             <!-- View Appointments Tab -->
             <div class="tab-content active" id="view-appointments">
-              <div class="appointments-list-container">
-                <div class="appointments-filter">
-                  <div class="filter-group">
-                    <label for="statusFilter">Filter by Status:</label>
-                    <select id="statusFilter" class="form-select">
-                      <option value="all">All Statuses</option>
-                      <option value="pending">Pending</option>
-                      <option value="confirmed">Confirmed</option>
-                      <option value="cancelled">Cancelled</option>
-                      <option value="completed">Completed</option>
-                    </select>
-                  </div>
-                  <div class="filter-group">
-                    <label for="childFilter">Filter by Child:</label>
-                    <select id="childFilter" class="form-select">
-                      <option value="all">All Children</option>
-                      <option value="child1">Emma Johnson</option>
-                      <option value="child2">Liam Johnson</option>
-                    </select>
-                  </div>
-                </div>
+              <div class="appointments-list-container" id="appointmentslist">
                 
-                <div class="appointments-list-header">
-                  <h3>Upcoming Appointments</h3>
-                  <div class="appointment-count">3 appointments</div>
-                </div>
-                
-               <!-- Update the appointments list containers in your HTML -->
-                <div class="appointments-list" id="upcomingAppointments">
-                  <!-- Will be populated by JavaScript -->
-                  <div class="empty-state" id="upcomingEmptyState" style="display: none;">
-                    <i class="fas fa-calendar-times"></i>
-                    <h4>No Upcoming Appointments</h4>
-                    <p>You don't have any upcoming appointments scheduled. Book one now to get started.</p>
-                    <button class="btn-primary" id="bookFromEmptyState">
-                      <i class="fas fa-calendar-plus"></i> Book Appointment
-                    </button>
-                  </div>
-                </div>
-                
-                <div class="appointments-list-header">
-                  <h3>Past Appointments</h3>
-                  <div class="appointment-count">5 appointments</div>
-                </div>
-                
-                <div class="appointments-list" id="pastAppointments">
-                  <!-- Will be populated by JavaScript -->
-                  <div class="empty-state" id="pastEmptyState" style="display: none;">
-                    <i class="fas fa-history"></i>
-                    <h4>No Past Appointments</h4>
-                    <p>Your past appointments will appear here once you've had your first visit.</p>
-                  </div>
-                </div>
               </div>
             </div>
 
