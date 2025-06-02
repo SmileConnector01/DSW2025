@@ -1163,7 +1163,9 @@ function renderSlotsWithoutBookings(timeSlots, slotsWrapper) {
   });
 }
 
-let PatientID = 38; // Divin PatientID from patient who logged in
+// Get PatientID from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+let PatientID = urlParams.get('patient_id');
 
 // --- Function 1: Send PatientID to PHP and store it in session ---
 function sendPatientID(patientID) {

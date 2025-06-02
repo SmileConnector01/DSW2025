@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmileConnector</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="/assets/stylesheets/testing.css">
+    <!-- <link rel="stylesheet" href="/assets/stylesheets/testing.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    
     
@@ -2627,7 +2627,7 @@ html {
                     <button id="open-slideshow" class="book-btn" style="margin-top: 20px;">Discover more about our Dental Program</button>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dental Team">
+                    <img src="/assets/images/teledentistry6.jpg" alt="Dental Team">
                 </div>
             </div>
 
@@ -2638,7 +2638,7 @@ html {
                     
                     <!-- Slide 1 -->
                     <div class="slide active">
-                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Advanced Technology" class="slide-image">
+                        <img src="/assets/images/" alt="Advanced Technology" class="slide-image">
                         <div class="slide-content">
                             <h4>Advanced Technology</h4>
                             <p>Our state-of-the-art equipment includes digital X-rays, intraoral cameras, and laser dentistry tools. We use the latest technology to provide precise diagnoses and comfortable treatments, ensuring you receive the highest quality care with minimal discomfort.</p>
@@ -2665,7 +2665,7 @@ html {
 
                     <!-- Slide 4 -->
                     <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Comfortable Environment" class="slide-image">
+                        <img src="/assets/images/teledentistry2.jpeg" alt="Comfortable Environment" class="slide-image">
                         <div class="slide-content">
                             <h4>Comfort & Care</h4>
                             <p>Our relaxing environment features comfortable seating, calming music, and amenities to help you feel at ease. We offer sedation options for anxious patients and ensure every visit is as comfortable and stress-free as possible.</p>
@@ -2819,7 +2819,7 @@ html {
                         <div class="specialty-badge">Logistics Officer</div>
                         <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="../assets/images/kgopotso.png" alt="Kgopotso Molekoa" class="doctor-image">
+                            <img src="../assets/images/kgopotso.jpg" alt="Kgopotso Molekoa" class="doctor-image">
                         </div>
                         <div class="doctor-info">
                             <h3 class="doctor-name">Kgopotso Molekoa</h3>
@@ -2840,7 +2840,7 @@ html {
                         <div class="specialty-badge">Marketing Officer</div>
                         <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="../assets/images/masego.pnp" alt="Masego Motsamai" class="doctor-image">
+                            <img src="../assets/images/masego.jpg" alt="Masego Motsamai" class="doctor-image">
                         </div>
                         <div class="doctor-info">
                             <h3 class="doctor-name">Masego Motsamai</h3>
@@ -2881,7 +2881,7 @@ html {
                         <div class="specialty-badge">Communications officer</div>
                         <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="" alt="Emmanuel Mukanku" class="doctor-image">
+                            <img src="../assets/images/emmanuel.jpg" alt="Emmanuel Mukanku" class="doctor-image">
                         </div>
                         <div class="doctor-info">
                             <h3 class="doctor-name">Emmanuel Mukanku</h3>
@@ -2993,7 +2993,7 @@ html {
     <!-- <script src="/assets/scripts/testing.js"> </script> -->
 
 <!-- Google Maps API (make sure your API key is restricted in your Google Cloud Console) -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnu99zZwlwPmaRdFvSF82ECLPBKmwpKgg&callback=initMap"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnu99zZwlwPmaRdFvSF82ECLPBKmwpKgg&callback=initMap"></script> -->
 <script>
     // Navbar scroll effect
     window.addEventListener('scroll', function () {
@@ -3307,7 +3307,7 @@ function initMap() {
     //fetching the key
     document.addEventListener('DOMContentLoaded', function() {
         
-        fetch('/api/maps-key')
+        fetch('../api/maps-key')
         .then(res => {
             if (!res.ok) throw new Error('Failed to fetch API key');
             return res.json();

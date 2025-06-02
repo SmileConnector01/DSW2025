@@ -81,9 +81,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $updateRoleLogin = $mysqli->prepare("UPDATE patients SET last_login = ? WHERE user_ID = ?");
                     $updateRoleLogin->bind_param("si", $currentTime, $user["user_ID"]);
                     $updateRoleLogin->execute();
-                    header("Location: ../dashboard/patient.html?username=" . urlencode($user["full_name"]) . "&email=" . urlencode($user["email"]));
+                    
+                    // After updating last_login for patient
+                    $patientId = null;
+                    $getPatientId = $mysqli->prepare("SELECT patient_id FROM patients WHERE user_ID = ?");
+                    $getPatientId->bind_param("i", $user["user_ID"]);
+                    $getPatientId->execute();
+                    $getPatientIdResult = $getPatientId->get_result();
+                    if ($row = $getPatientIdResult->fetch_assoc()) {
+                        $patientId = $row['patient_id'];
+                    }
+                    header("Location: ../dashboard/patient.html?username=" . urlencode($user["full_name"]) . 
+                        "&email=" . urlencode($user["email"]) . 
+                        "&patient_id=" . urlencode($patientId));
                     break;
-
                 case 'admin':
                     $updateRoleLogin = $mysqli->prepare("UPDATE admin SET last_login = ? WHERE user_ID = ?");
                     $updateRoleLogin->bind_param("si", $currentTime, $user["user_ID"]);

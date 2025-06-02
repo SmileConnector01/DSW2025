@@ -237,20 +237,30 @@ document.addEventListener('DOMContentLoaded', function() {
                   pane.classList.add('active');
               }
           });
-            if (tabId === 'admins') {
-                loadAdminTable();
-            } else if (tabId === 'patients') {
-                loadPatientTable();
+            // Reload data for the current tab
+            switch (tabId) {
+                case 'dashboard':
+                    initDashboardCharts();
+                    break;
+                case 'admins':
+                    loadAdminTable();
+                    break;
+                case 'patients':
+                    loadPatientTable();
+                    break;
+                case 'schools':
+                    initAddEventButton();
+                    break;
+                case 'audit':
+                    filterAuditLogs();
+                    break;
             }
-            // Initialize school programs tab if it's the active tab
-            if (tabId === 'schools') {
-              initAddEventButton();
-            }
-                // when you hide/remove the iframe
+
+            // when you hide/remove the iframe
             if(document.getElementById('videoconferenceIframe')) {
                 const iframeid = document.getElementById('videoconferenceIframe');
                 iframeid.contentWindow.postMessage({ cmd: 'stop-camera' }, '*');
-            }
+            }
       
       });
   });

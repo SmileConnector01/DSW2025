@@ -1638,3 +1638,50 @@ function setupCompletedVisitAnalyticsModalListeners() {
     }
 }
 
+ // Profile picture update
+    setupProfilePictureUpdate();
+
+// Profile Picture Update Functions
+function setupProfilePictureUpdate() {
+    const profilePictureInput = document.getElementById('profilePictureInput');
+    const changeProfilePictureButton = document.getElementById('changeProfilePictureButton');
+    const avatarElement = document.querySelector('.avatar'); // Assuming this is where the profile picture is displayed
+
+    if (changeProfilePictureButton && profilePictureInput && avatarElement) {
+        changeProfilePictureButton.addEventListener('click', function() {
+            profilePictureInput.click(); // Trigger the hidden file input click
+        });
+
+        profilePictureInput.addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Get the selected file
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Create a new image element or update the existing one
+                    // Remove existing content (like the default icon)
+                    avatarElement.innerHTML = '';
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Profile Picture';
+                    img.style.width = '100%'; // Style the image to fit the container
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover'; // Ensure the image covers the area
+                    img.style.borderRadius = '50%'; // Keep the avatar circular
+
+                    avatarElement.appendChild(img);
+
+                    // TODO: Send the file to the server for permanent storage and update 'everywhere'
+                    console.log('Selected file:', file);
+                    // Example: uploadFileToServer(file);
+                }
+
+                reader.readAsDataURL(file); // Read the file as a data URL
+            }
+        });
+    } else {
+        console.error('Profile picture elements not found.');
+    }
+}

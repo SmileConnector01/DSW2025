@@ -488,29 +488,34 @@ document.addEventListener('DOMContentLoaded', function() {
         // Delete event
         if (event) {
             modal.querySelector('.delete-event').addEventListener('click', function() {
-                if (confirm('Are you sure you want to delete this event?')) {
-                    // Send the data via fetch
-                    fetch('http://localhost:80/SmileConnector/backend/delete_calendar_event.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({id: event.id})
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log('Success:', result);
-                        // Handle success (e.g., close modal, update UI)
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                    modal.remove();
-                    showNotification('Event deleted successfully', 'success');
-                    
-                    // Refresh calendar
-                    calendar.refetchEvents();
-                }
+                modal.remove();
+
+                window.showPasswordModal(
+                    'Confirm Deletion',
+                    `You are about to delete the event <strong>${event.title}</strong>. For security reasons, please confirm your password to proceed.`,
+                    async function() {
+                        // Proceed with deletion after password confirmation
+                        try {
+                            const response = await fetch('http://localhost:80/SmileConnector/backend/delete_calendar_event.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({id: event.id})
+                            });
+                            const result = await response.json();
+                            if (result.success) {
+                                showNotification('Event deleted successfully', 'success');
+                                calendar.refetchEvents();
+                            } else {
+                                showNotification(result.message || 'Failed to delete event', 'error');
+                            }
+                        } catch (error) {
+                            showNotification('Error deleting event', 'error');
+                            console.error('Error:', error);
+                        }
+                    }
+                );
             });
         }
         
