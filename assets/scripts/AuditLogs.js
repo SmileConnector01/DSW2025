@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     exportAuditLogs.addEventListener('click', function() {
       // Implement CSV export functionality
-      alert('Export to CSV functionality would be implemented here');
+      // alert('Export to CSV functionality would be implemented here');
     });
   
     // Initial render
