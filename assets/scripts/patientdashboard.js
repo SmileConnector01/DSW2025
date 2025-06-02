@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize all tabs and set dashboard as default
   initializeApplication();
+  initializeDentalRecordsTabs();
 
 
   const logoutLink = document.getElementById('logoutLink');
@@ -1288,4 +1289,22 @@ function saveChild() {
   if (document.getElementById('appointmentsContent').classList.contains('active')) {
     loadAppointments();
   }
+}
+
+function initializeDentalRecordsTabs() {
+  const recordsTabs = document.querySelectorAll('#recordsContent .tabs .tab-btn');
+  const recordsTabContents = document.querySelectorAll('#recordsContent .tab-content');
+
+  recordsTabs.forEach(btn => {
+    btn.addEventListener('click', function () {
+      // Remove active from all buttons and contents
+      recordsTabs.forEach(b => b.classList.remove('active'));
+      recordsTabContents.forEach(tc => tc.classList.remove('active'));
+
+      // Activate clicked button and corresponding content
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
 }

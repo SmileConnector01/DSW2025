@@ -44,7 +44,7 @@
               <span>Dental Records</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="display: none;">
             <a href="#" id="messagesLink">
               <i class="fas fa-comments"></i>
               <span>Messages</span>
@@ -240,44 +240,11 @@
               ></a>
             </div>
 
-            <div class="records-grid">
-              <div class="record-card" id="record1">
-                <div class="record-header">
-                  <h3 class="record-title">Dental Examination</h3>
-                  <span class="record-date">12 Jun 2025</span>
-                </div>
-                <div class="record-content">
-                  <p>
-                    Routine dental checkup. No cavities detected. Recommended
-                    fluoride treatment for prevention.
-                  </p>
-                </div>
-              </div>
-
-              <div class="record-card" id="record2">
-                <div class="record-header">
-                  <h3 class="record-title">X-Ray Results</h3>
-                  <span class="record-date">05 Jun 2025</span>
-                </div>
-                <div class="record-content">
-                  <p>
-                    Bitewing x-rays show no signs of decay between teeth. Wisdom
-                    teeth developing normally.
-                  </p>
-                </div>
-              </div>
-
-              <div class="record-card" id="record3">
-                <div class="record-header">
-                  <h3 class="record-title">Oral Hygiene Instruction</h3>
-                  <span class="record-date">15 May 2025</span>
-                </div>
-                <div class="record-content">
-                  <p>
-                    Demonstrated proper brushing and flossing techniques.
-                    Recommended electric toothbrush.
-                  </p>
-                </div>
+            <div class="records-grid" id="dashboardRecordsGrid">
+              <div class="empty-state">
+                <i class="fas fa-file-medical"></i>
+                <h4>No recent health records found</h4>
+                <p>Your recent dental records will appear here once available.</p>
               </div>
             </div>
           </section>
@@ -701,227 +668,31 @@
 
             <!-- Treatment History Tab Content -->
             <div class="tab-content active" id="treatment-history">
-              <div class="records-list">
-                <div class="record-item">
-                  <div class="record-item-header">
-                    <h3>Dental Examination</h3>
-                    <span class="record-date">Jun 12, 2025</span>
-                  </div>
-                  <div class="record-item-body">
-                    <p><strong>Dentist:</strong> Dr. Smith</p>
-                    <p>
-                      <strong>Findings:</strong> No cavities detected. Mild
-                      plaque buildup.
-                    </p>
-                    <p>
-                      <strong>Recommendations:</strong> Fluoride treatment
-                      recommended. Continue regular brushing and flossing.
-                    </p>
-                  </div>
-                  <div class="record-item-footer"></div>
-                </div>
-
-                <div class="record-item">
-                  <div class="record-item-header">
-                    <h3>Teeth Cleaning</h3>
-                    <span class="record-date">May 28, 2025</span>
-                  </div>
-                  <div class="record-item-body">
-                    <p><strong>Dentist:</strong> Dr. Lee</p>
-                    <p>
-                      <strong>Procedure:</strong> Professional teeth cleaning
-                      with scaling and polishing.
-                    </p>
-                    <p>
-                      <strong>Notes:</strong> Minimal gum bleeding observed.
-                      Recommended more frequent flossing.
-                    </p>
-                  </div>
-                  <div class="record-item-footer"></div>
-                </div>
-
-                <div class="record-item">
-                  <div class="record-item-header">
-                    <h3>Tooth Filling</h3>
-                    <span class="record-date">Mar 15, 2025</span>
-                  </div>
-                  <div class="record-item-body">
-                    <p><strong>Dentist:</strong> Dr. Johnson</p>
-                    <p>
-                      <strong>Procedure:</strong> Composite filling on tooth #19
-                      (Lower left molar).
-                    </p>
-                    <p>
-                      <strong>Materials Used:</strong> Tooth-colored composite
-                      resin.
-                    </p>
-                  </div>
-                  <div class="record-item-footer"></div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-notes-medical"></i>
+                <h4>No treatment history found</h4>
+                <p>Your dental treatment history will appear here once available.</p>
               </div>
             </div>
 
-            <!-- X-Rays & Scans Tab Content (Hidden by default) -->
+            <!-- X-Rays & Scans Tab Content -->
             <div class="tab-content" id="xrays">
-              <div class="media-gallery">
-                <div class="media-item">
-                  <div class="media-preview">
-                    <img
-                      src="../assets/images/Bitewing X-Ray.jpeg"
-                      alt="Bitewing X-Ray"
-                    />
-                  </div>
-                  <div class="media-info">
-                    <h4>Bitewing X-Ray</h4>
-                    <p><strong>Date:</strong> Jun 5, 2025</p>
-                    <p><strong>Dentist:</strong> Dr. Smith</p>
-                    <p>
-                      <strong>Notes:</strong> No signs of decay between teeth.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="media-item">
-                  <div class="media-preview">
-                    <img
-                      src="../assets/images/Panoramic X-Ray.jpeg"
-                      alt="Panoramic X-Ray"
-                    />
-                  </div>
-                  <div class="media-info">
-                    <h4>Panoramic X-Ray</h4>
-                    <p><strong>Date:</strong> Jan 10, 2025</p>
-                    <p><strong>Dentist:</strong> Dr. Johnson</p>
-                    <p>
-                      <strong>Notes:</strong> Wisdom teeth developing normally.
-                    </p>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-x-ray"></i>
+                <h4>No x-rays or scans found</h4>
+                <p>Your dental x-rays and scans will appear here once uploaded.</p>
               </div>
             </div>
 
             <!-- Prescriptions Tab Content -->
             <div class="tab-content" id="prescriptions">
-              <div class="prescriptions-list">
-                <div class="prescription-item">
-                  <div class="prescription-header">
-                    <h3>Fluoride Toothpaste</h3>
-                    <span class="prescription-date">Jun 12, 2025</span>
-                  </div>
-                  <div class="prescription-body">
-                    <p><strong>Prescribed by:</strong> Dr. Smith</p>
-                    <p><strong>Dosage:</strong> Use twice daily for brushing</p>
-                    <p>
-                      <strong>Instructions:</strong> Apply small amount to
-                      toothbrush. Brush for 2 minutes, then spit out excess. Do
-                      not rinse.
-                    </p>
-                  </div>
-                  <div class="prescription-footer">
-                    <span class="prescription-status active">Active</span>
-                  </div>
-                </div>
-
-                <div class="prescription-item">
-                  <div class="prescription-header">
-                    <h3>Antibiotic - Amoxicillin</h3>
-                    <span class="prescription-date">Mar 15, 2025</span>
-                  </div>
-                  <div class="prescription-body">
-                    <p><strong>Prescribed by:</strong> Dr. Johnson</p>
-                    <p>
-                      <strong>Dosage:</strong> 500mg every 8 hours for 7 days
-                    </p>
-                    <p>
-                      <strong>Instructions:</strong> Take with food. Complete
-                      full course even if symptoms improve.
-                    </p>
-                  </div>
-                  <div class="prescription-footer">
-                    <span class="prescription-status completed">Completed</span>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <h4>No prescriptions found</h4>
+                <p>Your dental prescriptions will appear here once available.</p>
               </div>
             </div>
 
-            <!-- Billing History Tab Content (Hidden by default) -->
-            <div class="tab-content" id="billing-history">
-              <div class="billing-summary">
-                <div class="summary-card">
-                  <h4>Total Paid</h4>
-                  <p class="amount">$1,250.00</p>
-                </div>
-                <div class="summary-card">
-                  <h4>Outstanding</h4>
-                  <p class="amount">$0.00</p>
-                </div>
-                <div class="summary-card">
-                  <h4>Insurance Claims</h4>
-                  <p class="amount">$850.00</p>
-                </div>
-              </div>
-
-              <div class="billing-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Service</th>
-                      <th>Provider</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                      <th>Receipt</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Jun 12, 2025</td>
-                      <td>Dental Examination</td>
-                      <td>Dr. Smith</td>
-                      <td>$120.00</td>
-                      <td>
-                        <span class="status-badge status-paid">Paid</span>
-                      </td>
-                      <td>
-                        <button class="btn-action btn-download">
-                          <i class="fas fa-file-invoice"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>May 28, 2025</td>
-                      <td>Teeth Cleaning</td>
-                      <td>Dr. Lee</td>
-                      <td>$95.00</td>
-                      <td>
-                        <span class="status-badge status-paid">Paid</span>
-                      </td>
-                      <td>
-                        <button class="btn-action btn-download">
-                          <i class="fas fa-file-invoice"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Mar 15, 2025</td>
-                      <td>Tooth Filling</td>
-                      <td>Dr. Johnson</td>
-                      <td>$210.00</td>
-                      <td>
-                        <span class="status-badge status-insurance"
-                          >Insurance Claim</span
-                        >
-                      </td>
-                      <td>
-                        <button class="btn-action btn-download">
-                          <i class="fas fa-file-invoice"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -947,7 +718,7 @@
         </div>
 
         <!-- Messages Page Content -->
-        <div class="content-section" id="messagesContent">
+        <div class="content-section" id="messagesContent" style="display: none;">
           <section class="section-header">
             <h2 class="section-title">Messages</h2>
             <button class="btn-primary" id="newMessageBtn">
@@ -1134,9 +905,9 @@
 
             <div class="billing-summary-card">
               <h3>Insurance</h3>
-              <p class="insurance-status">Active - Delta Dental</p>
+              <p class="insurance-status">No Insurance Saved</p>
               <p class="insurance-details">
-                Annual maximum remaining: R1,250.00
+                Annual maximum remaining: N/A
               </p>
             </div>
           </div>
@@ -1145,119 +916,39 @@
             <div class="billing-tabs">
               <button class="billing-tab-btn active" data-tab="invoices">
                 <i class="fas fa-file-invoice"></i> Invoices
-                <span class="tab-badge">2</span>
+                <span class="tab-badge">0</span>
               </button>
               <button class="billing-tab-btn" data-tab="payments">
                 <i class="fas fa-credit-card"></i> Payments
-                <span class="tab-badge">2</span>
+                <span class="tab-badge">0</span>
               </button>
               <button class="billing-tab-btn" data-tab="insurance">
                 <i class="fas fa-shield-alt"></i> Insurance Claims
-                <span class="tab-badge">1</span>
+                <span class="tab-badge">0</span>
               </button>
             </div>
 
             <div class="billing-tab-content active" id="invoices">
-              <div class="invoice-list">
-                <div class="invoice-item">
-                  <div class="invoice-header">
-                    <h4>Invoice #INV-2025-06-001</h4>
-                    <span class="invoice-status status-paid">Paid</span>
-                  </div>
-                  <div class="invoice-details">
-                    <p><strong>Date:</strong> Jun 12, 2025</p>
-                    <p><strong>Amount:</strong> R120.00</p>
-                    <p><strong>Services:</strong> Dental Examination</p>
-                  </div>
-                  <div class="invoice-actions">
-                    <button class="btn-download-invoice">
-                      <i class="fas fa-download"></i> Download
-                      <span class="download-format">PDF</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="invoice-item">
-                  <div class="invoice-header">
-                    <h4>Invoice #INV-2025-05-002</h4>
-                    <span class="invoice-status status-paid">Paid</span>
-                  </div>
-                  <div class="invoice-details">
-                    <p><strong>Date:</strong> May 28, 2025</p>
-                    <p><strong>Amount:</strong> R95.00</p>
-                    <p><strong>Services:</strong> Teeth Cleaning</p>
-                  </div>
-                  <div class="invoice-actions">
-                    <button class="btn-download-invoice">
-                      <i class="fas fa-download"></i> Download
-                      <span class="download-format">PDF</span>
-                    </button>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-file-invoice"></i>
+                <h4>No invoices found</h4>
+                <p>You have no invoices at this time.</p>
               </div>
             </div>
 
             <div class="billing-tab-content" id="payments">
-              <div class="payment-list">
-                <div class="payment-item">
-                  <div class="payment-header">
-                    <h4>Payment #PAY-2025-06-001</h4>
-                    <span class="payment-method">Credit Card (Visa)</span>
-                  </div>
-                  <div class="payment-details">
-                    <p><strong>Date:</strong> Jun 12, 2025</p>
-                    <p><strong>Amount:</strong> R120.00</p>
-                    <p><strong>For Invoice:</strong> #INV-2025-06-001</p>
-                  </div>
-                  <div class="payment-actions">
-                    <button class="btn-download-receipt">
-                      <i class="fas fa-receipt"></i> Receipt
-                      <span class="download-format">PDF</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="payment-item">
-                  <div class="payment-header">
-                    <h4>Payment #PAY-2025-05-001</h4>
-                    <span class="payment-method">Credit Card (Visa)</span>
-                  </div>
-                  <div class="payment-details">
-                    <p><strong>Date:</strong> May 28, 2025</p>
-                    <p><strong>Amount:</strong> R95.00</p>
-                    <p><strong>For Invoice:</strong> #INV-2025-05-002</p>
-                  </div>
-                  <div class="payment-actions">
-                    <button class="btn-download-receipt">
-                      <i class="fas fa-receipt"></i> Receipt
-                      <span class="download-format">PDF</span>
-                    </button>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-credit-card"></i>
+                <h4>No payments found</h4>
+                <p>You have not made any payments yet.</p>
               </div>
             </div>
 
             <div class="billing-tab-content" id="insurance">
-              <div class="insurance-claims">
-                <div class="claim-item">
-                  <div class="claim-header">
-                    <h4>Claim #CLM-2025-03-001</h4>
-                    <span class="claim-status status-processed">Processed</span>
-                  </div>
-                  <div class="claim-details">
-                    <p><strong>Date:</strong> Mar 15, 2025</p>
-                    <p><strong>Amount:</strong> R210.00</p>
-                    <p><strong>Service:</strong> Tooth Filling</p>
-                    <p><strong>Paid by Insurance:</strong> R160.00</p>
-                    <p><strong>Patient Responsibility:</strong> R50.00</p>
-                  </div>
-                  <div class="claim-actions">
-                    <button class="btn-download-eob">
-                      <i class="fas fa-file-alt"></i> EOB
-                      <span class="download-format">PDF</span>
-                    </button>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-shield-alt"></i>
+                <h4>No insurance claims found</h4>
+                <p>You have no insurance claims at this time.</p>
               </div>
             </div>
           </div>
@@ -1335,7 +1026,7 @@
                   <div class="cardholder-input">
                     <input
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Enter the card holder name"
                       id="cardholderName"
                       class="form-input"
                     />
@@ -1389,10 +1080,490 @@
             </div>
           </div>
         </div>
-        
+        <!-- Settings Page Content-->
+        <div class="content-section" id="settingsContent">
+          <section class="section-header">
+            <h2 class="section-title">Patient Settings</h2>
+          </section>
+
+          <div class="settings-container">
+            <div class="settings-tabs">
+              <button class="settings-tab-btn active" data-tab="profile">
+                <i class="fas fa-user-circle"></i> Profile
+              </button>
+              <button class="settings-tab-btn" data-tab="oral-health">
+                <i class="fas fa-tooth"></i> Oral Health
+              </button>
+              <button class="settings-tab-btn" data-tab="security">
+                <i class="fas fa-lock"></i> Security
+              </button>
+              <button class="settings-tab-btn" data-tab="notifications">
+                <i class="fas fa-bell"></i> Notifications
+              </button>
+              <button class="settings-tab-btn" data-tab="community">
+                <i class="fas fa-users"></i> Community
+              </button>
+            </div>
+
+            <div class="settings-tab-content active" id="profile">
+              <form class="settings-form" id="profileForm">
+                <div class="sc-info-banner">
+                  <i class="fas fa-info-circle"></i>
+                  <p>
+                    Your profile helps us provide personalized oral health care
+                    and education
+                  </p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-input"
+                      value="John"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      class="form-input"
+                      value="Doe"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-input"
+                    value="john.doe@example.com"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    class="form-input"
+                    value="+27 12 345 6789"
+                    required
+                  />
+                  <p class="form-help">
+                    Used for appointment reminders and oral health tips
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="location">Community Location</label>
+                  <select id="location" class="form-input" required>
+                    <option value="">Select your community</option>
+                    <option value="limpopo">Limpopo</option>
+                    <option value="eastern-cape">Eastern Cape</option>
+                    <option value="kwazulu-natal">KwaZulu-Natal</option>
+                    <option value="free-state">Free State</option>
+                    <option value="north-west">North West</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelProfileChanges"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Save Profile
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="settings-tab-content"
+              id="oral-health"
+              style="display: none"
+            >
+              <form class="settings-form" id="oralHealthForm">
+                <div class="sc-info-banner">
+                  <i class="fas fa-tooth"></i>
+                  <p>
+                    Help us provide better dental care by sharing your oral
+                    health information
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="lastDentalVisit">Last Dental Visit</label>
+                  <input type="date" id="lastDentalVisit" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                  <label>Current Oral Health Concerns</label>
+                  <div class="checkbox-grid">
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="sensitivity"
+                        name="oralHealthConcerns"
+                        value="sensitivity"
+                      />
+                      <span class="checkmark"></span>
+                      Tooth Sensitivity
+                    </label>
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="bleedingGums"
+                        name="oralHealthConcerns"
+                        value="bleedingGums"
+                      />
+                      <span class="checkmark"></span>
+                      Bleeding Gums
+                    </label>
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="badBreath"
+                        name="oralHealthConcerns"
+                        value="badBreath"
+                      />
+                      <span class="checkmark"></span>
+                      Persistent Bad Breath
+                    </label>
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="toothPain"
+                        name="oralHealthConcerns"
+                        value="toothPain"
+                      />
+                      <span class="checkmark"></span>
+                      Tooth Pain
+                    </label>
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="dryMouth"
+                        name="oralHealthConcerns"
+                        value="dryMouth"
+                      />
+                      <span class="checkmark"></span>
+                      Dry Mouth
+                    </label>
+                    <label class="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id="clickingJaw"
+                        name="oralHealthConcerns"
+                        value="clickingJaw"
+                      />
+                      <span class="checkmark"></span>
+                      Clicking Jaw
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Oral Hygiene Habits</label>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="brushingFrequency">Brushing Frequency</label>
+                      <select id="brushingFrequency" class="form-input">
+                        <option value="twice">Twice daily</option>
+                        <option value="once">Once daily</option>
+                        <option value="sometimes">Sometimes</option>
+                        <option value="rarely">Rarely</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="flossingFrequency">Flossing Frequency</label>
+                      <select id="flossingFrequency" class="form-input">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="never">Never</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dentalHistory">Dental History</label>
+                  <textarea
+                    id="dentalHistory"
+                    class="form-input"
+                    rows="3"
+                    placeholder="Previous treatments, surgeries, or dental conditions"
+                  ></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelOralHealthChanges"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Update Oral Health Info
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="settings-tab-content"
+              id="security"
+              style="display: none"
+            >
+              <form class="settings-form" id="securityForm">
+                <div class="sc-info-banner">
+                  <i class="fas fa-shield-alt"></i>
+                  <p>
+                    Keep your account secure to protect your health information
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    class="form-input"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    class="form-input"
+                    required
+                  />
+                  <div class="password-strength">
+                    <div class="strength-bar"></div>
+                    <span class="strength-text">Password strength</span>
+                  </div>
+                  <p class="form-help">
+                    Password must be at least 8 characters with numbers and
+                    symbols
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm New Password</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="form-input"
+                    required
+                  />
+                  <p
+                    id="passwordMatch"
+                    class="form-help"
+                    style="display: none"
+                  ></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="twoFactorAuth" />
+                    <span class="checkmark"></span>
+                    Enable Two-Factor Authentication via SMS
+                  </label>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelSecurityChanges"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-lock"></i> Update Security
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="settings-tab-content"
+              id="notifications"
+              style="display: none"
+            >
+              <form class="settings-form" id="notificationsForm">
+                <div class="sc-info-banner">
+                  <i class="fas fa-bell"></i>
+                  <p>
+                    Choose how you'd like to receive oral health reminders and
+                    updates
+                  </p>
+                </div>
+
+                <h3 class="subsection-title">
+                  <i class="fas fa-calendar-alt"></i> Appointment Reminders
+                </h3>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="emailApptReminders" checked />
+                    <span class="checkmark"></span>
+                    Email reminders (48 hours before)
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="smsApptReminders" checked />
+                    <span class="checkmark"></span>
+                    SMS reminders (24 hours before)
+                  </label>
+                </div>
+
+                <h3 class="subsection-title">
+                  <i class="fas fa-tooth"></i> Oral Health Tips
+                </h3>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="weeklyTips" checked />
+                    <span class="checkmark"></span>
+                    Weekly oral health tips
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="seasonalTips" checked />
+                    <span class="checkmark"></span>
+                    Seasonal dental care advice
+                  </label>
+                </div>
+
+                <h3 class="subsection-title">
+                  <i class="fas fa-comments"></i> Community Updates
+                </h3>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="schoolPrograms" checked />
+                    <span class="checkmark"></span>
+                    School oral health programs
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="communityEvents" />
+                    <span class="checkmark"></span>
+                    Community dental health events
+                  </label>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelNotificationChanges"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-bell"></i> Update Notifications
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="settings-tab-content"
+              id="community"
+              style="display: none"
+            >
+              <form class="settings-form" id="communityForm">
+                <div class="sc-info-banner">
+                  <i class="fas fa-users"></i>
+                  <p>Connect with your community's oral health initiatives</p>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="joinGardening" checked />
+                    <span class="checkmark"></span>
+                    Participate in school food gardening projects
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="shareHealthData" />
+                    <span class="checkmark"></span>
+                    Share anonymized health data to improve community services
+                  </label>
+                  <p class="form-help">
+                    Helps SmileConnector secure funding and resources
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="volunteerOpportunities" />
+                    <span class="checkmark"></span>
+                    Notify me about volunteer opportunities
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="receiveNewsletter" checked />
+                    <span class="checkmark"></span>
+                    Receive monthly community newsletter
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label for="communityFeedback">Community Feedback</label>
+                  <textarea
+                    id="communityFeedback"
+                    class="form-input"
+                    rows="3"
+                    placeholder="Suggestions for improving oral health in our community"
+                  ></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelCommunityChanges"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-users"></i> Update Community Settings
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
     <script src="../assets/scripts/patientdashboard.js"></script>
-    <script src="../assets/scripts/bookingAppointment.js"></script>
+     <script src="../assets/scripts/billing.js"></script>
+     <script src="../assets/scripts/settings.js"></script>
   </body>
 </html>
