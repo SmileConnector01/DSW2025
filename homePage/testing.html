@@ -6,6 +6,7 @@
     <title>SmileConnector</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/assets/stylesheets/testing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    
     
     <style>
@@ -609,10 +610,11 @@
             }
 
             .team-grid {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3 per line */
+                gap: 2rem;
+                margin-top: 3rem;
+                justify-items: center;
             }
 
             .team-card {
@@ -1556,13 +1558,13 @@
     }
 }
 
-/* Team Grid */
+/* Team Grid
 .team-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 3rem;
-}
+} */
 
 /* Doctor Cards */
 .doctor-card {
@@ -1605,6 +1607,12 @@
         0 12px 24px rgba(59, 130, 246, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     border-color: rgba(59, 130, 246, 0.3);
+}
+
+.doctor-card {
+    max-width: 320px;      /* Decrease width for a cuter look */
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* Doctor Image */
@@ -1780,7 +1788,7 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
     .team-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 }
@@ -1795,7 +1803,7 @@
     }
     
     .team-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 1.5rem;
     }
     
@@ -2533,6 +2541,7 @@ html {
     pointer-events: none;
 }
 
+
     </style>
 </head>
 <body>
@@ -2789,13 +2798,13 @@ html {
                         <div class="specialty-badge">Administrator</div>
                         <div class="experience-indicator">15+ Years</div>
                         <div class="doctor-image-container">
-                            <img src="../assets/images/WhatsApp Image 2025-05-28 at 12.55.05.jpeg" alt="Dr. Sarah Johnson" class="doctor-image">
+                            <img src="../assets/images/kinder.jpg" alt="Ms Kinder" class="doctor-image">
                         </div>
                         <div class="doctor-info">
                             <h3 class="doctor-name">Ms Kinder</h3>
                             <p class="doctor-specialty">Administrator</p>
                             <p class="doctor-description">
-                               Handles administrative tasks, documentation, compliance ,Her leadership helps maintain structure and accountability across all departments.
+                               Visionary founder and leader of SmileConnector, driving strategic initiatives and ensuring excellence in dental outreach programs across communities.
                             </p>
                         </div>
                     </div>
@@ -2808,12 +2817,12 @@ html {
                             <div class="floating-circle"></div>
                         </div>
                         <div class="specialty-badge">Logistics Officer</div>
-                        <!-- <div class="experience-indicator">12+ Years</div> -->
+                        <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face" alt="Dr. Michael Chen" class="doctor-image">
+                            <img src="../assets/images/kgopotso.png" alt="Kgopotso Molekoa" class="doctor-image">
                         </div>
                         <div class="doctor-info">
-                            <h3 class="doctor-name">Divin</h3>
+                            <h3 class="doctor-name">Kgopotso Molekoa</h3>
                             <p class="doctor-specialty">Logistics Officer</p>
                              <p class="doctor-description">
                                Oversees the coordination and delivery of dental kits, equipment, and outreach schedules to ensure smooth field operations.
@@ -2829,17 +2838,15 @@ html {
                             <div class="floating-circle"></div>
                         </div>
                         <div class="specialty-badge">Marketing Officer</div>
-                        <!-- <div class="experience-indicator">10+ Years</div> -->
+                        <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="https://images.unsplash.com/photo-1594824735912-0346bf4e2e2b?w=300&h=300&fit=crop&crop=face" alt="Dr. Emily Rodriguez" class="doctor-image">
+                            <img src="../assets/images/masego.pnp" alt="Masego Motsamai" class="doctor-image">
                         </div>
                         <div class="doctor-info">
-                            <h3 class="doctor-name">Emmanuel</h3>
+                            <h3 class="doctor-name">Masego Motsamai</h3>
                             <p class="doctor-specialty">Marketing Officer</p>
                              <p class="doctor-description">
-                               Leads marketing strategy, branding, and promotional campaigns to enhance visibility and stakeholder engagement.
-
-                            </p> 
+                               Leads marketing strategy, branding, and promotional campaigns to enhance visibility and stakeholder engagement.                            </p> 
                         </div>
                     </div>
 
@@ -2851,12 +2858,12 @@ html {
                             <div class="floating-circle"></div>
                         </div>
                         <div class="specialty-badge">IT Specialist</div>
-                        <!-- <div class="experience-indicator">18+ Years</div> -->
+                        <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&h=300&fit=crop&crop=face" alt="Dr. James Wilson" class="doctor-image">
+                            <img src="../assets/images/divin.jpeg" alt="Divin Mathem's" class="doctor-image">
                         </div>
                         <div class="doctor-info">
-                            <h3 class="doctor-name">kgopotso</h3>
+                            <h3 class="doctor-name">Divin Mathem's</h3>
                             <p class="doctor-specialty">IT Specialist</p>
                            <p class="doctor-description">
                               Develop and maintain the SmileConnector platform, ensuring system reliability, security, and technical support.
@@ -2864,25 +2871,7 @@ html {
                         </div>
                         
                     </div>
-                    <div class="doctor-card">
-                        <div class="floating-elements">
-                            <div class="floating-circle"></div>
-                            <div class="floating-circle"></div>
-                            <div class="floating-circle"></div>
-                        </div>
-                        <div class="specialty-badge">IT Specialist</div>
-                        <!-- <div class="experience-indicator">18+ Years</div> -->
-                        <div class="doctor-image-container">
-                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&h=300&fit=crop&crop=face" alt="Dr. James Wilson" class="doctor-image">
-                        </div>
-                        <div class="doctor-info">
-                            <h3 class="doctor-name">Daniel</h3>
-                            <p class="doctor-specialty">IT Specialist</p>
-                             <p class="doctor-description">
-                               Develop and maintain the SmileConnector platform, ensuring system reliability, security, and technical support.
-                            </p> 
-                        </div>
-                    </div>
+
                     <div class="doctor-card">
                         <div class="floating-elements">
                             <div class="floating-circle"></div>
@@ -2890,15 +2879,35 @@ html {
                             <div class="floating-circle"></div>
                         </div>
                         <div class="specialty-badge">Communications officer</div>
-                        <!-- <div class="experience-indicator">18+ Years</div> -->
+                        <div class="experience-indicator">2nd year BIT student</div>
                         <div class="doctor-image-container">
-                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&h=300&fit=crop&crop=face" alt="Dr. James Wilson" class="doctor-image">
+                            <img src="" alt="Emmanuel Mukanku" class="doctor-image">
                         </div>
                         <div class="doctor-info">
-                            <h3 class="doctor-name">Masego</h3>
+                            <h3 class="doctor-name">Emmanuel Mukanku</h3>
                             <p class="doctor-specialty">communications officer</p>
                             <p class="doctor-description">
                                Manages internal and external communication, public awareness, and community engagement initiatives.
+                            </p> 
+                        </div>
+                    </div>
+
+                        <div class="doctor-card">
+                        <div class="floating-elements">
+                            <div class="floating-circle"></div>
+                            <div class="floating-circle"></div>
+                            <div class="floating-circle"></div>
+                        </div>
+                        <div class="specialty-badge">IT Specialist</div>
+                        <div class="experience-indicator">2nd year BIT student</div>
+                        <div class="doctor-image-container">
+                            <img src="../assets/images/daniel.jpg" alt="Daniel Balepe" class="doctor-image">
+                        </div>
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Daniel Balepe</h3>
+                            <p class="doctor-specialty">IT Specialist</p>
+                             <p class="doctor-description">
+                               Develop and maintain the SmileConnector platform, ensuring system reliability, security, and technical support.
                             </p> 
                         </div>
                     </div>
@@ -2917,20 +2926,18 @@ html {
                     <p>Providing exceptional dental care with advanced technology and compassionate service. Your smile is our passion, and your health is our priority.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1AtQvAA8zQ/?mibextid=wwXIfr" class="social-link" title="Facebook" target="_blank">
-                            <img src="/assets/images/logo_facebook.png" alt="Facebook" width="24" height="24">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
 
                         <a href="https://www.instagram.com/smile_connector_/?igsh=ejRoMjAxeW5rZmFu&utm_source=qr#" class="social-link" title="Instagram" target="_blank">
-                            <img src="/assets/images/logo_instagram.png" alt="Instagram" width="24" height="24">
+                            <i class="fab fa-instagram"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/smile-connector-a00639368/" class="social-link" title="LinkedIn" target="_blank">
-                            <img src="/assets/images/icons8-linkedin-50.png" alt="LinkedIn" width="24" height="24">
+                            <i class="fab fa-linkedin-in"></i>
                         </a>
-                         <a href="https://wa.me/27678352384?text=Hello%2C%20I'm%20interested%20in%20your%20services!" class="social-link" title="WhatsApp" target="_blank">
-                            <img src="/assets/images/icons8-whatsapp-50.png" alt="WhatsApp" width="24" height="24">
-                            </a>
-
-
+                        <a href="https://wa.me/27678352384?text=Hello%2C%20I'm%20interested%20in%20your%20services!" class="social-link" title="WhatsApp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
 
                 </div>
@@ -2962,7 +2969,7 @@ html {
                     </div>
                 </div>
 
-                <div class="footer-section">
+                <!-- <div class="footer-section">
                     <div class="newsletter">
                         <h3>Stay Updated</h3>
                         <p>Subscribe to our newsletter for dental health tips and practice updates.</p>
@@ -2971,7 +2978,7 @@ html {
                             <button type="submit" class="newsletter-btn">Subscribe</button>
                         </form>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="footer-bottom">

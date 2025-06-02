@@ -1,7 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize all tabs and set dashboard as default
   initializeApplication();
-  
+
+
+  const logoutLink = document.getElementById('logoutLink');
+  //Fetching username from the backend
+    const username = document.querySelectorAll('.user-name');
+    const email = document.querySelectorAll(".user-email");
+    const urlParams = new URLSearchParams(window.location.search);
+    const fullName = urlParams.get('username') || "User";
+    const Email = urlParams.get('email');
+
+    username.forEach((userName =>{
+        userName.textContent = fullName;
+    }))
+
+    email.forEach((mail =>{
+        mail.textContent = Email;
+    }))
+
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent link from navigating
+      
+          fetch("../backend/logout.php", { method: "GET" })
+              .then(response => {
+                  if (response.ok) {
+                      sessionStorage.clear();
+                      localStorage.clear();
+
+                      window.location.href = '../logins/login.html';
+                  } else {
+                      throw new Error('Logout failed');
+                  }
+              })
+              .catch(error => {
+                  console.error('Logout error:', error);
+                  alert('Failed to logout. Please try again.');
+              });
+      });
+    }
+    
   // Tab navigation
   const navLinks = document.querySelectorAll('.nav-item a');
   const contentSections = document.querySelectorAll('.content-section');
@@ -96,11 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApplication() {
-  // Set user name throughout the dashboard
-  const userNameElements = document.querySelectorAll('.user-name');
-  userNameElements.forEach(el => {
-    el.textContent = 'John Johnson'; // This would come from your user data
-  });
+
   document.getElementById('addChildInModal')?.addEventListener('click', function() {
     openAddChildModal();
   });
@@ -183,9 +218,7 @@ function initializeAppointmentsTab() {
     filterAppointments();
   });
   
-  document.getElementById('childFilter')?.addEventListener('change', function() {
-    filterAppointments();
-  });
+  
 }
 
 fetch('http://localhost/SmileConnector/backend/fetch_appoitments.php?type=calendar_event')
@@ -213,20 +246,20 @@ fetch('http://localhost/SmileConnector/backend/fetch_appoitments.php?type=calend
   .catch(error => console.error("Error fetching calendar events:", error));
 
 // Add this new function to handle filtering
-function filterAppointments() {
+  function filterAppointments() {
   const statusFilter = document.getElementById('statusFilter').value;
-  const childFilter = document.getElementById('childFilter').value;
-  
+  const searchValue = document.getElementById('searchChild').value.trim().toLowerCase();
+
   const appointmentItems = document.querySelectorAll('.appointment-item');
-  
+
   appointmentItems.forEach(item => {
     const status = item.querySelector('.appointment-status').classList[1].replace('status-', '');
-    const child = item.querySelector('.appointment-item-info p').textContent.split('•')[0].trim();
-    
+    const child = item.querySelector('.appointment-item-info p').textContent.split('•')[0].trim().toLowerCase();
+
     const statusMatch = statusFilter === 'all' || status === statusFilter;
-    const childMatch = childFilter === 'all' || child.includes(childFilter === 'child1' ? 'Emma' : 'Liam');
-    
-    if (statusMatch && childMatch) {
+    const searchMatch = !searchValue || child.includes(searchValue);
+
+    if (statusMatch && searchMatch) {
       item.style.display = 'flex';
     } else {
       item.style.display = 'none';
@@ -246,13 +279,7 @@ function filterAppointments() {
   });
 }
 
-function initializeDashboard() {
-  // Set user name throughout the dashboard
-  const userNameElements = document.querySelectorAll('.user-name');
-  userNameElements.forEach(el => {
-    el.textContent = 'John Johnson'; // This would come from your user data
-  });
-  
+function initializeDashboard() {  
   // Quick action cards
   const bookAppointmentCard = document.getElementById('bookAppointmentCard');
   const viewRecordsCard = document.getElementById('viewRecordsCard');
