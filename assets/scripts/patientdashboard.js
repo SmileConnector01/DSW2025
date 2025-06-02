@@ -369,7 +369,8 @@ button_tele_dentistry.addEventListener("click", function(event) {
     // Create an iframe to load the video conference
     const iframe = document.createElement('iframe');
     iframe.setAttribute('id', 'videoconferenceIframe');
-    iframe.src = 'video_conf_U/public/index.html';
+    iframe.src = 'https://frontend-g13j.onrender.com';
+    iframe.setAttribute('allow', 'microphone; camera; display-capture');
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
