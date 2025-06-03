@@ -1359,6 +1359,8 @@ function loadChildrenList() {
         childDiv.classList.add('selected');
       });
     });
+    
+    enableBookingSelections();
 
     console.log("✅ Children loaded:", children);
   })

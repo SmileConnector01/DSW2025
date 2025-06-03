@@ -130,10 +130,10 @@ try {
 
     // Insert into patients table for last_login tracking
     $currentTime = (new DateTime())->format('Y-m-d H:i:s');
-    $insert_patient_sql = "INSERT INTO patients (user_ID, last_login) VALUES (?, ?)";
+    $insert_patient_sql = "INSERT INTO patients (last_login) VALUES (?)";
     $patient_stmt = $mysqli->prepare($insert_patient_sql);
     if ($patient_stmt) {
-        $patient_stmt->bind_param("is", $user_id, $currentTime);
+        $patient_stmt->bind_param("is", $currentTime);
         $patient_stmt->execute();
     }
 
@@ -144,7 +144,15 @@ try {
         $cleanup_stmt->bind_param("s", $email);
         $cleanup_stmt->execute();
     }
-
+    // Fetch patient_id for redirect
+    $getPatientId = $mysqli->prepare("SELECT patient_id FROM patients WHERE user_ID = ?");
+    $getPatientId->bind_param("i", $user_id);
+    $getPatientId->execute();
+    $getPatientIdResult = $getPatientId->get_result();
+    $patientId = null;
+    if ($row = $getPatientIdResult->fetch_assoc()) {
+        $patientId = $row['patient_id'];
+    }
     // Send welcome email
     try {
         $mail->setFrom('noreplysmileconnector@gmail.com', 'SmileConnector Portal');
@@ -301,7 +309,10 @@ try {
     unset($_SESSION['verified_email']);
     unset($_SESSION['signup_email']);
 
-    header("Location: ../dashboard/patient.html?status=success");
+    // After fetching $patientId
+    header("Location: ../dashboard/patient.html?username=" . urlencode($fullName) .
+        "&email=" . urlencode($email) .
+        "&patient_id=" . urlencode($patientId));
     exit;
 
 } catch (Exception $e) {

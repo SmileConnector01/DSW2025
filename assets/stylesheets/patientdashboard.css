@@ -3616,3 +3616,67 @@ input[type="month"] {
     z-index: 9999;
   }
 }
+/* Primary Button */
+.btn-primary {
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  outline: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  padding: 10px 20px;
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  outline: none;
+}
+/* Improved selection for child-option */
+.child-option {
+  background-color: var(--lighter-gray);
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.child-option.selected,
+.child-option:focus,
+.child-option:active {
+  background-color: var(--primary-light);
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.15);
+  outline: none;
+}
+
+.child-option.selected .child-select {
+  color: var(--primary);
+}
+
+.child-option:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
