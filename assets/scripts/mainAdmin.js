@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+    
     // 1. Fetch the events JSON
   fetch('http://localhost:80/SmileConnector/backend/readevent.php?type=upcoming_event')
     .then(response => {
@@ -8,29 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(events => {
       events.forEach(evt => {
-        let upcoming_activity = document.getElementById('upcoming-activity');
-        const minute = new Date(evt.date).getMinutes();
-        const hour = new Date(evt.date).getHours();
         const date = new Date(evt.date);
-        const day = date.getDate(); 
-        const month = date.getMonth()+1;
-        // Get padded month number
-        const paddedMonth = String(month).padStart(2, '0'); // "07"
-
-        // Abbreviated month name (e.g., 'Jul')
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hour = String(date.getHours()).padStart(2, '0');
+        const minute = String(date.getMinutes()).padStart(2, '0');
         const shortMonth = date.toLocaleString('default', { month: 'short' }); // "Jul"
 
+        // Format full date and time
+        const fullDateTime = `${year}-${month}-${day} ${hour}:${minute}`;
         if (dashboard) {
             upcoming_activity.innerHTML += `
                 <div class="event-item">
                     <div class="event-date">
-                    <span class="event-day">${day}</span>
-                    <span class="event-month">${shortMonth}</span>
+                        <span class="event-day">${day}</span>
+                        <span class="event-month">${shortMonth.toUpperCase()}</span>
                     </div>
                     <div class="event-details">
-                    <h3>${evt.school}</h3>
-                    <p>${evt.location}</p>
-                    <span class="event-time">${hour}:${minute}</span>
+                        <h3>${evt.school.toUpperCase()}</h3>
+                        <p>${evt.location.toUpperCase()}</p>
+                        <span class="event-time">${fullDateTime}</span>
                     </div>
                 </div>
             `;
@@ -217,54 +215,72 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize charts
   initDashboardCharts();
   
-  // Tab switching functionality
-  const tabLinks = document.querySelectorAll('.sidebar li');
-  const tabPanes = document.querySelectorAll('.tab-pane');
-  
-  tabLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const tabId = this.getAttribute('data-tab');
-          
-          // Update active tab
-          tabLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-          
-          // Update active pane
-          tabPanes.forEach(pane => {
-              pane.classList.remove('active');
-              if (pane.id === tabId) {
-                  pane.classList.add('active');
-              }
-          });
-            // Reload data for the current tab
-            switch (tabId) {
-                case 'dashboard':
-                    initDashboardCharts();
-                    break;
-                case 'admins':
-                    loadAdminTable();
-                    break;
-                case 'patients':
-                    loadPatientTable();
-                    break;
-                case 'schools':
-                    initAddEventButton();
-                    break;
-                case 'audit':
-                    filterAuditLogs();
-                    break;
-            }
+// Tab switching functionality
+const tabLinks = document.querySelectorAll('.sidebar li');
+const tabPanes = document.querySelectorAll('.tab-pane');
 
-            // when you hide/remove the iframe
-            if(document.getElementById('videoconferenceIframe')) {
-                const iframeid = document.getElementById('videoconferenceIframe');
-                iframeid.contentWindow.postMessage({ cmd: 'stop-camera' }, '*');
+tabLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const tabId = this.getAttribute('data-tab');
+        
+        // Update active tab
+        tabLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update active pane
+        tabPanes.forEach(pane => {
+            pane.classList.remove('active');
+            if (pane.id === tabId) {
+                pane.classList.add('active');
+                
+                // Refresh data for the current tab
+                refreshTabData(tabId);
             }
-      
-      });
-  });
+        });
 
+        // when you hide/remove the iframe
+        if(document.getElementById('videoconferenceIframe')) {
+            const iframeid = document.getElementById('videoconferenceIframe');
+            iframeid.contentWindow.postMessage({ cmd: 'stop-camera' }, '*');
+        }
+    });
+});
+
+// Function to refresh tab data
+function refreshTabData(tabId) {
+    switch (tabId) {
+        case 'dashboard':
+            initDashboardCharts();
+            // Add any other dashboard data loading functions here
+            break;
+        case 'schools':
+            initAddEventButton(); // Assuming this loads school data
+            // Add any other school data loading functions here
+            break;
+        case 'admins':
+            loadAdminTable();
+            break;
+        case 'patients':
+            loadPatientTable();
+            break;
+        case 'audit':
+            filterAuditLogs();
+            break;
+        // case 'teledentistry':
+        //     loadTeleDentistry();
+        //     break;
+        // Add cases for other tabs as needed
+        case 'calendar-appointments':
+            if (typeof window.refreshCalendarTab === 'function') {
+                window.refreshCalendarTab();
+            }
+            break;
+        case 'settings':
+            // Add function to load settings data
+            break;
+    }
+}
 
 
 document.querySelector('.tele-dentistry-content')?.addEventListener('click', function(e) {
@@ -398,7 +414,25 @@ if (addAdminBtn) {
           adminDetailsModal.classList.remove('active');
       });
   });
-  
+  // Header icon tab switching
+    const appointmentsHeaderBtn = document.getElementById('appointmentsHeaderBtn');
+    const notesHeaderBtn = document.getElementById('notesHeaderBtn');
+
+    if (appointmentsHeaderBtn) {
+        appointmentsHeaderBtn.addEventListener('click', function() {
+            // Switch to calendar-appointments tab
+            const calendarTab = document.querySelector('.sidebar li[data-tab="calendar-appointments"]');
+            if (calendarTab) calendarTab.click();
+        });
+    }
+
+    if (notesHeaderBtn) {
+        notesHeaderBtn.addEventListener('click', function() {
+            // Switch to calendar-appointments tab (or another tab if you have a notes tab)
+            const calendarTab = document.querySelector('.sidebar li[data-tab="calendar-appointments"]');
+            if (calendarTab) calendarTab.click();
+        });
+    }
   // Edit admin from details modal
 //   const editFromDetailsBtn = document.querySelector('.edit-from-details');
 //   if (editFromDetailsBtn) {
@@ -795,19 +829,19 @@ async function initDashboardCharts() {
                 {
                     label: 'student Outreach',
                     data: [count_currentMonthName_5, count_currentMonthName_4, count_currentMonthName_3, count_currentMonthName_2, count_currentMonthName_1, count_currentMonthName],
-                    backgroundColor: '#5A80FF',
+                    backgroundColor: '#4285F4',
                     borderRadius: 5
                 },
                 {
                     label: 'School Programs',
                     data: [count_schoolPrograms5, count_schoolPrograms4, count_schoolPrograms3, count_schoolPrograms2, count_schoolPrograms1, count_schoolPrograms],
-                    backgroundColor: '#315CBC',
+                    backgroundColor: '#34A853',
                     borderRadius: 5
                 },
                 {
-                    label: 'Mobile Clinics',
+                    label: 'Tele Consultations',
                     data: [count_mobileClinics5, count_mobileClinics4, count_mobileClinics3, count_mobileClinics2, count_mobileClinics1, count_mobileClinics],
-                    backgroundColor: '#0077FF',
+                    backgroundColor: '#EA4335',
                     borderRadius: 5
                 }
             ]
@@ -877,10 +911,10 @@ async function initDashboardCharts() {
             datasets: [{
                 data: [totalCavities, totalGumDisease, totalToothLoss, totalOther],
                 backgroundColor: [
-                    '#5A80FF',
-                    '#315CBC',
-                    '#0077FF',
-                    '#FFF235'
+                    '#4FC3F7',
+                    '#34A853',
+                    '#EA4335',
+                    '#FFCA28'
                 ],
                 borderWidth: 0
             }]
@@ -1129,3 +1163,4 @@ function showNotification(message, type = 'info') {
     notification.addEventListener('click', removeNotification);
     setTimeout(removeNotification, 5000);
 }
+

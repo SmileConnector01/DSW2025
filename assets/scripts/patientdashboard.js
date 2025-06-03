@@ -2,7 +2,106 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize all tabs and set dashboard as default
   initializeApplication();
   initializeDentalRecordsTabs();
-
+  // Add this to your existing JavaScript
+document.getElementById('communityFeedback').addEventListener('input', function() {
+    const charCount = this.value.length;
+    const counter = document.getElementById('feedbackCounter') || 
+                   document.createElement('div');
+    
+    if (!document.getElementById('feedbackCounter')) {
+        counter.id = 'feedbackCounter';
+        counter.style.fontSize = '0.8em';
+        counter.style.color = '#666';
+        counter.style.textAlign = 'right';
+        counter.style.marginTop = '5px';
+        this.parentNode.appendChild(counter);
+    }
+    
+    counter.textContent = `${charCount}/500 characters`;
+    
+    if (charCount > 500) {
+        counter.style.color = '#EA4335';
+    } else if (charCount > 400) {
+        counter.style.color = '#FBBC05';
+    } else {
+        counter.style.color = '#666';
+    }
+});
+  // Community feedback form submission handler with loading spinner
+  document.getElementById('communityForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = this;
+      const formData = new FormData(form);
+      const submitButton = form.querySelector('button[type="submit"]');
+      
+      // Store original button text and show spinner
+      const originalText = submitButton.innerHTML;
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitButton.disabled = true;
+      
+      // Add action identifier for the PHP backend
+      formData.append('action', 'community_feedback');
+      
+      // Debugging: Log form data before submission
+      console.log('Community feedback submission data:', Object.fromEntries(formData.entries()));
+      
+      fetch(form.action, {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => {
+          // First get the raw text
+          return response.text().then(text => {
+              try {
+                  // Try to parse as JSON
+                  return JSON.parse(text);
+              } catch (e) {
+                  // If parsing fails, check if it's a valid JSON string inside the text
+                  const jsonMatch = text.match(/\{.*\}/s);
+                  if (jsonMatch) {
+                      try {
+                          return JSON.parse(jsonMatch[0]);
+                      } catch (e) {
+                          throw new Error('Invalid JSON: ' + text);
+                      }
+                  }
+                  throw new Error('Invalid response: ' + text);
+              }
+          });
+      })
+      .then(data => {
+          if (data.success) {
+              showNotification(data.message || 'Thank you for your feedback!', 'success');
+              
+              // Reset form on success
+              form.reset();
+              
+              // Close modal if this form is in one (optional)
+              const modal = form.closest('.modal');
+              if (modal) {
+                  modal.classList.remove('active');
+              }
+              
+              // You could add specific refresh logic here if needed
+              // For example, if you display feedback history somewhere:
+              // if (typeof loadFeedbackHistory === 'function') {
+              //     loadFeedbackHistory();
+              // }
+          } else {
+              showNotification(data.message || 'Failed to send feedback. Please try again.', 'error');
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          showNotification('An error occurred. Please try again.', 'error');
+      })
+      .finally(() => {
+          // Restore button state
+          submitButton.innerHTML = originalText;
+          submitButton.disabled = false;
+      });
+  });
 
   const logoutLink = document.getElementById('logoutLink');
   //Fetching username from the backend
@@ -19,7 +118,10 @@ document.addEventListener('DOMContentLoaded', function() {
     email.forEach((mail =>{
         mail.textContent = Email;
     }))
+    document.getElementById('fullName').value = fullName;
+    document.getElementById('email').value = Email;
 
+    
     if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {
           e.preventDefault(); // Prevent link from navigating
@@ -37,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
               })
               .catch(error => {
                   console.error('Logout error:', error);
-                  alert('Failed to logout. Please try again.');
+                    showNotification('Failed to logout. Please try again.', 'error');
               });
       });
     }
@@ -317,8 +419,25 @@ function initializeDashboard() {
   const bookAppointmentCard = document.getElementById('bookAppointmentCard');
   const viewRecordsCard = document.getElementById('viewRecordsCard');
   const startConsultationCard = document.getElementById('startConsultationCard');
+  // const healthTipsCard = document.getElementById('healthTipsCard');
+
+  const oralTipsModal = document.getElementById('oralTipsModal');
+  const closeOralTipsModal = document.getElementById('closeOralTipsModal');
   const healthTipsCard = document.getElementById('healthTipsCard');
-  
+
+  if (healthTipsCard && oralTipsModal && closeOralTipsModal) {
+    healthTipsCard.addEventListener('click', function() {
+      oralTipsModal.style.display = 'flex';
+    });
+    closeOralTipsModal.addEventListener('click', function() {
+      oralTipsModal.style.display = 'none';
+    });
+    // Optional: close modal when clicking outside the modal content
+    oralTipsModal.addEventListener('click', function(e) {
+      if (e.target === oralTipsModal) oralTipsModal.style.display = 'none';
+    });
+  }
+
   bookAppointmentCard.addEventListener('click', function() {
     // Switch to appointments tab and start booking process
     document.getElementById('appointmentsLink').click();
@@ -332,11 +451,6 @@ function initializeDashboard() {
   
   startConsultationCard.addEventListener('click', function() {
     document.getElementById('teleDentistryLink').click();
-  });
-  
-  healthTipsCard.addEventListener('click', function() {
-    // This would open a health tips modal or page
-    alert('Oral health tips will be displayed here');
   });
   
   // View all appointments link
@@ -611,7 +725,7 @@ function cancelAppointment(appointmentId) {
       }
       
       // Show success message
-      alert('Appointment cancelled successfully');
+      showNotification('Appointment cancelled successfully', 'success');
       
       // Update dashboard appointments
       updateDashboardAppointments();
@@ -768,13 +882,13 @@ function validateStep(stepNumber) {
   if (stepNumber === 1) {
     const selectedChild = document.querySelector('.child-option.selected');
     if (!selectedChild) {
-      alert('Please select a child or add a new one');
+      showNotification('Please select a child or add a new one', 'warning');
       return false;
     }
   } else if (stepNumber === 2) {
     const selectedService = document.querySelector('.service-option.selected');
     if (!selectedService) {
-      alert('Please select a service');
+      showNotification('Please select a service', 'warning');
       return false;
     }
   } else if (stepNumber === 3) {
@@ -782,7 +896,7 @@ function validateStep(stepNumber) {
     const selectedTime = document.querySelector('.time-slot.selected');
     
     if (!selectedDate || !selectedTime) {
-      alert('Please select both a date and time');
+      showNotification('Please select both a date and time', 'warning');
       return false;
     }
   }
@@ -855,80 +969,68 @@ function confirmBooking() {
   const notes = document.getElementById('appointmentNotes').value;// this is description
   PatientID;// this is the Patient_ID
 
-// 2. Combine into one string
-const rawDateStr = `${currentMonth} ${selectedDate} ${selectedTime}`; // e.g. "June 2025 4 08:00"
-const dateObj = new Date(rawDateStr);
+  // 2. Combine into one string
+  const rawDateStr = `${currentMonth} ${selectedDate} ${selectedTime}`; // e.g. "June 2025 4 08:00"
+  const dateObj = new Date(rawDateStr);
 
-// 3. Format start_datetime
-const yyyy = dateObj.getFullYear();
-const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
-const dd = String(dateObj.getDate()).padStart(2, '0');
-const hh = String(dateObj.getHours()).padStart(2, '0');
-const min = String(dateObj.getMinutes()).padStart(2, '0');
-const start_datetime = `${yyyy}-${mm}-${dd} ${hh}:${min}:00`;
+  // 3. Format start_datetime
+  const yyyy = dateObj.getFullYear();
+  const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const dd = String(dateObj.getDate()).padStart(2, '0');
+  const hh = String(dateObj.getHours()).padStart(2, '0');
+  const min = String(dateObj.getMinutes()).padStart(2, '0');
+  const start_datetime = `${yyyy}-${mm}-${dd} ${hh}:${min}:00`;
 
-// 4. Calculate end_datetime (+1 hour)
-const endDateObj = new Date(dateObj.getTime() + 60 * 60 * 1000); // Add 1 hour
-const end_hh = String(endDateObj.getHours()).padStart(2, '0');
-const end_min = String(endDateObj.getMinutes()).padStart(2, '0');
-const end_datetime = `${yyyy}-${mm}-${dd} ${end_hh}:${end_min}:00`;
+  // 4. Calculate end_datetime (+1 hour)
+  const endDateObj = new Date(dateObj.getTime() + 60 * 60 * 1000); // Add 1 hour
+  const end_hh = String(endDateObj.getHours()).padStart(2, '0');
+  const end_min = String(endDateObj.getMinutes()).padStart(2, '0');
+  const end_datetime = `${yyyy}-${mm}-${dd} ${end_hh}:${end_min}:00`;
 
-// 5. Prepare data to send
-const appointmentData = {
-  childFullName: selectedChild,
-  title: selectedService,
-  description: notes,
-  start_datetime: start_datetime,
-  end_datetime: end_datetime,
-  Patient_ID: PatientID
-};
+  // 5. Prepare data to send
+  const appointmentData = {
+    childFullName: selectedChild,
+    title: selectedService,
+    description: notes,
+    start_datetime: start_datetime,
+    end_datetime: end_datetime,
+    Patient_ID: PatientID
+  };
 
-console.log('Appointment data to send:', appointmentData);
+  console.log('Appointment data to send:', appointmentData);
 
-// 6. Send to PHP using fetch()
-fetch('http://localhost/SmileConnector/backend/createAppointment.php', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(appointmentData)
-})
-.then(response => response.json())
-.then(result => {
-  if (result.status === 'success') {
-    alert('✅ Appointment successfully created!');
-    // Optionally refresh calendar or redirect
-  } else {
-    alert('❌ Failed to create appointment: ' + result.message);
-  }
-})
-.catch(error => {
-  console.error('❌ Fetch error:', error);
-  alert('❌ Could not connect to server.');
-});
+  // 6. Send to PHP using fetch()
+  fetch('http://localhost/SmileConnector/backend/createAppointment.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(appointmentData)
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.status === 'success') {
+        showNotification('Appointment successfully created!', 'success');
+        // Only close booking modal and show success modal if successful
+        closeBookingModal();
+        document.getElementById('successModal').style.display = 'flex';
 
-  // console.log('Booking appointment:', {
-  //   child: selectedChild,
-  //   service: selectedService,
-  //   date: `${selectedDate} ${currentMonth}`,
-  //   time: selectedTime,
-  //   notes: notes
-  // });
-  
-  // Close booking modal
-  closeBookingModal();
-  
-  // Show success modal
-  document.getElementById('successModal').style.display = 'flex';
-  
-  // Close success modal
-  document.getElementById('closeSuccessModal').addEventListener('click', function() {
-    document.getElementById('successModal').style.display = 'none';
-    
-    // Refresh appointments list
-    loadAppointments();
-    updateDashboardAppointments();
-  }, { once: true });
+        // Close success modal
+        document.getElementById('closeSuccessModal').addEventListener('click', function() {
+          document.getElementById('successModal').style.display = 'none';
+          // Refresh appointments list
+          loadAppointments();
+          updateDashboardAppointments();
+        }, { once: true });
+      } else {
+        showNotification('Failed to create appointment: ' + result.message, 'error');
+        // Do NOT close the booking modal or show the success modal
+      }
+    })
+    .catch(error => {
+      console.error('❌ Fetch error:', error);
+      showNotification('Could not connect to server.', 'error');
+    });
 }
 
 function initializeCalendar() {
@@ -1302,7 +1404,7 @@ function saveChild() {
   const gender = document.getElementById('childGender').value;
   
   if (!firstName || !lastName || !dob || !gender) {
-    alert('Please fill in all fields');
+    showNotification('Please fill in all required fields', 'error');
     return;
   }
   
@@ -1313,7 +1415,7 @@ function saveChild() {
   closeAddChildModal();
   
   // Show success message
-  alert('Child added successfully');
+  showNotification('Child added successfully', 'success');
   
   // Reload children list in booking modal
   if (document.getElementById('bookingModal').style.display === 'flex') {
@@ -1342,4 +1444,71 @@ function initializeDentalRecordsTabs() {
       document.getElementById(tabId).classList.add('active');
     });
   });
+}
+
+    function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelector('.notification');
+    if (existing) {
+        existing.remove();
+    }
+
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        z-index: 10001;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+        cursor: pointer;
+    `;
+
+    const colors = {
+        success: '#4caf50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#2196f3'
+    };
+
+    notification.style.background = colors[type] || colors.info;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center;">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}" 
+               style="margin-right: 10px; font-size: 16px;"></i>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    document.body.appendChild(notification);
+
+    // Auto remove after 5 seconds or on click
+    const removeNotification = () => {
+        notification.style.animation = 'slideIn 0.3s ease-out reverse';
+        setTimeout(() => notification.remove(), 300);
+    };
+
+    notification.addEventListener('click', removeNotification);
+    setTimeout(removeNotification, 5000);
 }

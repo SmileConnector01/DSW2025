@@ -599,7 +599,7 @@
 
         <!-- Dental Records Page Content -->
         <div class="content-section" id="recordsContent">
-          <section class="section-header">
+          <section class="section-header" style="display: none;">
             <h2 class="section-title">Dental Records</h2>
           </section>
 
@@ -824,7 +824,6 @@
 
         <!-- Tele-Dentistry Page Content -->
         <div class="content-section" id="teleDentistryContent">
-          <h1 class="page-title">Tele-Dentistry</h1>
             <div id="tele-dentistry-content">
                 <p>Start new conference</p>
             </div>
@@ -902,6 +901,22 @@
             </div>
           </div>
         </div>
+        <!-- Oral Health Tips Modal -->
+        <div id="oralTipsModal" class="modal" style="display:none; position:fixed; z-index:10000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); align-items:center; justify-content:center;">
+          <div style="background:#fff; border-radius:8px; max-width:350px; width:90%; padding:24px 20px; box-shadow:0 8px 32px rgba(0,0,0,0.18); position:relative;">
+            <button id="closeOralTipsModal" style="position:absolute; top:10px; right:12px; background:none; border:none; font-size:1.2rem; color:#888; cursor:pointer;">
+              &times;
+            </button>
+            <h3 style="margin-top:0; color:#2c5fb3; font-size:1.2rem;"><i class="fas fa-tooth" style="margin-right:8px;"></i>Oral Health Tips</h3>
+            <ul style="padding-left:18px; margin:16px 0 0 0; font-size:1rem; color:#333;">
+              <li>Brush your children teeth twice a day with fluoride toothpaste.</li>
+              <li>Floss daily to remove plaque between teeth.</li>
+              <li>Limit sugary snacks and drinks to your children.</li>
+              <li>Visit a dentist regularly for checkups.</li>
+              <li>Give your children plenty of water and a balanced diet of food.</li>
+            </ul>
+          </div>
+        </div>
 
         <!-- Payment Modal -->
         <div class="modal-overlay" id="paymentModal" style="display: none">
@@ -940,6 +955,7 @@
                       maxlength="19"
                       id="cardNumber"
                       class="form-input"
+                      required
                     />
                     <i class="fab fa-cc-visa"></i>
                   </div>
@@ -953,6 +969,7 @@
                       id="expiryDate"
                       class="form-input"
                       min="2025-06"
+                      required
                     />
                   </div>
                 </div>
@@ -966,6 +983,7 @@
                       maxlength="3"
                       class="form-input"
                       id="cvvInput"
+                      required
                     />
                   </div>
                 </div>
@@ -978,6 +996,7 @@
                       placeholder="Enter the card holder name"
                       id="cardholderName"
                       class="form-input"
+                      required  
                     />
                   </div>
                 </div>
@@ -986,7 +1005,7 @@
                   <button class="btn-secondary" id="cancelPayment">
                     Cancel
                   </button>
-                  <button class="btn-primary" id="confirmPayment">
+                  <button class="btn-primary" id="confirmPayment" disabled>
                     Pay R<span id="paymentAmount">0.00</span>
                     <i class="fas fa-lock"></i>
                   </button>
@@ -1031,7 +1050,7 @@
         </div>
         <!-- Settings Page Content-->
         <div class="content-section" id="settingsContent">
-          <section class="section-header">
+          <section class="section-header" style="display: none;">
             <h2 class="section-title">Patient Settings</h2>
           </section>
 
@@ -1040,13 +1059,13 @@
               <button class="settings-tab-btn active" data-tab="profile">
                 <i class="fas fa-user-circle"></i> Profile
               </button>
-              <button class="settings-tab-btn" data-tab="oral-health">
+              <button class="settings-tab-btn" data-tab="oral-health" style="display: none;">
                 <i class="fas fa-tooth"></i> Oral Health
               </button>
-              <button class="settings-tab-btn" data-tab="security">
+              <button class="settings-tab-btn" data-tab="security" style="display: none;">
                 <i class="fas fa-lock"></i> Security
               </button>
-              <button class="settings-tab-btn" data-tab="notifications">
+              <button class="settings-tab-btn" data-tab="notifications" style="display: none;">
                 <i class="fas fa-bell"></i> Notifications
               </button>
               <button class="settings-tab-btn" data-tab="community">
@@ -1065,24 +1084,23 @@
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group">
-                    <label for="firstName">First Name</label>
+                    <div class="form-group">
+                    <label for="fullName">Full Name</label>
                     <input
                       type="text"
-                      id="firstName"
-                      class="form-input"
-                      value="John"
+                      id="fullName"
+                      class="form-input user-name"
                       required
                     />
-                  </div>
+                    </div>
 
-                  <div class="form-group">
+                  <div class="form-group" style="display: none;">
                     <label for="lastName">Last Name</label>
                     <input
                       type="text"
                       id="lastName"
-                      class="form-input"
-                      value="Doe"
+                      class="user"
+                      value=""
                       required
                     />
                   </div>
@@ -1093,8 +1111,8 @@
                   <input
                     type="email"
                     id="email"
-                    class="form-input"
-                    value="john.doe@example.com"
+                    class="form-input user-email"
+                    value=""
                     required
                   />
                 </div>
@@ -1105,7 +1123,7 @@
                     type="tel"
                     id="phone"
                     class="form-input"
-                    value="+27 12 345 6789"
+                    value=""
                     required
                   />
                   <p class="form-help">
@@ -1117,11 +1135,8 @@
                   <label for="location">Community Location</label>
                   <select id="location" class="form-input" required>
                     <option value="">Select your community</option>
-                    <option value="limpopo">Limpopo</option>
-                    <option value="eastern-cape">Eastern Cape</option>
-                    <option value="kwazulu-natal">KwaZulu-Natal</option>
-                    <option value="free-state">Free State</option>
-                    <option value="north-west">North West</option>
+                    <option value="limpopo">Johannesburg</option>
+                    
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -1146,7 +1161,7 @@
               id="oral-health"
               style="display: none"
             >
-              <form class="settings-form" id="oralHealthForm">
+              <form class="settings-form" id="oralHealthForm" style="display: none;">
                 <div class="sc-info-banner">
                   <i class="fas fa-tooth"></i>
                   <p>
@@ -1442,7 +1457,7 @@
               id="community"
               style="display: none"
             >
-              <form class="settings-form" id="communityForm">
+              <form class="settings-form" id="communityForm" action="../backend/feedback.php">
                 <div class="sc-info-banner">
                   <i class="fas fa-users"></i>
                   <p>Connect with your community's oral health initiatives</p>
@@ -1450,7 +1465,7 @@
 
                 <div class="form-group">
                   <label class="checkbox-container">
-                    <input type="checkbox" id="joinGardening" checked />
+                    <input type="checkbox" id="joinGardening" checked disabled />
                     <span class="checkmark"></span>
                     Participate in school food gardening projects
                   </label>
@@ -1458,7 +1473,7 @@
 
                 <div class="form-group">
                   <label class="checkbox-container">
-                    <input type="checkbox" id="shareHealthData" />
+                    <input type="checkbox" id="shareHealthData" checked disabled/>
                     <span class="checkmark"></span>
                     Share anonymized health data to improve community services
                   </label>
@@ -1469,7 +1484,7 @@
 
                 <div class="form-group">
                   <label class="checkbox-container">
-                    <input type="checkbox" id="volunteerOpportunities" />
+                    <input type="checkbox" id="volunteerOpportunities" checked disabled/>
                     <span class="checkmark"></span>
                     Notify me about volunteer opportunities
                   </label>
@@ -1477,7 +1492,7 @@
 
                 <div class="form-group">
                   <label class="checkbox-container">
-                    <input type="checkbox" id="receiveNewsletter" checked />
+                    <input type="checkbox" id="receiveNewsletter" checked disabled/>
                     <span class="checkmark"></span>
                     Receive monthly community newsletter
                   </label>
@@ -1490,6 +1505,7 @@
                     class="form-input"
                     rows="3"
                     placeholder="Suggestions for improving oral health in our community"
+                    name="communityFeedback"
                   ></textarea>
                 </div>
 
@@ -1501,9 +1517,9 @@
                   >
                     Cancel
                   </button>
-                  <button type="submit" class="btn-primary">
-                    <i class="fas fa-users"></i> Update Community Settings
-                  </button>
+                    <button type="submit" class="btn-primary" id="feedback">
+                    <i class="fas fa-comment-dots"></i> Send Feedback
+                    </button>
                 </div>
               </form>
             </div>

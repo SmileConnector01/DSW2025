@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     refreshAuditLogs.addEventListener('click', function() {
       // In real app, this would fetch fresh data from server
-      alert('Refreshing logs...');
+      // alert('Refreshing logs...');
       filterLogs();
     });
     exportAuditLogs.addEventListener('click', function() {

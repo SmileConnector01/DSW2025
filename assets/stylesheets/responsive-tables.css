@@ -757,3 +757,515 @@
         margin: 0 1px;
     }
 }
+
+/* ==================== FULLCALENDAR RESPONSIVE STYLES ==================== */
+
+/* Base calendar container */
+#calendar {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* General FullCalendar responsive adjustments */
+.fc {
+    font-size: 14px;
+}
+
+/* Header toolbar adjustments */
+.fc-header-toolbar {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px !important;
+}
+
+.fc-toolbar-title {
+    font-size: 1.1rem !important;
+    margin: 0 5px !important;
+}
+
+.fc-toolbar-chunk {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Button adjustments */
+.fc-button {
+    padding: 6px 8px !important;
+    font-size: 0.8rem !important;
+}
+
+/* Day grid adjustments */
+.fc-daygrid-day-frame {
+    min-height: 60px;
+}
+
+.fc-daygrid-day-number {
+    font-size: 0.9rem;
+}
+
+.fc-daygrid-event {
+    font-size: 0.75rem !important;
+    padding: 1px 3px !important;
+}
+
+/* Time grid adjustments */
+.fc-timegrid-slots td {
+    height: 30px !important;
+}
+
+.fc-timegrid-event {
+    font-size: 0.7rem !important;
+}
+
+.fc-timegrid-axis-cushion {
+    font-size: 0.7rem;
+}
+
+/* Column headers */
+.fc-col-header-cell {
+    padding: 5px 0 !important;
+}
+
+.fc-col-header-cell-cushion {
+    font-size: 0.8rem !important;
+    padding: 2px 4px !important;
+}
+
+/* Event content */
+.fc-event-title {
+    font-size: 0.7rem;
+}
+
+.fc-event-time {
+    font-size: 0.65rem;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+    /* Calendar toolbar */
+    .calendar-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .toolbar-left, .toolbar-right {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .toolbar-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Calendar view */
+    .fc-view {
+        overflow-x: auto;
+    }
+    
+    .fc-scrollgrid {
+        width: 100%;
+        min-width: 600px; /* Ensures calendar doesn't get too narrow */
+    }
+    
+    /* Day headers */
+    .fc-col-header-cell {
+        min-width: 60px;
+    }
+    
+    /* Event dots in month view */
+    .fc-daygrid-event-dot {
+        display: none;
+    }
+    
+    /* Hide some elements in mobile */
+    .fc-timegrid-axis {
+        display: none;
+    }
+    
+    /* Adjust event rendering */
+    .fc-event {
+        font-size: 0.6rem !important;
+    }
+    
+    /* Date range display */
+    #date-range-display {
+        font-size: 0.9rem;
+        text-align: center;
+        margin: 5px 0;
+    }
+}
+
+/* Tablet styles (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .fc-toolbar-title {
+        font-size: 1rem !important;
+    }
+    
+    .fc-button {
+        padding: 5px 7px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    .fc-col-header-cell-cushion {
+        font-size: 0.7rem !important;
+    }
+    
+    .fc-daygrid-day-number {
+        font-size: 0.8rem;
+    }
+    
+    .fc-event {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* Small desktop adjustments (1025px - 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .fc-toolbar-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .fc-button {
+        padding: 6px 8px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .fc-col-header-cell-cushion {
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Special adjustments for timeGridWeek view */
+.fc-timeGridWeek-view {
+    /* Ensure time slots are visible */
+    .fc-timegrid-slots td {
+        height: 40px !important;
+    }
+    
+    /* Make events more compact */
+    .fc-timegrid-event {
+        margin-bottom: 1px !important;
+    }
+}
+
+/* Special adjustments for dayGridMonth view */
+.fc-dayGridMonth-view {
+    /* Reduce day cell padding */
+    .fc-daygrid-day-frame {
+        padding: 2px !important;
+    }
+    
+    /* Make day numbers smaller */
+    .fc-daygrid-day-number {
+        font-size: 0.8rem;
+    }
+    
+    /* Hide some event content in month view */
+    .fc-event-time {
+        display: none;
+    }
+    
+    .fc-event-title {
+        font-size: 0.65rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* Print styles */
+@media print {
+    #calendar {
+        width: 100%;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    .fc-header-toolbar,
+    .fc-footer-toolbar {
+        display: none !important;
+    }
+    
+    .fc-view {
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    .fc-event {
+        page-break-inside: avoid;
+    }
+}
+/* ==================== SCHOOL PROGRAMS RESPONSIVE STYLES ==================== */
+
+.school-programs-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+}
+
+/* School Section Base Styles */
+.school-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.school-section h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--dark-blue);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* School Visit Cards */
+.school-visit-card {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid var(--primary-blue);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.school-visit-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.school-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.visit-date {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* School Details Grid */
+.school-details {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 3px;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+/* Demographics Visualization */
+.demographics-container {
+  margin-top: 15px;
+}
+
+.demographics-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.demographic-chart {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.chart-title {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.chart-container {
+  height: 180px;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+/* Action Buttons */
+.school-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+/* Tablet Styles (601px - 900px) */
+@media (min-width: 601px) {
+  .school-programs-content {
+    gap: 25px;
+    padding: 20px;
+  }
+  
+  .school-section {
+    padding: 22px;
+  }
+  
+  .school-section h2 {
+    font-size: 19px;
+  }
+  
+  .school-visit-card {
+    padding: 18px;
+  }
+  
+  .school-visit-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .school-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .demographics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small Desktop Styles (901px - 1200px) */
+@media (min-width: 901px) {
+  .school-details {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .detail-label {
+    font-size: 12px;
+  }
+  
+  .detail-value {
+    font-size: 15px;
+  }
+}
+
+/* Large Desktop Styles (1201px+) */
+@media (min-width: 1201px) {
+  .school-programs-content {
+    gap: 30px;
+    padding: 25px;
+  }
+  
+  .school-section h2 {
+    font-size: 20px;
+  }
+  
+  .school-visit-card {
+    padding: 20px;
+  }
+  
+  .chart-container {
+    height: 200px;
+  }
+}
+
+/* Animation Adjustments for Mobile */
+@media (max-width: 600px) {
+  .school-visit-card {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+  
+  .school-visit-card:nth-child(1) { animation-delay: 0.1s; }
+  .school-visit-card:nth-child(2) { animation-delay: 0.15s; }
+  .school-visit-card:nth-child(3) { animation-delay: 0.2s; }
+  .school-visit-card:nth-child(4) { animation-delay: 0.25s; }
+  
+  .demographic-chart {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+  
+  .demographic-chart:nth-child(1) { animation-delay: 0.2s; }
+  .demographic-chart:nth-child(2) { animation-delay: 0.25s; }
+}
+
+/* Super Admin Permission Responsive Styles */
+.form-group.super-admin-permission {
+  padding: 8px;
+  gap: 6px;
+}
+
+.super-admin-permission label {
+  font-size: 0.95em;
+}
+
+@media (max-width: 600px) {
+  .form-group.super-admin-permission {
+    padding: 6px;
+    gap: 4px;
+  }
+  
+  .super-admin-permission label {
+    font-size: 0.9em;
+  }
+  
+  .super-admin-permission .permission-tooltip .tooltip-text {
+    font-size: 0.85em;
+    width: 80vw;
+    max-width: 200px;
+  }
+}
+
+/* Admin Notes Responsive Styles */
+#adminNotes {
+  min-height: 2.2em;
+  max-height: 3.2em;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  #adminNotes {
+    min-height: 2.5em;
+    max-height: 3.5em;
+    font-size: 15px;
+  }
+}
+
+/* Hover Effects - Disabled on Touch Devices */
+@media (hover: hover) {
+  .school-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .school-visit-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .demographic-chart:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}

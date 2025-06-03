@@ -787,7 +787,8 @@ function savePdf() {
         doc.save(fileName);
     }).catch(error => {
         console.error('PDF generation failed:', error);
-        alert('Failed to generate PDF. Please try again.');
+        showNotification('Failed to generate PDF. Please try again.', 'error');
+
     });
 }
 
@@ -874,7 +875,7 @@ async function emailPdf() {
         
     } catch (error) {
         console.error('PDF generation failed:', error);
-        alert('Failed to generate PDF for email. Please try again.');
+        showNotification('Failed to generate PDF for email. Please try again.', 'error');
     }
 }
 

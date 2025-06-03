@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         URL.revokeObjectURL(pdfUrl);
         
         // Show download confirmation
-        showSuccessAlert(`Invoice ${invoiceId} downloaded successfully`);
+        showNotification(`Invoice ${invoiceId} downloaded successfully`, 'success');
     }
 
     // Open payment modal
@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Disable payment buttons if amount is zero
             const confirmPayment = document.getElementById('confirmPayment');
             const confirmBankPayment = document.getElementById('confirmBankPayment');
-            const isZero = parseFloat(amount) === 0;
+            // const isZero = parseFloat(amount) === 0;
             
-            if (confirmPayment) confirmPayment.disabled = isZero;
-            if (confirmBankPayment) confirmBankPayment.disabled = isZero;
+            // if (confirmPayment) confirmPayment.disabled = isZero;
+            // if (confirmBankPayment) confirmBankPayment.disabled = isZero;
         });
 
     // Close payment modal
@@ -124,31 +124,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Bank selection code 
+    // // Bank selection code 
+    // document.querySelectorAll('.bank-option').forEach(option => {
+    //     option.addEventListener('click', function() {
+    //         // Remove selection from all options
+    //         document.querySelectorAll('.bank-option').forEach(opt => {
+    //             opt.classList.remove('selected');
+    //         });
+            
+    //         // Add selection to clicked option
+    //         this.classList.add('selected');
+    //         selectedBank = this.querySelector('span').textContent.trim();
+    //     });
+    // });
+
+    let selectedBank = null;
+
     document.querySelectorAll('.bank-option').forEach(option => {
         option.addEventListener('click', function() {
             // Remove selection from all options
             document.querySelectorAll('.bank-option').forEach(opt => {
                 opt.classList.remove('selected');
             });
-            
+
             // Add selection to clicked option
             this.classList.add('selected');
             selectedBank = this.querySelector('span').textContent.trim();
         });
     });
-
-    let selectedBank = null;
-
-    document.querySelectorAll('.bank-option').forEach(option => {
-        option.addEventListener('click', function() {
-            selectedBank = this.querySelector('span').textContent.trim(); // "Standard Bank", "Nedbank", etc.
-        });
-    });
-
     document.getElementById('confirmBankPayment')?.addEventListener('click', function() {
         if (!selectedBank) {
-            alert('Please select a bank first!');
+            showNotification('Please select a bank to continue', 'error');
             return;
         }
 
@@ -209,29 +215,74 @@ document.addEventListener('DOMContentLoaded', function() {
     // Confirm payment
     document.getElementById('confirmPayment')?.addEventListener('click', function() {
         // Add your payment processing logic here
-        alert('Payment processed successfully!');
+        showNotification('Payment processed successfully!', 'success');
         closePaymentModal();
     });
 
-    // Helper function for showing success alerts
-    function showSuccessAlert(message) {
-        const alert = document.createElement('div');
-        alert.className = 'sc-alert success';
-        alert.innerHTML = `
-            <i class="fas fa-check-circle"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(alert);
-        
-        setTimeout(() => {
-            alert.classList.add('show');
-        }, 10);
-        
-        setTimeout(() => {
-            alert.classList.remove('show');
-            setTimeout(() => {
-                alert.remove();
-            }, 300);
-        }, 3000);
+    function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelector('.notification');
+    if (existing) {
+        existing.remove();
     }
+
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        z-index: 10001;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+        cursor: pointer;
+    `;
+
+    const colors = {
+        success: '#4caf50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#2196f3'
+    };
+
+    notification.style.background = colors[type] || colors.info;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center;">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}" 
+               style="margin-right: 10px; font-size: 16px;"></i>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    document.body.appendChild(notification);
+
+    // Auto remove after 5 seconds or on click
+    const removeNotification = () => {
+        notification.style.animation = 'slideIn 0.3s ease-out reverse';
+        setTimeout(() => notification.remove(), 300);
+    };
+
+    notification.addEventListener('click', removeNotification);
+    setTimeout(removeNotification, 5000);
+}
 });

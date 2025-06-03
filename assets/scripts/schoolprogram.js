@@ -47,7 +47,7 @@ addForm.addEventListener('submit', function(e) {
   });
 
   if (!isValid) {
-    alert('Please fill in all required fields');
+    showNotification('Please fill in all required fields', 'error');
     return;
   }
 
@@ -72,7 +72,7 @@ addForm.addEventListener('submit', function(e) {
 }))
   .then(data => {
     if (data.success) {
-      alert('Event added successfully!');
+      showNotification('Event added successfully!', 'success');
       closeModal(document.getElementById('addEventModal'));
       if (typeof initSchoolProgramsTab === 'function') {
         initSchoolProgramsTab();
@@ -83,7 +83,8 @@ addForm.addEventListener('submit', function(e) {
   })
   .catch(error => {
     console.error('Error:', error);
-    alert('Error: ' + error.message);
+    showNotification('Error: ' + error.message, 'error');
+
   });
 });
 
@@ -258,13 +259,13 @@ plannedVisitsList.addEventListener('click', e => {
         // 2) Close the modal
         openModal(editModal, false);
         } else {
-        alert('Failed to save changes.');
+        showNotification('Failed to save changes.', 'error');
         console.error(result);
         }
     })
     .catch(err => {
         console.error('Error updating event:', err);
-        alert('An error occurred.');
+        showNotification('An error occurred while updating the event.', 'error');
     });
     });
 
@@ -282,26 +283,33 @@ plannedVisitsList.addEventListener('click', e => {
   const card = deleteBtn.closest('.school-visit-card');
   const id = card.dataset.id;
 
-  if (confirm('Are you sure you want to delete this event?')) {
-    fetch('http://localhost:80/SmileConnector/backend/delete_btn_coming_event.php', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id })
-    })
-    .then(res => res.json())
-    .then(result => {
-      console.log(result);
-      if (result.message.includes('success')) {
-        card.remove(); // Remove the card from DOM
-      } else {
-        alert('Failed to delete event.');
-      }
-    })
-    .catch(err => {
-      console.error('Delete failed:', err);
-      alert('An error occurred.');
-    });
-  }
+  // Use pop-up password modal before deleting
+  window.showPasswordModal(
+    'Confirm Deletion',
+    'You are about to delete this event. For security reasons, please confirm your password to proceed.',
+    function() {
+      // Only runs if password is correct
+      fetch('http://localhost:80/SmileConnector/backend/delete_btn_coming_event.php', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+      })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        if (result.message && result.message.includes('success')) {
+          card.remove(); // Remove the card from DOM
+          showNotification('Event deleted successfully!', 'success');
+        } else {
+          showNotification('Failed to delete event.', 'error');
+        }
+      })
+      .catch(err => {
+        console.error('Delete failed:', err);
+        showNotification('An error occurred.', 'error');
+      });
+    }
+  );
 });
 
 
@@ -507,7 +515,7 @@ document.getElementById('editVisitForm')
 })
 .then(json => {
   if (json.success) {
-    alert('Updated successfully!');
+    showNotification('Updated successfully!', 'success');
     closeModal(editVisitModal);
   } else {
     console.error('Server error:', json.message || json.error);
@@ -516,3 +524,70 @@ document.getElementById('editVisitForm')
 .catch(err => console.error('Network error:', err));
 
   });
+
+      function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelector('.notification');
+    if (existing) {
+        existing.remove();
+    }
+
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        z-index: 10001;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+        cursor: pointer;
+    `;
+
+    const colors = {
+        success: '#4caf50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#2196f3'
+    };
+
+    notification.style.background = colors[type] || colors.info;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center;">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}" 
+               style="margin-right: 10px; font-size: 16px;"></i>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    document.body.appendChild(notification);
+
+    // Auto remove after 5 seconds or on click
+    const removeNotification = () => {
+        notification.style.animation = 'slideIn 0.3s ease-out reverse';
+        setTimeout(() => notification.remove(), 300);
+    };
+
+    notification.addEventListener('click', removeNotification);
+    setTimeout(removeNotification, 5000);
+}

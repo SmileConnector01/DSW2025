@@ -28,20 +28,20 @@
         <header class="dashboard-header">
             <div class="header-controls">
                 <div class="header-left">
-                    <button class="header-btn" aria-label="Appointments">
+                    <button class="header-btn" aria-label="Appointments" style="display: none;">
                         <i class="fa-regular fa-calendar"></i>
                     </button>
-                    <button class="header-btn" aria-label="Notes">
+                    <button class="header-btn" aria-label="Notes" style="display: none;">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                    <button class="header-btn" aria-label="Messages">
+                    <button class="header-btn" aria-label="Messages" style="display: none;">
                         <i class="fa-regular fa-comment-dots"></i>
                         <span class="message-badge">5</span>
                     </button>
                 </div>
                 
                 <div class="header-right">
-                    <button class="header-btn" aria-label="Notifications">
+                    <button class="header-btn" aria-label="Notifications" style="display: none;"">
                         <i class="fas fa-bell"></i>
                         <span class="notification-badge">3</span>
                     </button>
@@ -127,7 +127,7 @@
                 <li data-tab="calendar-appointments">
                   <a href="#"><i class="fas fa-calendar-alt"></i> <em>Calendar &nbsp;& &nbsp;&nbsp;&nbsp;Appointments</em> <span></span></a>
                 </li>
-                <li data-tab="chat">
+                <li data-tab="chat" style="display: none;">
                     <a href="#"><i class="fas fa-comments"></i> Chat Messages <span></span></a>
                 </li>
                 <li data-tab="Assistant Smila">
@@ -225,21 +225,21 @@
                   </section>
       
                   <!-- Recent Activity and Upcoming Events -->
-                  <section class="activity-section">
-                    <div class="recent-activity">
+                  <!-- <section class="activity-section"> -->
+                    <!-- <div class="recent-activity" style="display: none;">
                       <h2>Recent Activity</h2>
                       <div class="activity-list" id="recent-activities">
-                        <!--recent activities will be dynamically loaded here-->
-                      </div>
-                    </div>
+                        recent activities will be dynamically loaded here-->
+                      <!-- </div>
+                    </div> -->
       
                     <div class="upcoming-events">
                       <h2>Upcoming Events</h2>
-                      <div class="event-list" id="upcoming-activity">
+                      <div class="event-list" id="upcoming_activity">
                         <!--Upcoming events will be dynamically loaded here-->
                       </div>
                     </div>
-                  </section>
+                  <!-- </section> -->
                 </div>
 
                 <!-- Calendar and appointments tab -->
@@ -369,22 +369,22 @@
                             </div>
                 
                             <div class="actionList">
-                                <button class="transparentButton">
+                                <button class="transparentButton" id="feebackChatbot">
                                     <i class="fa-regular fa-circle-question"></i>
                                     <span class="collapseText">Help & FAQ <span></span></span>
                                 </button>
                 
-                                <button class="transparentButton">
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                <button class="transparentButton" style="display: none;">
+                                    <i class="fa-solid fa-clock-rotate-left" ></i>
                                     <span class="collapseText">History <span></span></span>
                                 </button>
                 
-                                <button class="transparentButton" title="Toggle Theme">
+                                <button class="transparentButton" title="Toggle Theme" style="display: none;">
                                     <i class="fas fa-moon"></i>
                                     <span class="collapseText">Theme <span></span></span>
                                 </button>
                 
-                                <button class="transparentButton">
+                                <button class="transparentButton" style="display: none;">
                                     <i class="fa-solid fa-gear"></i>
                                     <span class="collapseText">Settings <span></span></span>
                                 </button>
@@ -1771,7 +1771,7 @@
                             </div>
                         </div>
 
-                        <div class="info-section">
+                        <div class="info-section" style="display: none;">
                             <h4>Recent Activity</h4>
                             <div class="visit-timeline" id="adminActivityTimeline">
                                 <div class="visit-item">

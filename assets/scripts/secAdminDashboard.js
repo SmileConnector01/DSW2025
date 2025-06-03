@@ -237,20 +237,30 @@ document.addEventListener('DOMContentLoaded', function() {
                   pane.classList.add('active');
               }
           });
-            if (tabId === 'admins') {
-                loadAdminTable();
-            } else if (tabId === 'patients') {
-                loadPatientTable();
+            // Reload data for the current tab
+            switch (tabId) {
+                case 'dashboard':
+                    initDashboardCharts();
+                    break;
+                case 'admins':
+                    loadAdminTable();
+                    break;
+                case 'patients':
+                    loadPatientTable();
+                    break;
+                case 'schools':
+                    initAddEventButton();
+                    break;
+                case 'audit':
+                    filterAuditLogs();
+                    break;
             }
-            // Initialize school programs tab if it's the active tab
-            if (tabId === 'schools') {
-              initAddEventButton();
-            }
-                // when you hide/remove the iframe
+
+            // when you hide/remove the iframe
             if(document.getElementById('videoconferenceIframe')) {
                 const iframeid = document.getElementById('videoconferenceIframe');
                 iframeid.contentWindow.postMessage({ cmd: 'stop-camera' }, '*');
-            }
+            }
       
       });
   });
@@ -752,27 +762,27 @@ async function initDashboardCharts() {
                 const monthName = monthNames[date.getMonth()];
 
                 if(monthName == currentMonthName){
-                    count_currentMonthName += event.students;
+                    count_currentMonthName += Number(event.students);
                     count_schoolPrograms += 1;
                 }
                 else if(monthName == currentMonthName_1 && year == current_year_1){
-                    count_currentMonthName_1 += event.students;
+                    count_currentMonthName_1 += Number(event.students);
                     count_schoolPrograms1 += 1;
                 }
                 else if(monthName == currentMonthName_2 && year == current_year_2){
-                    count_currentMonthName_2 += event.students;
+                    count_currentMonthName_2 += Number(event.students);
                     count_schoolPrograms2 += 1;
                 }
                 else if(monthName == count_currentMonthName_3 && year == current_year_3){
-                    count_currentMonthName_3 += event.students;
+                    count_currentMonthName_3 += Number(event.students);
                     count_schoolPrograms3 += 1;
                 }
                 else if(monthName == currentMonthName_4 && year == current_year_4){
-                    count_currentMonthName_4 += event.students;
+                    count_currentMonthName_4 += Number(event.students);
                     count_schoolPrograms4 += 1;
                 }
                 else if(monthName == currentMonthName_5 && year == current_Year){
-                    count_currentMonthName_5 += event.students;
+                    count_currentMonthName_5 += Number(event.students);
                     count_schoolPrograms5 += 1;
                 }
             });
@@ -785,19 +795,19 @@ async function initDashboardCharts() {
                 {
                     label: 'student Outreach',
                     data: [count_currentMonthName_5, count_currentMonthName_4, count_currentMonthName_3, count_currentMonthName_2, count_currentMonthName_1, count_currentMonthName],
-                    backgroundColor: '#5A80FF',
+                    backgroundColor: '#4285F4',
                     borderRadius: 5
                 },
                 {
                     label: 'School Programs',
                     data: [count_schoolPrograms5, count_schoolPrograms4, count_schoolPrograms3, count_schoolPrograms2, count_schoolPrograms1, count_schoolPrograms],
-                    backgroundColor: '#315CBC',
+                    backgroundColor: '#34A853',
                     borderRadius: 5
                 },
                 {
-                    label: 'Mobile Clinics',
+                    label: 'Tele Consultations',
                     data: [count_mobileClinics5, count_mobileClinics4, count_mobileClinics3, count_mobileClinics2, count_mobileClinics1, count_mobileClinics],
-                    backgroundColor: '#0077FF',
+                    backgroundColor: '#EA4335',
                     borderRadius: 5
                 }
             ]
@@ -867,10 +877,10 @@ async function initDashboardCharts() {
             datasets: [{
                 data: [totalCavities, totalGumDisease, totalToothLoss, totalOther],
                 backgroundColor: [
-                    '#5A80FF',
-                    '#315CBC',
-                    '#0077FF',
-                    '#FFF235'
+                    '#4FC3F7',
+                    '#34A853',
+                    '#EA4335',
+                    '#FFCA28'
                 ],
                 borderWidth: 0
             }]

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
-
 :root {
+    /* Your existing light mode variables */
     --primary: #4361ee;
     --primary-dark: #3a0ca3;
     --primary-light: #4895ef;
@@ -29,8 +29,146 @@
     --rounded: 0.5rem;
     --rounded-lg: 0.75rem;
     --rounded-xl: 1rem;
+    
+    /* Dark mode variables */
+    --dm-bg: #121212;
+    --dm-card: #1e1e1e;
+    --dm-text: #e0e0e0;
+    --dm-text-light: #a0a0a0;
+    --dm-border: #2d2d2d;
+    --dm-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    --dm-chat-bubble-received: #2d2d2d;
+}
+.dark-mode {
+    --light: #080d16;
+    --dark: #1a2238;
+    --text: #f8fafc;
+    --text-light: #94a3b8;
+    --border: #334155;
+    --shadow: 0 4px 6px rgba(0,0,0,0.3);
+    --shadow-md: 0 10px 15px rgba(0,0,0,0.1);
+    --chat-bubble-received: #1a2238;
+    --white: #1a2238;
+    --light-gray: #0f172a;
+    --primary: #5A80FF;
+    --primary-blue: #5A80FF;
+    --header-bg: #0f172a;
+    --dropdown-bg: #0f172a;
+    --dropdown-hover: rgba(90, 128, 255, 0.2);
+    --card-bg: #1a2238;
+    --bg-light: #080d16;
+    background-color: var(--bg-light);
+    color: var(--text);
+}
+.dark-mode body {
+    background-color: var(--bg-light);
 }
 
+.dark-mode .card,
+.dark-mode .modal-content,
+.dark-mode .chat-container,
+.dark-mode .chat-bot,
+.dark-mode .sideNavigation,
+.dark-mode .chatScreen,
+.dark-mode .content-card {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-mode .chat-sidebar,
+.dark-mode .sideNavigation {
+    background-color: var(--header-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-mode .chat-header,
+.dark-mode .chatHeader {
+    background-color: var(--header-bg);
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .chat-input,
+.dark-mode .inputContainer,
+.dark-mode .inputArea,
+.dark-mode .input-field input,
+.dark-mode .inputArea textarea {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-mode .chat-bubble-received,
+.dark-mode .message.ai .message-bubble {
+    background-color: var(--chat-bubble-received);
+    color: var(--text);
+}
+
+.dark-mode .message.sent .message-bubble {
+    background: linear-gradient(135deg, var(--primary), var(--primary-blue));
+    color: #fff;
+}
+
+.dark-mode .suggestionCard {
+    background-color: var(--header-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-mode .file-preview-container {
+    background-color: var(--header-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-mode .chat-contact.active,
+.dark-mode .chat-contact:hover {
+    background-color: var(--dropdown-hover);
+    color: var(--primary-blue);
+}
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.dark-mode input:focus,
+.dark-mode textarea:focus,
+.dark-mode select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(90,128,255,0.15);
+    background-color: var(--card-bg);
+    color: var(--text);
+}
+
+.dark-mode input[disabled],
+.dark-mode textarea[disabled],
+.dark-mode select[disabled] {
+    background-color: #232b3a;
+    color: #6c7a92;
+    opacity: 0.7;
+}
+
+.dark-mode ::placeholder {
+    color: var(--text-light);
+    opacity: 1;
+}
+.dark-mode .form-group label,
+.dark-mode label {
+    color: var(--text-light);
+}
+
+.dark-mode .form-help {
+    color: var(--text-light);
+    opacity: 0.8;
+}
 *{
     box-sizing: border-box;
     margin: 0;
@@ -1245,3 +1383,224 @@
   list-style-type: disc;
 }
 
+
+/* ==================== CHATBOT RESPONSIVE STYLES ==================== */
+
+/* Base styles remain unchanged as they work well on desktop */
+
+/* Tablet Breakpoint (768px - 1024px) */
+@media (max-width: 1024px) {
+    .chat-bot {
+        height: calc(100vh - 100px);
+    }
+    
+    .sideNavigation {
+        width: 250px;
+    }
+    
+    .suggestionGrid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    
+    .message.ai .message-bubble {
+        margin-left: 60px;
+        max-width: calc(100% - 80px);
+    }
+    
+    .message.user .message-bubble {
+        max-width: calc(100% - 30px);
+    }
+}
+
+/* Mobile Breakpoint (480px - 767px) */
+@media (max-width: 767px) {
+    .chat-bot {
+        height: calc(100vh - 80px);
+        border-radius: var(--rounded-lg);
+    }
+    
+    .sideNavigation {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sideNavigation.active {
+        transform: translateX(0);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .chatScreen {
+        width: 100%;
+    }
+    
+    .startContent {
+        padding: 1.5rem;
+    }
+    
+    .startContent h1 {
+        font-size: 1.5rem;
+    }
+    
+    .greeting .user-name {
+        font-size: 1.3rem;
+    }
+    
+    .message.ai .message-bubble {
+        margin-left: 20px;
+        max-width: calc(100% - 40px);
+    }
+    
+    .message-actions {
+        opacity: 1; /* Always show actions on mobile */
+    }
+    
+    .inputArea {
+        padding: 0.5rem;
+    }
+    
+    .inputTools button {
+        width: 1.8rem;
+        height: 1.8rem;
+        font-size: 1rem;
+    }
+}
+
+/* Small Mobile Breakpoint (≤479px) */
+@media (max-width: 479px) {
+    .chat-bot {
+        height: calc(100vh - 60px);
+    }
+    
+    .startContent {
+        padding: 1rem;
+    }
+    
+    .startContent h1 {
+        font-size: 1.3rem;
+    }
+    
+    .startContent p {
+        font-size: 0.9rem;
+    }
+    
+    .chatHeader {
+        padding: 0.75rem 1rem;
+    }
+    
+    .chatTitle {
+        font-size: 1rem;
+    }
+    
+    .inputContainer {
+        padding: 0.75rem;
+    }
+    
+    .message-bubble {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .file-preview-container {
+        padding: 0.75rem;
+    }
+    
+    #image-preview {
+        max-width: 80px;
+        max-height: 80px;
+    }
+}
+
+/* Sidebar Toggle Button (hidden on desktop) */
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 767px) {
+    .sidebar-toggle {
+        display: block;
+    }
+}
+
+/* Animation for mobile menu */
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Input field adjustments for mobile */
+@media (max-width: 767px) {
+    .inputArea textarea {
+        font-size: 0.9rem;
+    }
+    
+    .privacyPolicy {
+        font-size: 0.6rem;
+    }
+}
+
+/* Message bubble adjustments for very small screens */
+@media (max-width: 374px) {
+    .message-bubble {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .message-actions .action-btn {
+        font-size: 0.8rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .chat-bot {
+        height: calc(100vh - 60px);
+    }
+    
+    .startContent {
+        padding: 1rem;
+    }
+    
+    .chatContent {
+        padding: 0.75rem;
+    }
+    
+    .inputContainer {
+        padding: 0.5rem;
+    }
+}
+
+/* Dark mode support - maintains existing styles */
+@media (prefers-color-scheme: dark) {
+    .chat-bot,
+    .sideNavigation,
+    .chatScreen {
+        background-color: var(--dark);
+        color: var(--light);
+    }
+    
+    .message.ai .message-bubble {
+        background-color: var(--gray);
+        color: var(--light);
+    }
+    
+    .inputArea {
+        background-color: var(--dark);
+        border-color: var(--gray);
+    }
+    
+    .inputArea textarea {
+        color: var(--light);
+    }
+}

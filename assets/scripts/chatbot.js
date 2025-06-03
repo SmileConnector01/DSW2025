@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newChatButton = document.getElementById('newChatButton');
     const recentChatList = document.querySelector('.recentchat');
     const inputArea = document.querySelector('.inputArea');
-    
+
     // Create file preview container inside input area
     const filePreviewContainer = document.createElement('div');
     filePreviewContainer.className = 'file-preview-container';

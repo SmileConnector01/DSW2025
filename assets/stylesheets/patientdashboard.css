@@ -3561,3 +3561,58 @@ input[type="month"] {
   font-size: 0.95rem;
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-top: 60px;
+    padding-bottom: 80px;
+  }
+  .header {
+    left: 0;
+    padding: 1rem;
+  }
+  .sidebar {
+    width: 100%;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    height: 60px;
+  }
+  .records-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .user-profile {
+    position: static;
+    margin-left: auto;
+  }
+  .user-dropdown {
+    right: 10px;
+    left: auto;
+    width: 95vw;
+    min-width: 0;
+    max-width: 320px;
+    top: 110%;
+    z-index: 9999;
+  }
+}
+/* Show dropdown when .show class is present */
+.user-dropdown.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  top: 100% !important;
+  pointer-events: auto;
+}
+@media (max-width: 768px) {
+  .user-dropdown.show {
+    right: 10px;
+    left: auto;
+    width: 95vw;
+    min-width: 0;
+    max-width: 320px;
+    top: 110%;
+    z-index: 9999;
+  }
+}

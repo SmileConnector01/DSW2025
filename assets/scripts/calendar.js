@@ -25,14 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
             // Refresh data when switching tabs
             if (tabId === 'my-appointments') {
                 loadMyAppointments();
+                initializeCalendar();
             } else if (tabId === 'patient-appointments') {
                 loadPatientAppointments();
+                initializeCalendar();
             }
         });
     });
     
     // Initialize FullCalendar
     function initializeCalendar() {
+        if (window.innerWidth <= 767) {
+            document.getElementById('calendar').addEventListener('touchstart', function(e) {
+                this.scrollLeft += e.touches[0].pageX > this.clientWidth / 2 ? 100 : -100;
+            }, { passive: true });
+        }
         const calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek', // Changed to timeGridWeek view
@@ -40,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 'auto',
             nowIndicator: true,
             editable: true,
+            contentHeight: 'auto',
+            aspectRatio: 1.5, 
+            handleWindowResize: true,
             selectable: true,
             dayMaxEvents: true,
             events: loadCalendarEvents,
@@ -520,11 +530,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Add click handler for the modal background to close when clicking outside
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
+        // modal.addEventListener('click', function(e) {
+        //     if (e.target === modal) {
+        //         modal.remove();
+        //     }
+        // });
     }
     
     // Format date for datetime-local input
@@ -622,7 +632,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="appointment-header">
                         <div class="appointment-title">${appointment.title}</div>
                         <div class="appointment-time">${formatDate(appointment.date)} • ${appointment.time}</div>
-                        <span class="appointment-status status-${appointment.status}">${appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}</span>
                     </div>
                     <div class="appointment-body">
                         <div class="appointment-patient">
@@ -775,7 +784,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="appointment-header">
                         <div class="appointment-title">${appointment.title}</div>
                         <div class="appointment-time">${formatDate(appointment.date)} • ${appointment.time}</div>
-                        <span class="appointment-status status-${appointment.status}">${appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}</span>
                     </div>
                     <div class="appointment-body">
                         <div class="appointment-patient">
@@ -960,3 +968,21 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(removeNotification, 5000);
     }
 });
+window.refreshCalendarTab = function() {
+    // If you use FullCalendar, you might want to refetch events:
+    if (window.calendar && typeof window.calendar.refetchEvents === 'function') {
+        window.calendar.refetchEvents();
+    }
+    // Or reload appointments lists:
+    if (typeof loadMyAppointments === 'function') loadMyAppointments();
+    if (typeof loadPatientAppointments === 'function') loadPatientAppointments();
+};
+function refreshTabData(tabId) {
+    switch (tabId) {
+        case 'calendar-appointments':
+            if (typeof window.refreshCalendarTab === 'function') {
+                window.refreshCalendarTab();
+            }
+            break;
+    }
+}

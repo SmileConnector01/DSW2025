@@ -2485,3 +2485,120 @@ html {
     opacity: 1;
     pointer-events: auto;
 }
+
+
+@media (max-width: 768px) {
+  .chart-card {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .chart-container {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  canvas#outreachChart,
+  canvas#conditionsChart {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* Make upcoming-events full width and visually prominent */
+.upcoming-events {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 30px auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(90,128,255,0.07);
+  padding: 32px 28px 28px 28px;
+  border: 1.5px solid var(--primary-blue);
+  transition: box-shadow 0.2s;
+}
+
+.upcoming-events h2 {
+  font-size: 1.7rem;
+  margin-bottom: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 12px;
+  border-bottom: none; /* Remove border since grid handles spacing */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(90,128,255,0.05);
+  background: var(--card-bg);
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-date {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.event-details h3 {
+  font-size: 1.1rem;
+  color: var(--dark-blue);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.event-details p {
+  font-size: 0.97rem;
+  color: var(--text-light);
+  margin-bottom: 2px;
+}
+
+.event-time {
+  font-size: 0.95rem;
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .upcoming-events {
+    padding: 18px 8px;
+    border-radius: 8px;
+  }
+  .event-date {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 900px) {
+  .event-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .event-list {
+    grid-template-columns: 1fr;
+  }
+}

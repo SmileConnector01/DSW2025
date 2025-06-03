@@ -955,9 +955,7 @@ function editPlannedVisit(visitId) {
     // Open the modal
     openModal(editModal);
   } else {
-    console.error(`Planned visit with ID ${visitId} not found or modal elements missing.`);
-    alert('Error: Could not load visit details for editing.');
-  }
+    showNotification('Error: Could not load visit details for editing.', 'error'); }
 }
 
 // Function to save planned visit edits
@@ -989,12 +987,8 @@ function savePlannedVisitEdit(event) {
     const editModal = document.getElementById('editPlannedVisitModal');
     closeModal(editModal);
 
-    console.log(`Saved changes for planned visit ID: ${visitId}`);
-    alert('Planned visit updated successfully!');
-  } else {
-    console.error(`Planned visit with ID ${visitId} not found for saving.`);
-    alert('Error: Could not save changes.');
-  }
+    showNotification('Planned visit updated successfully!', 'success'); } else {
+    showNotification('Error: Could not save changes.', 'error'); }
 }
 
 
@@ -1013,9 +1007,7 @@ function schedulePlannedVisit(visitId) {
     // Open the modal
     openModal(scheduleModal);
   } else {
-    console.error(`Planned visit with ID ${visitId} not found or schedule modal elements missing.`);
-    alert('Error: Could not load visit details for scheduling.');
-  }
+    showNotification('Error: Could not load visit details for scheduling.', 'error'); }
 }
 
 // Function to save planned visit schedule
@@ -1042,20 +1034,15 @@ function savePlannedVisitSchedule(event) {
     const scheduleModal = document.getElementById('schedulePlannedVisitModal');
     closeModal(scheduleModal);
 
-    console.log(`Scheduled visit for ID: ${visitId} to date: ${visit.date}`);
-    alert(`Planned visit scheduled successfully for ${visit.date}!`);
-  } else {
-    console.error(`Planned visit with ID ${visitId} not found for scheduling.`);
-    alert('Error: Could not schedule visit.');
-  }
+    showNotification(`Planned visit scheduled successfully for ${visit.date}!`, 'success'); } else {
+    showNotification('Error: Could not schedule visit.', 'error'); }
 }
 
 
 // Placeholder functions for other button actions
 function generateVisitReport(schoolName, visitDate) {
   console.log(`Generating report for completed visit at ${schoolName} on ${visitDate}`);
-  // Add actual report generation logic here
-  alert(`Generating report for completed visit at ${schoolName} on ${visitDate}`);
+  showNotification(`Generating report for completed visit at ${schoolName} on ${visitDate}`, 'info');
 }
 
 // Function to open the completed visit analytics modal
@@ -1074,9 +1061,7 @@ function viewVisitAnalytics(visitId) {
     // Open the modal
     openModal(analyticsModal);
   } else {
-    console.error(`Completed visit with ID ${visitId} not found or analytics modal elements missing.`);
-    alert('Error: Could not load analytics for this visit.');
-  }
+    showNotification('Error: Could not load analytics for this visit.', 'error'); }
 }
 
 // Setup event listeners for the edit planned visit modal
@@ -1594,9 +1579,7 @@ function viewVisitAnalytics(visitId) {
     // Open the modal
     openModal(analyticsModal);
   } else {
-    console.error(`Completed visit with ID ${visitId} not found or analytics modal elements missing.`);
-    alert('Error: Could not load analytics for this visit.');
-  }
+    showNotification('Error: Could not load analytics for this visit.', 'error'); }
 }
 
 // Setup event listeners for the completed visit analytics modal (copied from dashboard.js)
