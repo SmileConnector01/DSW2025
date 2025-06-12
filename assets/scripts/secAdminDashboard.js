@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     sessionStorage.clear();
                     localStorage.clear();
 
-                    window.location.href = '../logins/login.html';
+                    window.location.href = '../homePage/test.html';
                 } else {
                     throw new Error('Logout failed');
                 }
