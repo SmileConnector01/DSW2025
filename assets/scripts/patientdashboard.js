@@ -132,7 +132,7 @@ document.getElementById('communityFeedback').addEventListener('input', function(
                       sessionStorage.clear();
                       localStorage.clear();
 
-                      window.location.href = '../homePage/test.html';
+                      window.location.href = '../homePage/testing.html';
                   } else {
                       throw new Error('Logout failed');
                   }
