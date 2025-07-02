@@ -177,8 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load calendar events from server
     async function loadCalendarEvents(fetchInfo, successCallback, failureCallback) {
-        // In a real app, you would fetch this from your server
-        // This is mock data for demonstration
+
         const events = [];
         await fetch('http://localhost/SmileConnector/backend/read_calendar_event.php')
         .then(r => {
@@ -233,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle event drop (reschedule)
     function handleEventDrop(info) {
-        // In a real app, you would send this to your server
+        
         console.log('Event rescheduled:', info.event.title, 'to', info.event.start);
         
         // Show notification
@@ -242,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle event resize
     function handleEventResize(info) {
-        // In a real app, you would send this to your server
         console.log('Event duration changed:', info.event.title, 'new duration:', info.event.end - info.event.start);
         
         // Show notification
@@ -447,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // If meeting, get attendees as raw string
             if (eventType === 'meeting') {
                 const attendees = document.getElementById('meeting-attendees').value;
-                eventData.attendees = attendees; // just a plain string, or you can split it manually later in PHP
+                eventData.attendees = attendees;
             }
 
             if(modeHeader.id==="create-mode") 
@@ -463,7 +461,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => response.json())
                     .then(result => {
                         console.log('Success:', result);
-                        // Handle success (e.g., close modal, update UI)
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -481,7 +478,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(result => {
                     console.log('Success:', result);
-                    // Handle success (e.g., close modal, update UI)
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -528,13 +524,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
             });
         }
-        
-        // Add click handler for the modal background to close when clicking outside
-        // modal.addEventListener('click', function(e) {
-        //     if (e.target === modal) {
-        //         modal.remove();
-        //     }
-        // });
     }
     
     // Format date for datetime-local input
@@ -548,8 +537,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const filter = document.getElementById('my-appointments-filter').value;
         const container = document.getElementById('my-appointments-list');
         
-        // In a real app, you would fetch this from your server with the filter
-        // This is mock data for demonstration
         const appointments = [];
 
         // Fetch data and push into the same array
@@ -584,7 +571,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         notes:     event.extendedProps.description || ''
                     });
                 });
-                // Now appointments includes both mock and fetched entries
             })
             .catch(console.error);
         
@@ -691,11 +677,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const filter = filterValue || document.getElementById('patient-appointments-filter').value;
         const container = document.getElementById('patient-appointments-list');
         
-        // In a real app, you would fetch this from your server with the filter
-        // This is mock data for demonstration
         const appointments = [];
 
-        // 2) Fetch from your PHP endpoint…
         await fetch('http://localhost/SmileConnector/backend/read_calendar_event.php')
         .then(r => {
             if (!r.ok) throw new Error('Network response was not OK');
@@ -703,7 +686,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             data.forEach(event => {
-            // Parse start/end into Date objects
             const startDate = new Date(event.start);
             const endDate   = new Date(event.end);
 
@@ -713,30 +695,28 @@ document.addEventListener('DOMContentLoaded', function() {
                             + ' - '
                             + endDate.toLocaleTimeString(undefined, opts);
 
-            // Build a minimal patient object; fill in name/age/school if you have that data elsewhere
             const patient = {
                 id:    event.extendedProps.patientId || null,
-                name:  '',       // you could look this up by ID from a patients list
+                name:  '',     
                 age:   null,
                 school:''
             };
 
-            // Notes can be your description field
             const notes = event.extendedProps.description || '';
 
             // Push into appointments in the same shape as your mock data
             appointments.push({
-                id:        event.id,               // e.g. "3" or "event3"
-                title:     event.title,            // same as before
-                date:      startDate,              // Date object for the day
-                time:      timeStr,                // formatted time range
-                patient,                           // object with at least an id
+                id:        event.id,               
+                title:     event.title,            
+                date:      startDate,              
+                time:      timeStr,                
+                patient,                           
                 status:    event.extendedProps.status,
                 treatment: event.extendedProps.treatment,
                 notes
             });
             });
-            // now you can read appointments[0].title, appointments[1].date, etc.
+            
         })
         .catch(console.error);
         
@@ -840,21 +820,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // View appointment details
     function viewAppointmentDetails(appointmentId) {
-        // In a real app, you would fetch the appointment details from the server
         console.log('Viewing details for appointment:', appointmentId);
         showNotification(`Viewing details for appointment ${appointmentId}`, 'info');
     }
     
     // Edit appointment
     function editAppointment(appointmentId) {
-        // In a real app, you would fetch the appointment details and show an edit form
         console.log('Editing appointment:', appointmentId);
         showNotification(`Editing appointment ${appointmentId}`, 'info');
     }
     
     // Reschedule appointment
     function rescheduleAppointment(appointmentId) {
-        // In a real app, you would show a rescheduling interface
         console.log('Rescheduling appointment:', appointmentId);
         showNotification(`Rescheduling appointment ${appointmentId}`, 'info');
     }
@@ -862,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cancel appointment
     function cancelAppointment(appointmentId) {
         if (confirm('Are you sure you want to cancel this appointment?')) {
-            // In a real app, you would send a cancellation request to the server
+
             console.log('Cancelled appointment:', appointmentId);
             showNotification(`Appointment ${appointmentId} cancelled`, 'success');
             
@@ -969,11 +946,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 window.refreshCalendarTab = function() {
-    // If you use FullCalendar, you might want to refetch events:
     if (window.calendar && typeof window.calendar.refetchEvents === 'function') {
         window.calendar.refetchEvents();
     }
-    // Or reload appointments lists:
     if (typeof loadMyAppointments === 'function') loadMyAppointments();
     if (typeof loadPatientAppointments === 'function') loadPatientAppointments();
 };

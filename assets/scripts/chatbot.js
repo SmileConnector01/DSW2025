@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const recentChatList = document.querySelector('.recentchat');
     const inputArea = document.querySelector('.inputArea');
 
-    // Create file preview container inside input area
     const filePreviewContainer = document.createElement('div');
     filePreviewContainer.className = 'file-preview-container';
     filePreviewContainer.innerHTML = `
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide file preview initially
         filePreviewContainer.style.display = 'none';
         
-        // Load any saved conversations
+        // Load any saved conversations (if needed)
         loadConversations();
         
         // Set up event listeners
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const actualFileInput = document.createElement('input');
             actualFileInput.type = 'file';
             actualFileInput.style.display = 'none';
-            actualFileInput.accept = '*/*'; // Accept all file types
+            actualFileInput.accept = '*/*';
             
             actualFileInput.addEventListener('change', function(e) {
                 if (e.target.files.length > 0) {
@@ -246,8 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function styleTranscriptText() {
-        // Add any styling you want after speech recognition ends
-        // For example, you could format or clean up the text here
         const finalText = userInput.value.trim();
         if (finalText) {
             userInput.value = finalText;

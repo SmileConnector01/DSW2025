@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(err => {
       console.error('Failed loading events:', err);
-      // optionally show a user‐friendly message
     });
 
     //Fetching username from the backend
@@ -77,10 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
     
-    // // Attach event listeners to all existing admin rows
-    // document.querySelectorAll('#admins .patient-table tbody tr').forEach(row => {
-    //     attachAdminRowEventListeners(row);
-    // });
+
     
     const superAdminBox = document.getElementById('permSuperAdmin');
     const superAdminGroup = superAdminBox.closest('.super-admin-permission');
@@ -252,11 +248,9 @@ function refreshTabData(tabId) {
     switch (tabId) {
         case 'dashboard':
             initDashboardCharts();
-            // Add any other dashboard data loading functions here
             break;
         case 'schools':
             initAddEventButton(); // Assuming this loads school data
-            // Add any other school data loading functions here
             break;
         case 'admins':
             loadAdminTable();
@@ -265,19 +259,15 @@ function refreshTabData(tabId) {
             loadPatientTable();
             break;
         case 'audit':
-            filterAuditLogs();
+            // filterAuditLogs();
             break;
-        // case 'teledentistry':
-        //     loadTeleDentistry();
-        //     break;
-        // Add cases for other tabs as needed
+
         case 'calendar-appointments':
             if (typeof window.refreshCalendarTab === 'function') {
                 window.refreshCalendarTab();
             }
             break;
         case 'settings':
-            // Add function to load settings data
             break;
     }
 }
@@ -303,7 +293,7 @@ document.querySelector('.tele-dentistry-content')?.addEventListener('click', fun
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
-    iframe.style.minHeight = '600px'; // Adjust as needed
+    iframe.style.minHeight = '600px';
     
     container.appendChild(iframe);
     
@@ -474,7 +464,6 @@ function searchAdmins() {
             .map(cell => cell.textContent.toLowerCase())
             .join(' ');
         
-        // Also include the admin type and status badge text
         //const typeText = row.cells[3].querySelector('span').textContent.toLowerCase();
         const statusText = row.cells[5].querySelector('span').textContent.toLowerCase();
         const fullText = rowText + ' ' + typeText + ' ' + statusText;
@@ -484,23 +473,6 @@ function searchAdmins() {
     });
 }
   
-  function filterAuditLogs() {
-      const actionFilter = auditActionType.value;
-      const timeFilter = auditTimeRange.value;
-      
-      document.querySelectorAll('#audit .patient-table tbody tr').forEach(row => {
-          const rowAction = row.cells[1].querySelector('span').textContent.toLowerCase();
-          const rowTimestamp = row.cells[0].textContent.toLowerCase();
-          
-          const actionMatch = actionFilter === 'all' || rowAction.includes(actionFilter);
-          // Basic time filtering - in a real app you'd use actual dates
-          const timeMatch = timeFilter === 'all' ||  
-                          (timeFilter === 'today' && rowTimestamp.includes('today')) || 
-                          (timeFilter === 'week' && (rowTimestamp.includes('today') || rowTimestamp.includes('yesterday') || rowTimestamp.includes('days ago')));
-          
-          row.style.display = actionMatch && timeMatch ? '' : 'none';
-      });
-  }
 });
 
 
@@ -772,7 +744,6 @@ async function initDashboardCharts() {
                 totalOther       += parseInt(row.Other)       || 0;
             });
 
-            // You can now pass these totals into a chart or UI
         } catch (e) {
             console.error('Invalid JSON from server. Raw response:', text);
         }
@@ -857,12 +828,6 @@ function initPatientManagement() {
     if (patientStatusFilter) patientStatusFilter.addEventListener('change', filterPatients);
     if (patientSort) patientSort.addEventListener('change', sortPatients);
 
-    // // Edit from details modal
-    // document.querySelector('#patientDetailsModal .edit-from-details')?.addEventListener('click', function() {
-    //     document.getElementById('patientDetailsModal').classList.remove('active');
-    //     document.getElementById('patientModalTitle').textContent = 'Edit Patient';
-    //     document.getElementById('patientFormModal').classList.add('active');
-    // });
 }
 
 // Search patients

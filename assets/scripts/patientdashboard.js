@@ -611,22 +611,7 @@ function loadAppointments() {
   
   const upcomingList = document.getElementById('upcomingAppointments');
   const pastList = document.getElementById('pastAppointments');
-  
-  // Clear existing appointments
-  // upcomingList.innerHTML = '';
-  // pastList.innerHTML = '';
-  
-  // Add upcoming appointments
-  // upcomingAppointments.forEach(appt => {
-  //   const apptElement = createAppointmentElement(appt);
-  //   upcomingList.appendChild(apptElement);
-  // });
-  
-  // // Add past appointments
-  // pastAppointments.forEach(appt => {
-  //   const apptElement = createAppointmentElement(appt);
-  //   pastList.appendChild(apptElement);
-  // });
+
   
   // Update appointment counts
   document.querySelectorAll('.appointment-count').forEach(el => {
@@ -734,8 +719,7 @@ function cancelAppointment(appointmentId) {
 }
 
 function updateDashboardAppointments() {
-  // This would update the dashboard appointments section
-  // In a real app, you would fetch the latest appointments
+
   console.log('Updating dashboard appointments');
 }
 

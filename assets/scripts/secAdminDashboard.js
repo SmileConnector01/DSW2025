@@ -812,12 +812,6 @@ function initPatientManagement() {
     if (patientStatusFilter) patientStatusFilter.addEventListener('change', filterPatients);
     if (patientSort) patientSort.addEventListener('change', sortPatients);
 
-    // // Edit from details modal
-    // document.querySelector('#patientDetailsModal .edit-from-details')?.addEventListener('click', function() {
-    //     document.getElementById('patientDetailsModal').classList.remove('active');
-    //     document.getElementById('patientModalTitle').textContent = 'Edit Patient';
-    //     document.getElementById('patientFormModal').classList.add('active');
-    // });
 }
 
 // Search patients

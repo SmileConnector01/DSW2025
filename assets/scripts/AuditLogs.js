@@ -1,7 +1,6 @@
 // ==================== AUDIT LOGS MODAL ====================
 document.addEventListener('DOMContentLoaded', function() {
 
-  // 1. Your existing fetch function (unchanged)
   function loadAuditLogs() {
   return fetch('http://localhost/SmileConnector/backend/read_audit_logs.php')
     .then(response => {
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(data => {
       return data.map(item => ({
-        timestamp: item.timestamp,  // Add your formatRelative() if needed
+        timestamp: item.timestamp, 
         action: item.action,
         admin: item.admin,
         targetType: item.target_type,
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(err => {
       console.error('Failed to load audit logs:', err);
-      return []; // Return empty array on error
+      return [];
     });
 }
   
@@ -46,8 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(logs => {
       filteredLogs = [...logs]; // Spread the resolved array
       
-      // Now use filteredLogs anywhere below this point
-      // Example:
       const deleteLogs = filteredLogs.filter(log => log.action === 'delete');
     });
   
@@ -60,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
-    // Fixed modal close functionality
+    // Modal close functionality
   const closeModal = () => {
     auditLogsModal.classList.remove('show');
     document.body.classList.remove('modal-open');
@@ -75,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       filterLogs();
-    }, 300); // 300ms delay after typing stops
+    }, 300);
   });
   
    // Enhanced filterLogs function with loading indicator
@@ -128,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </tr>
       `).join('');
   
-      // Update pagination controls
       auditPageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
       auditPrevPage.disabled = currentPage === 1;
       auditNextPage.disabled = currentPage === totalPages || totalPages === 0;
@@ -142,8 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     auditActionType.addEventListener('change', filterLogs);
     auditTimeRange.addEventListener('change', function() {
       if (this.value === 'custom') {
-        // Show date picker for custom range
-        // Implement this in your real app
+        // Show date picker for custom range (Later to be updated)
       }
       filterLogs();
     });
@@ -161,13 +156,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     refreshAuditLogs.addEventListener('click', function() {
-      // In real app, this would fetch fresh data from server
-      // alert('Refreshing logs...');
+      
       filterLogs();
     });
     exportAuditLogs.addEventListener('click', function() {
-      // Implement CSV export functionality
-      // alert('Export to CSV functionality would be implemented here');
+      
     });
   
     // Initial render
