@@ -1385,8 +1385,6 @@
 
 /* ==================== CHATBOT RESPONSIVE STYLES ==================== */
 
-/* Base styles remain unchanged as they work well on desktop */
-
 /* Tablet Breakpoint (768px - 1024px) */
 @media (max-width: 1024px) {
     .chat-bot {

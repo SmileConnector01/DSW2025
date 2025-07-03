@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize calendar variable at the top level
     let calendar;
     
     // Tab switching for calendar/appointments
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek', // Changed to timeGridWeek view
-            headerToolbar: false, // We're using our custom toolbar
+            headerToolbar: false,
             height: 'auto',
             nowIndicator: true,
             editable: true,
@@ -78,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.render();
         updateDateRangeDisplay(calendar);
         
+        setTimeout(() => {
+            calendar.updateSize();
+        }, 100);
         // Calendar navigation
         document.getElementById('prev-week').addEventListener('click', function() {
             calendar.prev();
