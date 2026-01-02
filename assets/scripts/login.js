@@ -619,7 +619,7 @@ Additionally, it includes basic validation for OTP inputs and handles backspace 
 document.getElementById('google-login').addEventListener('click', function(e) {
     e.preventDefault();
     showNotification('Redirecting to Google login...', 'info');
-    window.location.href = window.location.origin + "/SmileConnector/backend/googleSignup.php";
+    window.location.href = window.location.origin + "./backend/googleSignup.php";
 });
 document.getElementById('apple-login').addEventListener('click', function(e) {
     e.preventDefault();
@@ -632,7 +632,7 @@ document.getElementById('apple-login').addEventListener('click', function(e) {
     
     // Wait 3 seconds before redirecting
     setTimeout(() => {
-        window.location.href = window.location.origin + "/SmileConnector/logins/EmailRegister.html";
+        window.location.href = window.location.origin + "./logins/EmailRegister.html";
     }, 1800);
 });
 

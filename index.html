@@ -395,13 +395,13 @@
                         </a>
 
                         <a href="https://www.instagram.com/smile_connector_/?igsh=ejRoMjAxeW5rZmFu&utm_source=qr#" class="social-link" title="Instagram" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/smile-connector-a00639368/" class="social-link" title="LinkedIn" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                         <a href="https://wa.me/27678352384?text=Hello%2C%20I'm%20interested%20in%20your%20services!" class="social-link" title="WhatsApp" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fab fa-whatsapp" style="color: lightgreen;"></i>
                         </a>
                     </div>
 
@@ -425,11 +425,11 @@
                         <p>123 Dental Street, Medical District<br>City, State 12345</p>
                     </div> -->
                     <div class="contact-info">
-                        <i>📞</i>
+                        <i class="fas fa-phone" style="color: #0066cc; margin-right: 8px;"></i>
                         <p>+27 82 332 7135</p>
                     </div>
                     <div class="contact-info">
-                        <i>✉️</i>
+                        <i class="fas fa-envelope" style="color: #0066cc; margin-right: 8px;"></i>
                         <p>kinder@smileconnector.org.co.za</p>
                     </div>
                 </div>
@@ -835,6 +835,67 @@ function initMap() {
     document.getElementById('signupBtn').addEventListener('click', function() {
         console.log("Attempting to open: logins/register.html");
         window.location.href = '../logins/EmailRegister.html';
+    });
+
+    // ===== Text Carousel Indicator Update =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const textItems = document.querySelectorAll('.text-item');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentIndex = 0;
+
+        function updateIndicators() {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                }
+            });
+        }
+
+        // Update indicator every 4 seconds (matches text animation timing)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % textItems.length;
+            updateIndicators();
+        }, 4000);
+
+        // Initial update
+        updateIndicators();
+
+        // Add click handler to indicators for manual navigation
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+                currentIndex = index;
+                updateIndicators();
+            });
+        });
+    });
+
+    // ===== Enhanced Navigation Scroll Listener =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Check if section is in viewport (with offset for navbar)
+                if (window.scrollY >= (sectionTop - 150) && window.scrollY < (sectionTop + sectionHeight - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // Update nav links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
     });
 
     
